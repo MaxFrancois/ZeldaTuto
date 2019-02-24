@@ -8,6 +8,7 @@ public class Inventory : ScriptableObject
     public Item currentItem;
     public List<Item> Items = new List<Item>();
     public int NumberOfKeys;
+    public int Coins;
 
     public void AddItem(Item item)
     {

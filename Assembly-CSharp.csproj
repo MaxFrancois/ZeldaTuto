@@ -62,15 +62,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Camera\RoomMove.cs" />
+    <Compile Include="Assets\Scripts\Camera\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Log.cs" />
     <Compile Include="Assets\Scripts\Enemies\PatrolLog.cs" />
     <Compile Include="Assets\Scripts\Interactables\Chest.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Door.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Heart.cs" />
     <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Interactables\Pot.cs" />
-    <Compile Include="Assets\Scripts\Interactables\RoomMove.cs" />
-    <Compile Include="Assets\Scripts\Interactables\SceneTransition.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Powerup.cs" />
     <Compile Include="Assets\Scripts\Interactables\Sign.cs" />
     <Compile Include="Assets\Scripts\KnockBack.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\ContextClue.cs" />

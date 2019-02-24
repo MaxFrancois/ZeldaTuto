@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public string Name;
     public int BaseAttack;
     public float MoveSpeed;
+    public GameObject DeathAnimation;
 
     private void Awake()
     {
@@ -35,6 +36,10 @@ public class Enemy : MonoBehaviour
         CurrentHealth -= damage;
         if (CurrentHealth <= 0)
         {
+            if (DeathAnimation != null) {
+                var deathAnim = Instantiate(DeathAnimation, transform.position, Quaternion.identity);
+                Destroy(deathAnim, 1f);
+            }
             gameObject.SetActive(false);
         }
     }

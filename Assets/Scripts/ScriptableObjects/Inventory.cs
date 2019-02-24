@@ -14,4 +14,11 @@ public class Inventory : ScriptableObject
         if (item.isKey) NumberOfKeys++;
         Items.Add(item);
     }
+
+    public void RemoveItem(Item item)
+    {
+        if (item.isKey) NumberOfKeys--;
+        if (Items.Contains(item))
+            Items.Remove(item);
+    }
 }

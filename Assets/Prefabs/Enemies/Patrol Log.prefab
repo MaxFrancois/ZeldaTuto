@@ -214,6 +214,8 @@ MonoBehaviour:
   Name: Patrol Log
   BaseAttack: 1
   MoveSpeed: 2
+  DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
+    type: 3}
   body: {fileID: 0}
   Target: {fileID: 0}
   ChaseRadius: 3

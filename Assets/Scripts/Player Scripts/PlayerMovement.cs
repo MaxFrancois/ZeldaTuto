@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public VectorValue StartingPosition;
     public Inventory PlayerInventory;
     public SpriteRenderer ReceivedItemSprite;
+    public CustomSignal PlayerHit;
 
     void Start()
     {
@@ -117,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (body != null)
         {
+            PlayerHit.Raise();
             yield return new WaitForSeconds(pushTime);
             body.velocity = Vector2.zero;
             State = PlayerState.Idle;

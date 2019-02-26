@@ -65,7 +65,7 @@ public class Log : Enemy
         Animator.SetFloat("MoveY", setVector.y);
     }
 
-    void ChangeState(EnemyState state)
+    protected void ChangeState(EnemyState state)
     {
         if (state != CurrentState)
             CurrentState = state;

@@ -62,25 +62,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Camera\RoomMove.cs" />
     <Compile Include="Assets\Scripts\Camera\SceneTransition.cs" />
-    <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemies\AreaEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Log.cs" />
     <Compile Include="Assets\Scripts\Enemies\PatrolLog.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Chest.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Coin.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Door.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Heart.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Pot.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Powerup.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Sign.cs" />
+    <Compile Include="Assets\Scripts\Enemies\RockProjectile.cs" />
+    <Compile Include="Assets\Scripts\Enemies\TurretLog.cs" />
     <Compile Include="Assets\Scripts\KnockBack.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Chest.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Coin.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Door.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Heart.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Pot.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Powerup.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Sign.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\Switch.cs" />
+    <Compile Include="Assets\Scripts\Objects\Projectile.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\CoinManager.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\ContextClue.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\HeartManager.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\BoolValue.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\CustomSignal.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\FloatValue.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Inventory.cs" />

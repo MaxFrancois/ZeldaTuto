@@ -8,7 +8,6 @@ public class Log : Enemy
     public Transform Target;
     public float ChaseRadius;
     public float AttackRadius;
-    public Transform HomePosition;
     public Animator Animator;
     // Start is called before the first frame update
     void Start()

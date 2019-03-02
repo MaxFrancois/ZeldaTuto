@@ -19,15 +19,27 @@ public class Enemy : MonoBehaviour
     public int BaseAttack;
     public float MoveSpeed;
     public GameObject DeathAnimation;
+    public Vector2 HomePosition;
+    [Header("Death Signals")]
+    public CustomSignal RoomSignal;
+    public LootTable LootTable;
 
     private void Awake()
     {
+        transform.position = HomePosition;
+        CurrentHealth = MaxHealth.InitialValue;
+    }
+
+    private void OnEnable()
+    {
+        transform.position = HomePosition;
         CurrentHealth = MaxHealth.InitialValue;
     }
 
     public void Knock(Rigidbody2D body, float pushTime, float damage)
     {
-        StartCoroutine(Knockback(body, pushTime));
+        if (transform.gameObject.activeInHierarchy)
+            StartCoroutine(Knockback(body, pushTime));
         UpdateHealth(damage);
     }
 
@@ -40,7 +52,20 @@ public class Enemy : MonoBehaviour
                 var deathAnim = Instantiate(DeathAnimation, transform.position, Quaternion.identity);
                 Destroy(deathAnim, 1f);
             }
+            if (RoomSignal != null)
+                RoomSignal.Raise();
+            GetLoot();
             gameObject.SetActive(false);
+        }
+    }
+
+    private void GetLoot()
+    {
+        if (LootTable != null)
+        {
+            var loot = LootTable.GetLoot();
+            if (loot != null)
+                Instantiate(loot.gameObject, transform.position, Quaternion.identity);
         }
     }
 

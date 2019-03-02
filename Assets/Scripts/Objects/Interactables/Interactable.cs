@@ -11,7 +11,10 @@ public class Interactable : MonoBehaviour
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
-            Context.Raise();
+            if (Context != null && gameObject.activeInHierarchy)
+            {
+                Context.Raise();
+            }
             IsActive = true;
         }
     }
@@ -20,8 +23,11 @@ public class Interactable : MonoBehaviour
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
+            if (Context != null && gameObject.activeInHierarchy)
+            {
+                Context.Raise();
+            }
             IsActive = false;
-            Context.Raise();
         }
     }
 }

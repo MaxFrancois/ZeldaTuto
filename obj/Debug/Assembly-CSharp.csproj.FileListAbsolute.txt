@@ -261,3 +261,14 @@ F:\Unity 2019\TopDownRpg\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 F:\Unity 2019\TopDownRpg\obj\Debug\Assembly-CSharp.dll
 F:\Unity 2019\TopDownRpg\obj\Debug\Assembly-CSharp.pdb
 F:\Unity 2019\TopDownRpg\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Cinemachine.dll
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\com.unity.cinemachine.editor.dll
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Unity.Timeline.Editor.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Unity.TextMeshPro.Editor.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Unity.PackageManagerUI.Editor.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Unity.Timeline.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Unity.CollabProxy.Editor.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Unity.TextMeshPro.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Unity.Analytics.DataPrivacy.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\Cinemachine.pdb
+F:\Unity 2019\TopDownRpg\Temp\bin\Debug\com.unity.cinemachine.editor.pdb

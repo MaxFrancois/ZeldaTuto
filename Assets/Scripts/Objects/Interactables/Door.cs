@@ -25,7 +25,7 @@ public class Door : Interactable
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && IsActive && !IsOpen)
+        if (Input.GetButtonDown("Interact") && IsActive && !IsOpen)
         {
             if (DoorType == DoorType.Key && PlayerInventory.NumberOfKeys > 0)
             {
@@ -34,8 +34,9 @@ public class Door : Interactable
         }
     }
 
-    public void Open()
+    public virtual void Open()
     {
+        // inherit and only use key or other required item on child
         PlayerInventory.NumberOfKeys--;
         SpriteRenderer.enabled = false;
         IsActive = false;
@@ -43,8 +44,11 @@ public class Door : Interactable
         PhysicsCollider.enabled = false;
     }
 
-    void Close()
+    public void Close()
     {
-
+        SpriteRenderer.enabled = true;
+        IsActive = true;
+        IsOpen = false;
+        PhysicsCollider.enabled = true;
     }
 }

@@ -63,6 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Camera\DungeonEnemyRoom.cs" />
+    <Compile Include="Assets\Scripts\Camera\DungeonRoom.cs" />
+    <Compile Include="Assets\Scripts\Camera\OverworldRoom.cs" />
+    <Compile Include="Assets\Scripts\Camera\Room.cs" />
     <Compile Include="Assets\Scripts\Camera\RoomMove.cs" />
     <Compile Include="Assets\Scripts\Camera\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Enemies\AreaEnemy.cs" />
@@ -73,14 +77,14 @@
     <Compile Include="Assets\Scripts\Enemies\TurretLog.cs" />
     <Compile Include="Assets\Scripts\KnockBack.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Chest.cs" />
-    <Compile Include="Assets\Scripts\Objects\Interactables\Coin.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Door.cs" />
-    <Compile Include="Assets\Scripts\Objects\Interactables\Heart.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Pot.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Powerup.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Sign.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Switch.cs" />
+    <Compile Include="Assets\Scripts\Objects\Pickups\Coin.cs" />
+    <Compile Include="Assets\Scripts\Objects\Pickups\Heart.cs" />
     <Compile Include="Assets\Scripts\Objects\Projectile.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\CoinManager.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\ContextClue.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\FloatValue.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Inventory.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Item.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\LootTable.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\VectorValue.cs" />
     <Compile Include="Assets\Scripts\SignalListener.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -130,6 +135,12 @@
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>F:/Unity 2019/TopDownRpg/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>F:/Unity 2019/TopDownRpg/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>F:/Unity 2019/TopDownRpg/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0a4/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

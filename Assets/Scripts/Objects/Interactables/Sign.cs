@@ -11,7 +11,7 @@ public class Sign : Interactable
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && IsActive)
+        if (Input.GetButtonDown("Interact") && IsActive)
         {
             if (DialogBox.activeInHierarchy) DialogBox.SetActive(false);
             else

@@ -26,7 +26,7 @@ public class Chest : Interactable
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && IsActive)
+        if (Input.GetButtonDown("Interact") && IsActive)
         {
             if (!IsOpened)
             {

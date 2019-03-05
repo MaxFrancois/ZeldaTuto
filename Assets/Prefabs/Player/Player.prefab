@@ -481,8 +481,15 @@ MonoBehaviour:
   CurrentHealth: {fileID: 11400000, guid: 257a5a61a0a31de4e9d7f2d2e8098354, type: 2}
   HealthSignal: {fileID: 11400000, guid: f835ca4f8111fac46b8fb007eef400b3, type: 2}
   StartingPosition: {fileID: 11400000, guid: ea4305ef45b45914f9eafa635cb55b20, type: 2}
+  DashDistance: 3.5
+  DashAnimation: {fileID: 2979725522307296010, guid: bb1410becb59f93459191a3146a95236,
+    type: 3}
   PlayerInventory: {fileID: 11400000, guid: 22c93857dcb5f0b4da541a91aec16de6, type: 2}
+  Spells: {fileID: 0}
   ReceivedItemSprite: {fileID: 487798826}
+  PlayerHit: {fileID: 11400000, guid: f958e0d20641cb04d94a327569532089, type: 2}
+  DamageTakenCanvas: {fileID: 8702429126016056855, guid: 00624395a594fb64b8488b2443ae1d3e,
+    type: 3}
 --- !u!95 &9058059808089006290
 Animator:
   serializedVersion: 3

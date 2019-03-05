@@ -137,7 +137,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 1
   MoveDuration: 1
-  moveDurationTracker: 0
   MoveDirection: {x: 0, y: 0}
   rigidBody: {fileID: 6685199209679393933}
 --- !u!114 &6685199209679393928

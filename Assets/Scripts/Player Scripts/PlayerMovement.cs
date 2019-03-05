@@ -9,22 +9,33 @@ public enum PlayerState
     Walking,
     Interacting,
     Attacking,
-    Staggered
+    Staggered,
+    Dashing
 }
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Basics")]
     public float speed;
-    private Rigidbody2D rigidBody;
-    private Vector3 change;
-    private Animator animator;
     public PlayerState State;
     public FloatValue CurrentHealth;
     public CustomSignal HealthSignal;
+    [Header("Movement")]
     public VectorValue StartingPosition;
+    public float DashDistance;
+    public GameObject DashAnimation;
+    [Header("Inventories")]
     public Inventory PlayerInventory;
+    public SpellBar Spells;
+    [Header("Other")]
     public SpriteRenderer ReceivedItemSprite;
     public CustomSignal PlayerHit;
+    public GameObject DamageTakenCanvas;
+
+    private Rigidbody2D rigidBody;
+    private Vector3 change;
+    private Animator animator;
+    private Vector3 currentDirection;
 
     void Start()
     {
@@ -47,10 +58,55 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(AttackCo());
         }
+        else if (Input.GetButtonDown("Spell 0") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        {
+            CastSpell(0, new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0));
+        }
+        else if (Input.GetButtonDown("Spell 1") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        {
+            CastSpell(1, new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0));
+        }
+        else if (Input.GetButtonDown("Dash") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        {
+            Dash();
+        }
         else if (State == PlayerState.Walking || State == PlayerState.Idle)
         {
             UpdateMovement();
         }
+    }
+
+    private void CastSpell(int spellIndex, Vector3 direction)
+    {
+        Spells.CastSpell(spellIndex, transform, direction);
+    }
+
+    private bool CanMove(Vector3 direction, float distance)
+    {
+        //can't find the right collider for map ?
+        return Physics2D.Raycast(transform.position, direction, distance).collider == null;
+    }
+
+    private void Dash()
+    {
+        var direction = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0);
+        if (CanMove(direction, DashDistance))
+        {
+            StartCoroutine(DashCo(direction, DashDistance));
+        }
+    }
+
+    private IEnumerator DashCo(Vector3 direction, float distance)
+    {
+        var currentPosition = transform.position;
+        var dashEffect = Instantiate(DashAnimation, currentPosition, Quaternion.identity);
+        dashEffect.transform.eulerAngles = new Vector3(0, 0, UtilsClass.GetAngleFromVectorFloat(direction));
+        float dashEffectWidth = 3f;
+        dashEffect.transform.localScale = new Vector3(DashDistance / dashEffectWidth, 1f, 1f);
+        transform.position += direction * DashDistance;
+        yield return new WaitForSeconds(0.1f);
+        Destroy(dashEffect);
+        yield return null;
     }
 
     private void UpdateMovement()
@@ -118,9 +174,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (body != null)
         {
+            var damageTakenPosition = new Vector3(transform.position.x, transform.position.y + 1, 0);
+            var damageTaken = Instantiate(DamageTakenCanvas, damageTakenPosition, Quaternion.identity);
+            damageTaken.GetComponent<DamageDisplay>().DamageNumber = damage;
             PlayerHit.Raise();
             yield return new WaitForSeconds(pushTime);
-            body.velocity = Vector2.zero;
             State = PlayerState.Idle;
             body.velocity = Vector2.zero;
         }

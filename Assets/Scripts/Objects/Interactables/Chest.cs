@@ -8,7 +8,7 @@ public class Chest : Interactable
     public Item Contents;
     public Inventory PlayerInventory;
     public bool IsOpened;
-    public CustomSignal ReceivedItemSignal;
+    public VoidSignal ReceivedItemSignal;
     public GameObject DialogWindow;
     public Text DialogText;
     private Animator anim;

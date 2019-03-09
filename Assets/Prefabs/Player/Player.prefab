@@ -337,8 +337,9 @@ GameObject:
   - component: {fileID: 9058059808089006290}
   - component: {fileID: 9058059808089006291}
   - component: {fileID: 244566703}
-  - component: {fileID: 244566709}
-  - component: {fileID: 1281972283082379579}
+  - component: {fileID: 548933280}
+  - component: {fileID: 548933281}
+  - component: {fileID: 548933283}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -479,15 +480,14 @@ MonoBehaviour:
   speed: 4
   State: 0
   CurrentHealth: {fileID: 11400000, guid: 257a5a61a0a31de4e9d7f2d2e8098354, type: 2}
-  HealthSignal: {fileID: 11400000, guid: f835ca4f8111fac46b8fb007eef400b3, type: 2}
+  HealthSignal: {fileID: 11400000, guid: 21961cdd4259b5d41aa43413708f8fcb, type: 2}
   StartingPosition: {fileID: 11400000, guid: ea4305ef45b45914f9eafa635cb55b20, type: 2}
   DashDistance: 3.5
   DashAnimation: {fileID: 2979725522307296010, guid: bb1410becb59f93459191a3146a95236,
     type: 3}
   PlayerInventory: {fileID: 11400000, guid: 22c93857dcb5f0b4da541a91aec16de6, type: 2}
-  Spells: {fileID: 0}
   ReceivedItemSprite: {fileID: 487798826}
-  PlayerHit: {fileID: 11400000, guid: f958e0d20641cb04d94a327569532089, type: 2}
+  PlayerHit: {fileID: 11400000, guid: 2dc9c7ce85ee4a4418e6ca98f1525c49, type: 2}
   DamageTakenCanvas: {fileID: 8702429126016056855, guid: 00624395a594fb64b8488b2443ae1d3e,
     type: 3}
 --- !u!95 &9058059808089006290
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clue: {fileID: 26292940}
   IsActive: 0
---- !u!114 &244566709
+--- !u!114 &548933280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -560,15 +560,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: a32800f6819d91141aceb3fadeec79aa, type: 3}
+  m_Script: {fileID: 11500000, guid: c3682a5c422296741a777105eb59d56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Signal: {fileID: 11400000, guid: 640fb323c15ea6e498bdd5d046ed1da4, type: 2}
+  Spells:
+  - {fileID: 7432924486054220328, guid: b0e923db347467a4cb8cf338a8bdb35a, type: 3}
+  - {fileID: 4806634282985027023, guid: b00205b789ee93b4c8c76b0f23a59028, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  MaxQuantity: 4
+  SpendManaSignal: {fileID: 11400000, guid: 289c9ed159456e641883406ea14f244d, type: 2}
+--- !u!114 &548933281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058059808089006316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: c0b69fb11edc9f34e9bd9dbdb5a6f2eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Signal: {fileID: 11400000, guid: be4b2f61145b2574989903490f9fbb8e, type: 2}
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 244566703}
-        m_MethodName: ChangeActive
+      - m_Target: {fileID: 9058059808089006317}
+        m_MethodName: ReceiveItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -578,20 +598,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1281972283082379579
+--- !u!114 &548933283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -601,15 +610,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: a32800f6819d91141aceb3fadeec79aa, type: 3}
+  m_Script: {fileID: 11500000, guid: c0b69fb11edc9f34e9bd9dbdb5a6f2eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Signal: {fileID: 11400000, guid: 102a56aa5ba60234b9da90471ee28321, type: 2}
+  Signal: {fileID: 11400000, guid: 2d0386ddf33d23a4e830c6d4c8b8b0f0, type: 2}
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9058059808089006317}
-        m_MethodName: ReceiveItem
+      - m_Target: {fileID: 244566703}
+        m_MethodName: ChangeActive
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

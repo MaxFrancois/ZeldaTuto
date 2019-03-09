@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public CustomSignal Context;
+    public VoidSignal Context;
     public bool IsActive;
 
     private void OnTriggerEnter2D(Collider2D collidedObject)

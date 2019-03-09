@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 2d0997ac1b1fd664e98202450e7ea2d7, type: 3}
   Name: Fireball
-  Cooldown: 3
-  ManaCost: 0
+  Cooldown: 1
+  ManaCost: 10
   PushTime: 0.5
   PushForce: 3
   Animation: {fileID: 24008093422199903, guid: 5e948dbc1f879414fb6b2f30f38a4d50, type: 3}

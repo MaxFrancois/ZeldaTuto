@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     public GameObject DeathAnimation;
     public Vector2 HomePosition;
     [Header("Death Signals")]
-    public CustomSignal RoomSignal;
+    public VoidSignal RoomSignal;
     public LootTable LootTable;
 
     private void Awake()

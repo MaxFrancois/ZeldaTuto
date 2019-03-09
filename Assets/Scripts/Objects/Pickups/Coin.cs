@@ -10,7 +10,7 @@ public class Coin : Powerup
 
     private void Awake()
     {
-        PowerupSignal.Raise();
+        VoidPowerupSignal.Raise();
     }
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
@@ -19,7 +19,7 @@ public class Coin : Powerup
         {
             PlayerInventory.Coins++;
             PlayerCoins.RuntimeValue += AmountToAdd;
-            PowerupSignal.Raise();
+            VoidPowerupSignal.Raise();
             Destroy(this.gameObject);
         }
     }

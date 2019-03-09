@@ -19,17 +19,17 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public PlayerState State;
     public FloatValue CurrentHealth;
-    public CustomSignal HealthSignal;
+    public VoidSignal HealthSignal;
     [Header("Movement")]
     public VectorValue StartingPosition;
     public float DashDistance;
     public GameObject DashAnimation;
     [Header("Inventories")]
     public Inventory PlayerInventory;
-    public SpellBar Spells;
+    private SpellBar Spells;
     [Header("Other")]
     public SpriteRenderer ReceivedItemSprite;
-    public CustomSignal PlayerHit;
+    public VoidSignal PlayerHit;
     public GameObject DamageTakenCanvas;
 
     private Rigidbody2D rigidBody;
@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         State = PlayerState.Idle;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+        Spells = GetComponent<SpellBar>();
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
         transform.position = StartingPosition.InitialValue;
@@ -78,7 +79,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void CastSpell(int spellIndex, Vector3 direction)
     {
-        Spells.CastSpell(spellIndex, transform, direction);
+        if (PlayerInventory.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
+            Spells.CastSpell(spellIndex, transform, direction);
     }
 
     private bool CanMove(Vector3 direction, float distance)

@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 7125387
+    totalSpriteSurfaceArea: 7125899
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -56,6 +56,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a8a81f7163fa29442b63b47d751d64dd, type: 3}
   - {fileID: 21300000, guid: 56716f8129385514294b2819e9566f18, type: 3}
   - {fileID: 21300000, guid: e33073c12a1212141bb271ff12a51209, type: 3}
+  - {fileID: 21300000, guid: ee7048d1ef324204f88c94a1587f1fb3, type: 3}
   - {fileID: 21300000, guid: 42f6c722ead369b4b934a116b4324a4d, type: 3}
   - {fileID: 21300000, guid: 96281732b7dd97f43848d6dec60fd16b, type: 3}
   - {fileID: 3059174765694063163, guid: ac10a04214c3aeb41ae2eba4b34c5682, type: 3}
@@ -1443,6 +1444,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8b03ad0628d8cec43a17e35fbc3086e4, type: 3}
   - {fileID: 21300000, guid: 2c961366528f28c458c619797d0bbb2f, type: 3}
   - {fileID: 21300000, guid: a8963d66403e21a46b4935a666a9e731, type: 3}
+  - {fileID: 21300000, guid: eb3a9a76a9797b54192fd9bd4a4bc1da, type: 3}
   - {fileID: 21300000, guid: b5396be67fea11741b097c1481fb5352, type: 3}
   - {fileID: 21300000, guid: 82e10937dee60ac49aab93107e008888, type: 3}
   - {fileID: 21300000, guid: caf7b2475733a6e4480688688406916d, type: 3}
@@ -1831,6 +1833,7 @@ SpriteAtlas:
   - explosion_02
   - NPC_test
   - SpellBookPreface_24
+  - magic bottle
   - SpellBookPreface_17
   - SpellBookPreface_25
   - log_8
@@ -3218,6 +3221,7 @@ SpriteAtlas:
   - SpellBookPreface_21
   - fireball_01
   - Zelda
+  - magic bar
   - dashwind_03
   - explosion_05
   - SpellBookPreface_13

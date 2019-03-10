@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 7125899
+    totalSpriteSurfaceArea: 11094475
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -84,6 +84,7 @@ SpriteAtlas:
   - {fileID: -7445369939883215787, guid: ac10a04214c3aeb41ae2eba4b34c5682, type: 3}
   - {fileID: 21300000, guid: ac6ad492dd4743a47ab4da7cf07f6a95, type: 3}
   - {fileID: 21300000, guid: 411f88b287eb8504aa08edb04c1443c6, type: 3}
+  - {fileID: 21300000, guid: 2ac35e43bef7d4b43907ed54966af08e, type: 3}
   - {fileID: 21300000, guid: 6dec5c53ddfb4414b95f16b2cdde7280, type: 3}
   - {fileID: 21300000, guid: 293276643bb2ddd408d9145f15db23e2, type: 3}
   - {fileID: 21300000, guid: d75c3ea4f69088244983a84c88525796, type: 3}
@@ -1599,6 +1600,7 @@ SpriteAtlas:
   - {fileID: 1107736971085435061, guid: d8b15978d69577e488a7d42e092bd2a9, type: 3}
   - {fileID: -377563455374678323, guid: d8b15978d69577e488a7d42e092bd2a9, type: 3}
   - {fileID: 21300000, guid: ba8204987081496419081ce78d6917db, type: 3}
+  - {fileID: 21300000, guid: 7354e00920d9e9c4993887ffa74a5283, type: 3}
   - {fileID: 21300000, guid: 8cfb7309ecb4fa14fa40431963ae59ea, type: 3}
   - {fileID: 21300000, guid: 75a3e049c8703dd4c8c520102a77bd15, type: 3}
   - {fileID: 21300000, guid: ee34195976181ef4b83f98f5034ab668, type: 3}
@@ -1690,6 +1692,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 765adefb2fc5c44428193d49a3146ff3, type: 3}
   - {fileID: 21300000, guid: 6becf50c5d862904cacebdac87f15502, type: 3}
   - {fileID: 21300000, guid: 8cb1161cd4b52534ba2ec2922764d061, type: 3}
+  - {fileID: 21300000, guid: 2f966a8cbfc59b8499ac40ea053b0fc3, type: 3}
   - {fileID: 21300000, guid: 2d0997ac1b1fd664e98202450e7ea2d7, type: 3}
   - {fileID: 21300002, guid: 376debac1c661464f8b1f801198c660f, type: 3}
   - {fileID: 21300000, guid: 376debac1c661464f8b1f801198c660f, type: 3}
@@ -1861,6 +1864,7 @@ SpriteAtlas:
   - log_22
   - SpellBookPreface_15
   - SpellBookPreface_12
+  - circle
   - particlel
   - explosion_01
   - SpellBookPreface_07
@@ -3376,6 +3380,7 @@ SpriteAtlas:
   - objects_109
   - objects_108
   - dashwind_01
+  - purple-circle-out
   - SpellBookPreface_22
   - explosion_03
   - SpellBookPreface_02
@@ -3467,6 +3472,7 @@ SpriteAtlas:
   - DialogFrame
   - SpellBookPreface_08
   - dashwind_05
+  - purple-circle-in
   - SpellBookPreface_18
   - DashSprite_1
   - DashSprite_0

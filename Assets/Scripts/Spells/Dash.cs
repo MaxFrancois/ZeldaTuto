@@ -5,6 +5,7 @@ using UnityEngine;
 public class Dash : Spell
 {
     public float Distance;
+    private bool isDestroyed = false;
 
     private bool CanMove(Transform source, Vector3 direction)
     {
@@ -17,6 +18,19 @@ public class Dash : Spell
         if (CanMove(source, direction))
         {
             StartCoroutine(DashCo(source, direction, Distance));
+        }
+        else
+        {
+            DestroyThis();
+        }
+    }
+
+    private void DestroyThis()
+    {
+        if (!isDestroyed)
+        {
+            isDestroyed = true;
+            Destroy(this.gameObject, 0.5f);
         }
     }
 

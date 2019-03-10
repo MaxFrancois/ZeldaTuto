@@ -1,19 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cooldown
 {
     public Spell Spell;
     public float TimeTracker;
+    public Image CooldownImage;
+    public float CooldownTime;
 }
 
 public class SpellBar : MonoBehaviour
 {
-    public List<Cooldown> Cooldowns = new List<Cooldown>();
-    public List<Spell> Spells;
     public int MaxQuantity;
+    public List<Cooldown> Cooldowns = new List<Cooldown>();
+    [Header("Spells")]
+    public List<Image> CooldownImages;
+    public List<Spell> Spells;
     public FloatSignal SpendManaSignal;
+    [Header("Ultimate")]
+    public Image UltimateImage;
+    public Spell Ultimate;
+    public FloatSignal SpendUltimateSignal;
 
     public void AddSpell(Spell spell)
     {
@@ -27,6 +36,12 @@ public class SpellBar : MonoBehaviour
             Spells.Remove(spell);
     }
 
+    public void CastUltimate(Transform source, Vector3 direction)
+    {
+        SpendUltimateSignal.Raise(Ultimate.ManaCost);
+        Debug.Log("Casting ultimate!");
+    }
+
     public void CastSpell(int spellIndex, Transform source, Vector3 direction)
     {
         if (spellIndex < MaxQuantity && spellIndex >= 0)
@@ -35,7 +50,16 @@ public class SpellBar : MonoBehaviour
                 SpendManaSignal.Raise(Spells[spellIndex].ManaCost);
                 var spell = Instantiate(Spells[spellIndex], source.position, Quaternion.identity);
                 if (Spells[spellIndex].Cooldown > 0)
-                    Cooldowns.Add(new Cooldown() { TimeTracker = Spells[spellIndex].Cooldown, Spell = Spells[spellIndex] });
+                {
+                    CooldownImages[spellIndex].fillAmount = 1;
+                    Cooldowns.Add(new Cooldown()
+                    {
+                        TimeTracker = Spells[spellIndex].Cooldown,
+                        CooldownTime = Spells[spellIndex].Cooldown,
+                        Spell = Spells[spellIndex],
+                        CooldownImage = CooldownImages[spellIndex]
+                    });
+                }
                 spell.Cast(source, direction);
             }
     }
@@ -47,6 +71,7 @@ public class SpellBar : MonoBehaviour
         for (int i = Cooldowns.Count - 1; i >= 0; i--)
         {
             Cooldowns[i].TimeTracker -= deltaTime;
+            Cooldowns[i].CooldownImage.fillAmount -= deltaTime / Cooldowns[i].CooldownTime;
             if (Cooldowns[i].TimeTracker <= 0)
             {
                 Cooldowns.Remove(Cooldowns[i]);

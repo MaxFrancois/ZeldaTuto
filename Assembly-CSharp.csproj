@@ -87,10 +87,7 @@
     <Compile Include="Assets\Scripts\Objects\Pickups\ManaBottle.cs" />
     <Compile Include="Assets\Scripts\Objects\Pickups\Powerup.cs" />
     <Compile Include="Assets\Scripts\Objects\Projectile.cs" />
-    <Compile Include="Assets\Scripts\Player Scripts\CoinManager.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\ContextClue.cs" />
-    <Compile Include="Assets\Scripts\Player Scripts\HeartManager.cs" />
-    <Compile Include="Assets\Scripts\Player Scripts\ManaManager.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\BoolValue.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\CustomSignal.cs" />
@@ -108,11 +105,16 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\VectorValue.cs" />
     <Compile Include="Assets\Scripts\Spells\Dash.cs" />
     <Compile Include="Assets\Scripts\Spells\Fireball.cs" />
+    <Compile Include="Assets\Scripts\Spells\Firewall.cs" />
     <Compile Include="Assets\Scripts\Spells\ProjectileSpell.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellBar.cs" />
+    <Compile Include="Assets\Scripts\UI\CoinManager.cs" />
     <Compile Include="Assets\Scripts\UI\DamageDisplay.cs" />
+    <Compile Include="Assets\Scripts\UI\HeartManager.cs" />
+    <Compile Include="Assets\Scripts\UI\ManaManager.cs" />
     <Compile Include="Assets\Scripts\UI\SpellBarManager.cs" />
+    <Compile Include="Assets\Scripts\UI\UltimateManager.cs" />
     <Compile Include="Assets\Scripts\UtilsClass.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

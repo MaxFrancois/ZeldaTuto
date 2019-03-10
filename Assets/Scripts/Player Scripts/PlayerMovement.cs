@@ -55,17 +55,23 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
+        var currentDirection = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0);
         if (Input.GetButtonDown("Attack") && State != PlayerState.Attacking && State != PlayerState.Staggered)
         {
             StartCoroutine(AttackCo());
         }
+        else if (Input.GetButtonDown("Ultimate") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        {
+            if (PlayerInventory.CurrentUltimate >= Spells.Ultimate.ManaCost)
+                Spells.CastUltimate(transform, currentDirection);
+        }
         else if (Input.GetButtonDown("Spell 0") && State != PlayerState.Attacking && State != PlayerState.Staggered)
         {
-            CastSpell(0, new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0));
+            CastSpell(0, currentDirection);
         }
         else if (Input.GetButtonDown("Spell 1") && State != PlayerState.Attacking && State != PlayerState.Staggered)
         {
-            CastSpell(1, new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0));
+            CastSpell(1, currentDirection);
         }
         else if (Input.GetButtonDown("Dash") && State != PlayerState.Attacking && State != PlayerState.Staggered)
         {

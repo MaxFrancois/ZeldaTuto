@@ -22,3 +22,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 595fca657018c4144b2770c5576af1ea, type: 2}
   NumberOfKeys: 100
   Coins: 10
+  MaxMana: 100
+  CurrentMana: 100
+  PassiveManaRegenSpeed: 1
+  CurrentUltimate: 0
+  MaxUltimate: 100
+  PassiveUltimateRegenSpeed: 5

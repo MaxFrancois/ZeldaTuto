@@ -13,32 +13,36 @@ public class Fireball : ProjectileSpell
 
     private void Start()
     {
+        lifeTimeTracker = LifeTime;
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        //if (LifeTime != 0)
-        //{
-        //    lifeTimeTracker -= Time.deltaTime;
-        //    if (lifeTimeTracker <= 0)
-        //    {
-        //        DestroyThis();
-        //    }
-        //    else UpdatePosition();
-        //}
-        //else
-        UpdatePosition();
+        if (LifeTime != 0)
+        {
+            lifeTimeTracker -= Time.deltaTime;
+            if (lifeTimeTracker <= 0)
+            {
+                DestroyThis();
+            }
+            else UpdatePosition();
+        }
+        else
+            UpdatePosition();
     }
 
     private void DestroyThis()
     {
-        isDestroyed = true;
-        Debug.Log("destroying fireball");
-        Destroy(AnimationInstance);
-        var explosion = Instantiate(FireballExplosionAnimation, transform.position, Quaternion.identity);
-        Destroy(explosion, 0.5f);
-        Destroy(this.gameObject, 0.5f);
+        if (!isDestroyed)
+        {
+            isDestroyed = true;
+            Debug.Log("destroying fireball");
+            Destroy(AnimationInstance);
+            var explosion = Instantiate(FireballExplosionAnimation, transform.position, Quaternion.identity);
+            Destroy(explosion, 0.5f);
+            Destroy(this.gameObject, 0.5f);
+        }
     }
 
     private void UpdatePosition()

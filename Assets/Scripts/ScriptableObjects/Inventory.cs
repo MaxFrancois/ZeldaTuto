@@ -12,6 +12,9 @@ public class Inventory : ScriptableObject
     public float MaxMana = 100f;
     public float CurrentMana;
     public float PassiveManaRegenSpeed;
+    public float CurrentUltimate = 0;
+    public float MaxUltimate = 100f;
+    public float PassiveUltimateRegenSpeed;
 
     public void AddItem(Item item)
     {

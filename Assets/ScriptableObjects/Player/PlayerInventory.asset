@@ -25,6 +25,6 @@ MonoBehaviour:
   MaxMana: 100
   CurrentMana: 100
   PassiveManaRegenSpeed: 1
-  CurrentUltimate: 0
+  CurrentUltimate: 50
   MaxUltimate: 100
   PassiveUltimateRegenSpeed: 5

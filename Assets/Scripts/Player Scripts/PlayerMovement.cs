@@ -125,7 +125,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("MoveX", change.x);
             animator.SetFloat("MoveY", change.y);
             rigidBody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
-
         }
         else
         {

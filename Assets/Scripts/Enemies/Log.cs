@@ -5,7 +5,6 @@ using UnityEngine;
 public class Log : Enemy
 {
     public Rigidbody2D body;
-    public Transform Target;
     public float ChaseRadius;
     public float AttackRadius;
     public Animator Animator;

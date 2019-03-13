@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - WorldCollision
   - Room
+  - MiniBoss
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -53,4 +55,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4282853001
+    locked: 0
+  - name: Spells
+    uniqueID: 1679573765
     locked: 0

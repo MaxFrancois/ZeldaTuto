@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e69bd1737804a4c967d7061c37de94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Context: {fileID: 11400000, guid: 640fb323c15ea6e498bdd5d046ed1da4, type: 2}
+  Context: {fileID: 0}
   IsActive: 0
   DoorType: 0
   IsOpen: 0

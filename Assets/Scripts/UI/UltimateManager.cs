@@ -10,8 +10,7 @@ public class UltimateManager : MonoBehaviour
 
     void Start()
     {
-        UltimateOrb.fillAmount = 0;
-        PlayerInventory.CurrentUltimate  = 0;
+        UltimateOrb.fillAmount = PlayerInventory.CurrentUltimate / 100;
     }
 
     public void IncreaseUltimate(float amount)

@@ -563,13 +563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3682a5c422296741a777105eb59d56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxQuantity: 4
+  CooldownImages: []
   Spells:
   - {fileID: 7432924486054220328, guid: b0e923db347467a4cb8cf338a8bdb35a, type: 3}
   - {fileID: 4806634282985027023, guid: b00205b789ee93b4c8c76b0f23a59028, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  MaxQuantity: 4
   SpendManaSignal: {fileID: 11400000, guid: 289c9ed159456e641883406ea14f244d, type: 2}
+  UltimateImage: {fileID: 0}
+  Ultimate: {fileID: 0}
+  SpendUltimateSignal: {fileID: 0}
 --- !u!114 &548933281
 MonoBehaviour:
   m_ObjectHideFlags: 0

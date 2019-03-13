@@ -5,7 +5,6 @@ using UnityEngine;
 public class Dash : Spell
 {
     public float Distance;
-    private bool isDestroyed = false;
 
     private bool CanMove(Transform source, Vector3 direction)
     {

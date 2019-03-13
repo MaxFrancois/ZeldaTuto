@@ -9,7 +9,6 @@ public class Fireball : ProjectileSpell
     Vector3 fireDirection;
     Transform sourceTransform;
     public GameObject FireballExplosionAnimation;
-    private bool isDestroyed = false;
 
     private void Start()
     {
@@ -74,7 +73,8 @@ public class Fireball : ProjectileSpell
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
         if (!isDestroyed)
-            if (collidedObject.gameObject.CompareTag("Enemy") && collidedObject.isTrigger)
+            if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("MiniBoss")) 
+                && collidedObject.isTrigger)
             {
                 Vector2 difference = collidedObject.transform.position - transform.position;
                 difference = difference.normalized * PushForce;

@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public float MoveSpeed;
     public GameObject DeathAnimation;
     public Vector2 HomePosition;
+    public Transform Target;
     [Header("Death Signals")]
     public VoidSignal RoomSignal;
     public LootTable LootTable;
@@ -36,7 +37,7 @@ public class Enemy : MonoBehaviour
         CurrentHealth = MaxHealth.InitialValue;
     }
 
-    public void Knock(Rigidbody2D body, float pushTime, float damage)
+    public virtual void Knock(Rigidbody2D body, float pushTime, float damage)
     {
         if (transform.gameObject.activeInHierarchy)
             StartCoroutine(Knockback(body, pushTime));

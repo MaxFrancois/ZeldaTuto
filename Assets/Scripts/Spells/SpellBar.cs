@@ -39,7 +39,8 @@ public class SpellBar : MonoBehaviour
     public void CastUltimate(Transform source, Vector3 direction)
     {
         SpendUltimateSignal.Raise(Ultimate.ManaCost);
-        Debug.Log("Casting ultimate!");
+        var ult = Instantiate(Ultimate, source.position, Quaternion.identity);
+        ult.Cast(source, direction);
     }
 
     public void CastSpell(int spellIndex, Transform source, Vector3 direction)

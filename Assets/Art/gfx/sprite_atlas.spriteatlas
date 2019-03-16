@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 13113927
+    totalSpriteSurfaceArea: 12977096
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -1570,7 +1570,10 @@ SpriteAtlas:
   - {fileID: -4614463974701417080, guid: 62f50b97fdfe0a54aa13663d1b2826f9, type: 3}
   - {fileID: -8239091726997520733, guid: 62f50b97fdfe0a54aa13663d1b2826f9, type: 3}
   - {fileID: 1263595231250603967, guid: 62f50b97fdfe0a54aa13663d1b2826f9, type: 3}
-  - {fileID: 21300000, guid: 880163082fe664f47af538bcd5e32ea9, type: 3}
+  - {fileID: -1051775299394929331, guid: 880163082fe664f47af538bcd5e32ea9, type: 3}
+  - {fileID: 2092688400159238165, guid: 880163082fe664f47af538bcd5e32ea9, type: 3}
+  - {fileID: -6504214343415894341, guid: 880163082fe664f47af538bcd5e32ea9, type: 3}
+  - {fileID: 7810992929966424791, guid: 880163082fe664f47af538bcd5e32ea9, type: 3}
   - {fileID: 21300000, guid: b831ab380ef270c4782b20812e46b64d, type: 3}
   - {fileID: -1986772863260763996, guid: d8b15978d69577e488a7d42e092bd2a9, type: 3}
   - {fileID: 5760800594879907098, guid: d8b15978d69577e488a7d42e092bd2a9, type: 3}
@@ -3469,7 +3472,10 @@ SpriteAtlas:
   - Minotaur - Sprite Sheet_10
   - Minotaur - Sprite Sheet_40
   - Minotaur - Sprite Sheet_41
-  - xbox buttons
+  - xbox buttons_B
+  - xbox buttons_A
+  - xbox buttons_X
+  - xbox buttons_Y
   - font
   - objects_71
   - objects_70

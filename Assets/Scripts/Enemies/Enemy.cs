@@ -10,7 +10,7 @@ public enum EnemyState
     Staggered
 }
 
-public class Enemy : MonoBehaviour
+public class Enemy : EnemyBase
 {
     public EnemyState CurrentState;
     public float CurrentHealth;
@@ -37,8 +37,12 @@ public class Enemy : MonoBehaviour
         CurrentHealth = MaxHealth.InitialValue;
     }
 
-    public virtual void Knock(Rigidbody2D body, float pushTime, float damage)
+    public override void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
+        CurrentState = EnemyState.Staggered;
+        Vector2 difference = transform.position - thingThatHitYou.position;
+        difference = difference.normalized * pushForce;
+        body.AddForce(difference, ForceMode2D.Impulse);
         if (transform.gameObject.activeInHierarchy)
             StartCoroutine(Knockback(body, pushTime));
         UpdateHealth(damage);

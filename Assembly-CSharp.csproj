@@ -71,8 +71,10 @@
     <Compile Include="Assets\Scripts\Camera\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Enemies\AreaEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyBase.cs" />
     <Compile Include="Assets\Scripts\Enemies\Log.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Minotaur.cs" />
+    <Compile Include="Assets\Scripts\Enemies\MiniBosses\MiniBoss.cs" />
+    <Compile Include="Assets\Scripts\Enemies\MiniBosses\Minotaur.cs" />
     <Compile Include="Assets\Scripts\Enemies\PatrolLog.cs" />
     <Compile Include="Assets\Scripts\Enemies\RockProjectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\TurretLog.cs" />
@@ -116,7 +118,9 @@
     <Compile Include="Assets\Scripts\Spells\SpellInstances\FallingRock.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\ProjectileSpell.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\StaticFire.cs" />
+    <Compile Include="Assets\Scripts\UI\BossHealthManager.cs" />
     <Compile Include="Assets\Scripts\UI\CoinManager.cs" />
+    <Compile Include="Assets\Scripts\UI\CutsceneTrigger.cs" />
     <Compile Include="Assets\Scripts\UI\DamageDisplay.cs" />
     <Compile Include="Assets\Scripts\UI\HeartManager.cs" />
     <Compile Include="Assets\Scripts\UI\ManaManager.cs" />

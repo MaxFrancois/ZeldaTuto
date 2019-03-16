@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d758df553002a14abf46bcdd703e6c4, type: 3}
   m_Name: MinotaurHealth
   m_EditorClassIdentifier: 
-  InitialValue: 10
-  RuntimeValue: 10
+  InitialValue: 20
+  RuntimeValue: 20

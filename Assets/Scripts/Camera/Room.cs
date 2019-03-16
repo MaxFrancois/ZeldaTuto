@@ -7,11 +7,13 @@ public class Room : MonoBehaviour
     public Enemy[] Enemies;
     public Pot[] Pots;
     public GameObject VirtualCamera;
+    public bool ContainsPlayer = false;
 
     public virtual void OnTriggerEnter2D(Collider2D collidedObject)
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
+            ContainsPlayer = true;
             foreach (var enemy in Enemies)
             {
                 ChangeActivation(enemy, true);
@@ -29,6 +31,7 @@ public class Room : MonoBehaviour
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
+            ContainsPlayer = false;
             foreach (var enemy in Enemies)
             {
                 ChangeActivation(enemy, false);

@@ -117,11 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9411525d1e55384185a69d51f6cc571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushTime: 0.4
-  PushForce: 3
-  Damage: 1
-  FallDistance: 3
-  TimeBeforeFall: 1
 --- !u!58 &6532221454363518143
 CircleCollider2D:
   m_ObjectHideFlags: 0

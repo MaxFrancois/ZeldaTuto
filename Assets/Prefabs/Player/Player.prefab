@@ -241,6 +241,7 @@ MonoBehaviour:
   Thrust: 4
   PushTime: 0.3
   Damage: 1
+  IsActive: 0
 --- !u!1 &9058059807489499172
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +322,7 @@ MonoBehaviour:
   Thrust: 4
   PushTime: 0.3
   Damage: 1
+  IsActive: 0
 --- !u!1 &9058059808089006316
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +406,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -12114295
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7152930139536384079, guid: 3c84827b79fd2914c974ce3071b1bacc,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -564,7 +566,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxQuantity: 4
-  CooldownImages: []
+  CooldownImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Spells:
   - {fileID: 7432924486054220328, guid: b0e923db347467a4cb8cf338a8bdb35a, type: 3}
   - {fileID: 4806634282985027023, guid: b00205b789ee93b4c8c76b0f23a59028, type: 3}
@@ -572,8 +578,10 @@ MonoBehaviour:
   - {fileID: 0}
   SpendManaSignal: {fileID: 11400000, guid: 289c9ed159456e641883406ea14f244d, type: 2}
   UltimateImage: {fileID: 0}
-  Ultimate: {fileID: 0}
-  SpendUltimateSignal: {fileID: 0}
+  Ultimate: {fileID: 8953012459029955048, guid: 1eccb222177ccba4cb9e55220296cb8b,
+    type: 3}
+  SpendUltimateSignal: {fileID: 11400000, guid: 82f574a709135644db28571bed95a86a,
+    type: 2}
 --- !u!114 &548933281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +721,7 @@ MonoBehaviour:
   Thrust: 4
   PushTime: 0.3
   Damage: 1
+  IsActive: 0
 --- !u!1 &9058059808600726118
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,3 +802,4 @@ MonoBehaviour:
   Thrust: 4
   PushTime: 0.3
   Damage: 1
+  IsActive: 0

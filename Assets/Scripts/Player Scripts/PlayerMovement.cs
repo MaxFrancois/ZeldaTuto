@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class StatusEffect
+{
+    public string Name;
+    public Sprite Icon;
+}
+
 public enum PlayerState
 {
     Idle,
@@ -36,9 +42,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     private Vector3 currentDirection;
+    private List<StatusEffect> statusEffects = new List<StatusEffect>();
+    private bool isFrozenForCutscene;
 
     void Start()
     {
+        isFrozenForCutscene = false;
         State = PlayerState.Idle;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -51,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (State == PlayerState.Interacting) return;
+        if (State == PlayerState.Interacting || isFrozenForCutscene) return;
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
@@ -81,6 +90,12 @@ public class PlayerMovement : MonoBehaviour
         {
             UpdateMovement();
         }
+    }
+
+    //use timer instead
+    public void SetFrozenForCutscene(bool isFrozen)
+    {
+        isFrozenForCutscene = isFrozen;
     }
 
     private void CastSpell(int spellIndex, Vector3 direction)
@@ -163,8 +178,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Knock(float pushTime, float damage)
+    public void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
+        State = PlayerState.Staggered;
+        Vector2 difference = transform.position - thingThatHitYou.position;
+        difference = difference.normalized * pushForce;
+        rigidBody.AddForce(difference, ForceMode2D.Impulse);
         CurrentHealth.RuntimeValue -= damage;
         HealthSignal.Raise();
         if (CurrentHealth.RuntimeValue > 0)

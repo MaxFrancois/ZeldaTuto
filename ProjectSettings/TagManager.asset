@@ -59,3 +59,6 @@ TagManager:
   - name: Spells
     uniqueID: 1679573765
     locked: 0
+  - name: Ceiling
+    uniqueID: 2908030165
+    locked: 0

@@ -41,14 +41,10 @@ public class StaticFire : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
         if (!isDestroyed)
-            if (collidedObject.gameObject.CompareTag("Enemy") && collidedObject.isTrigger)
+            if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("MiniBoss"))
+                && collidedObject.isTrigger)
             {
-                Vector2 difference = collidedObject.transform.position - transform.position;
-                difference = difference.normalized * PushForce;
-                var collidedBody = collidedObject.GetComponent<Rigidbody2D>();
-                collidedBody.AddForce(difference, ForceMode2D.Impulse);
-                collidedBody.GetComponent<Enemy>().CurrentState = EnemyState.Staggered;
-                collidedObject.GetComponent<Enemy>().Knock(collidedBody, PushTime, Damage);
+                collidedObject.GetComponent<EnemyBase>().Knock(transform, PushForce, PushTime, Damage);
             }
     }
 }

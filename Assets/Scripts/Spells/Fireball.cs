@@ -72,26 +72,16 @@ public class Fireball : ProjectileSpell
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
+        //update this to use knockback script instead
         if (!isDestroyed)
             if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("MiniBoss")) 
                 && collidedObject.isTrigger)
             {
-                Vector2 difference = collidedObject.transform.position - transform.position;
-                difference = difference.normalized * PushForce;
-                var collidedBody = collidedObject.GetComponent<Rigidbody2D>();
-                collidedBody.AddForce(difference, ForceMode2D.Impulse);
-                collidedBody.GetComponent<Enemy>().CurrentState = EnemyState.Staggered;
-                collidedObject.GetComponent<Enemy>().Knock(collidedBody, PushTime, Damage);
+                collidedObject.GetComponent<EnemyBase>().Knock(transform, PushTime, PushForce, Damage);
                 DestroyThis();
             }
-            else if (collidedObject.gameObject.CompareTag("Breakable"))
+            else if (collidedObject.gameObject.CompareTag("Breakable") || collidedObject.gameObject.CompareTag("WorldCollision"))
             {
-                Debug.Log("Fireball hit a breakable");
-                DestroyThis();
-            }
-            else if (collidedObject.gameObject.CompareTag("WorldCollision"))
-            {
-                Debug.Log("Fireball hit a wall");
                 DestroyThis();
             }
     }

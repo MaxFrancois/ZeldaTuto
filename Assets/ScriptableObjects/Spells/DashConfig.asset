@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 81461b34c9438824d8fb32aa0f3de90f, type: 3}
+  m_Name: DashConfig
+  m_EditorClassIdentifier: 
+  Id: N001
+  Icon: {fileID: 21300000, guid: 495b165e4f96ef14fb23cd71fa625a47, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: b54ba107e5f14054ca2b80eb99004336, type: 3}
+  Name: Dash
+  Description: Dash in one direction
+  Video: {fileID: 0}
+  Element: 0
+  ManaCost: 1
+  PushTime: 0
+  PushForce: 0
+  Damage: 0
+  Cooldown: 1
+  LifeTime: 0
+  IsUnlocked: 1
+  DashInstance: {fileID: 2979725522307296010, guid: bb1410becb59f93459191a3146a95236,
+    type: 3}
+  Distance: 3
+  DashWidth: 3

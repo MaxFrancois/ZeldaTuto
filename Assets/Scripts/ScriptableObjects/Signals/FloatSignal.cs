@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "FloatSignal", menuName = "Signals/FloatSignal")]
 public class FloatSignal : SignalBase
 {
     public void Raise(float parameter)

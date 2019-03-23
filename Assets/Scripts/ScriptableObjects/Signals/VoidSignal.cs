@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "VoidSignal", menuName = "Signals/VoidSignal")]
 public class VoidSignal : SignalBase
 {
     public void Raise()

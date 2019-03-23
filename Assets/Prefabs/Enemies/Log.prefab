@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentState: 0
   CurrentHealth: 0
-  MaxHealth: {fileID: 11400000, guid: fe487fe8e8d4ff641bd9e3f28d6c33de, type: 2}
+  MaxHealth: {fileID: 11400000, guid: f5c017bbb55e3664cb04df1ee251c2d9, type: 2}
   Name: Log
   BaseAttack: 1
   MoveSpeed: 2
@@ -177,8 +177,7 @@ MonoBehaviour:
   HomePosition: {x: -8, y: 22}
   Target: {fileID: 0}
   RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
-  LootTable: {fileID: 11400000, guid: 9ba3d34ff1056e14b8a530da0302eb21, type: 2}
-  body: {fileID: 0}
+  LootTable: {fileID: 11400000, guid: 7177c74a6835c3f45b6dde15d1f1b787, type: 2}
   ChaseRadius: 4
   AttackRadius: 1
   Animator: {fileID: 0}
@@ -224,3 +223,4 @@ MonoBehaviour:
   Thrust: 4
   PushTime: 0.3
   Damage: 1
+  IsActive: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: 287e02b1d89a90846b01a2907a309cb6, type: 3}
+  m_Script: {fileID: 11500000, guid: ddc001561f0eb2c4e9b1fb8b9acc411b, type: 3}
   m_Name: Switch A
   m_EditorClassIdentifier: 
   InitialValue: 0

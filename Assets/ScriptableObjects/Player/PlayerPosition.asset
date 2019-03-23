@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: dceef03318b9f444c82a213a2a50f8cc, type: 3}
+  m_Script: {fileID: 11500000, guid: bdcc0f0a7e8a0c84896348a6d6cf3079, type: 3}
   m_Name: PlayerPosition
   m_EditorClassIdentifier: 
-  InitialValue: {x: 0.5, y: -3.5}
-  DefaultValue: {x: 0.5, y: -3.5}
+  InitialValue: {x: 0.1, y: 0.1}
+  DefaultValue: {x: 0.1, y: 0.1}

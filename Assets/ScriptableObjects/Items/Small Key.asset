@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: 17c96d1ce77a23e4f8c3334eb3d92c19, type: 3}
+  m_Script: {fileID: 11500000, guid: 98c1319f42748744e9635f06174c8651, type: 3}
   m_Name: Small Key
   m_EditorClassIdentifier: 
   ItemSprite: {fileID: 21300000, guid: d813f55a6bf636c48bbd287dc8d018d0, type: 3}
   ItemName: Small Key
-  ItemDescription: Small key that opens a small door
+  ItemDescription: A Small key to open doors
   isKey: 1

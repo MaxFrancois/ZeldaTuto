@@ -5,6 +5,7 @@ using UnityEngine;
 public class ManaBottle : Powerup
 {
     public float AmountToRecover;
+
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
         if (collidedObject.CompareTag("Player") && collidedObject.isTrigger)

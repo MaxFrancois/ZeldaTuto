@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Cooldown
 {
-    public Spell Spell;
+    public SpellConfig Spell;
     public float TimeTracker;
     public Image CooldownImage;
     public float CooldownTime;
@@ -17,20 +17,19 @@ public class SpellBar : MonoBehaviour
     public List<Cooldown> Cooldowns = new List<Cooldown>();
     [Header("Spells")]
     public List<Image> CooldownImages;
-    public List<Spell> Spells;
+    public List<SpellConfig> Spells;
     public FloatSignal SpendManaSignal;
-    [Header("Ultimate")]
-    public Image UltimateImage;
-    public Spell Ultimate;
+    public VoidSignal SpellChangedSignal;
+    public SpellConfig Ultimate;
     public FloatSignal SpendUltimateSignal;
 
-    public void AddSpell(Spell spell)
+    public void AddSpell(SpellConfig spell)
     {
         if (!Spells.Contains(spell) && Spells.Count < MaxQuantity)
             Spells.Add(spell);
     }
 
-    public void RemoveSpell(Spell spell)
+    public void RemoveSpell(SpellConfig spell)
     {
         if (Spells.Contains(spell))
             Spells.Remove(spell);
@@ -39,8 +38,14 @@ public class SpellBar : MonoBehaviour
     public void CastUltimate(Transform source, Vector3 direction)
     {
         SpendUltimateSignal.Raise(Ultimate.ManaCost);
-        var ult = Instantiate(Ultimate, source.position, Quaternion.identity);
-        ult.Cast(source, direction);
+        //var ult = Instantiate(Ultimate, source.position, Quaternion.identity);
+        Ultimate.Cast(source, direction);
+    }
+
+    public void ChangeSpell(int idx, SpellConfig newSpell)
+    {
+        Spells[idx] = newSpell;
+        SpellChangedSignal.Raise();
     }
 
     public void CastSpell(int spellIndex, Transform source, Vector3 direction)
@@ -49,7 +54,7 @@ public class SpellBar : MonoBehaviour
             if (Spells[spellIndex] != null && !Cooldowns.Any(c => c.Spell.Name == Spells[spellIndex].Name))
             {
                 SpendManaSignal.Raise(Spells[spellIndex].ManaCost);
-                var spell = Instantiate(Spells[spellIndex], source.position, Quaternion.identity);
+                var spell = Spells[spellIndex];//, source.position, Quaternion.identity);
                 if (Spells[spellIndex].Cooldown > 0)
                 {
                     CooldownImages[spellIndex].fillAmount = 1;

@@ -22,22 +22,22 @@ public class Sign : Interactable
         }
     }
 
-        private void OnTriggerEnter2D(Collider2D collidedObject)
+    private void OnTriggerEnter2D(Collider2D collidedObject)
+    {
+        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
-            if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
-            {
-                Context.Raise();
-                IsActive = true;
-            }
+            Context.Raise();
+            IsActive = true;
         }
+    }
 
-        private void OnTriggerExit2D(Collider2D collidedObject)
+    private void OnTriggerExit2D(Collider2D collidedObject)
+    {
+        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
-            if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
-            {
-                IsActive = false;
-                DialogBox.SetActive(false);
-                Context.Raise();
-            }
+            IsActive = false;
+            DialogBox.SetActive(false);
+            Context.Raise();
         }
+    }
 }

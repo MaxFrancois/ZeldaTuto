@@ -10,21 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: 68bbd842fb859544585b497fd76f4f37, type: 3}
+  m_Script: {fileID: 11500000, guid: 9420717959502f74db41e378c268fed0, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   currentItem: {fileID: 0}
-  Items:
-  - {fileID: 11400000, guid: 595fca657018c4144b2770c5576af1ea, type: 2}
-  - {fileID: 11400000, guid: 595fca657018c4144b2770c5576af1ea, type: 2}
-  - {fileID: 11400000, guid: 595fca657018c4144b2770c5576af1ea, type: 2}
-  - {fileID: 11400000, guid: 595fca657018c4144b2770c5576af1ea, type: 2}
-  - {fileID: 11400000, guid: 595fca657018c4144b2770c5576af1ea, type: 2}
+  Items: []
   NumberOfKeys: 100
-  Coins: 10
+  Coins: 0
   MaxMana: 100
-  CurrentMana: 100
-  PassiveManaRegenSpeed: 1
-  CurrentUltimate: 50
+  CurrentMana: 50
+  PassiveManaRegenSpeed: 2
+  CurrentUltimate: 20
   MaxUltimate: 100
-  PassiveUltimateRegenSpeed: 5
+  PassiveUltimateRegenSpeed: 1

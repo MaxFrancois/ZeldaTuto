@@ -20,10 +20,15 @@ public class SpellBarManager : MonoBehaviour
     {
         for (int i = 0; i < SpellBar.Spells.Count; i++)
         {
-            if (SpellIcons[i] != null && SpellBar.Spells[i] != null)
+            if (SpellBar.Spells[i] != null)
             {
                 SpellIcons[i].sprite = SpellBar.Spells[i].Icon;
                 SpellCooldownIcons[i].sprite = SpellBar.Spells[i].Icon;
+            }
+            else
+            {
+                SpellIcons[i].sprite = null;
+                SpellCooldownIcons[i].sprite = null;
             }
         }
     }

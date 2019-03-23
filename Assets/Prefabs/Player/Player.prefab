@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 548933280}
   - component: {fileID: 548933281}
   - component: {fileID: 548933283}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -572,14 +572,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Spells:
-  - {fileID: 7432924486054220328, guid: b0e923db347467a4cb8cf338a8bdb35a, type: 3}
-  - {fileID: 4806634282985027023, guid: b00205b789ee93b4c8c76b0f23a59028, type: 3}
+  - {fileID: 11400000, guid: cb3f9434268724a43b715b32c73f4154, type: 2}
+  - {fileID: 11400000, guid: f0730f8df7087024d91416321ab1c30a, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   SpendManaSignal: {fileID: 11400000, guid: 289c9ed159456e641883406ea14f244d, type: 2}
-  UltimateImage: {fileID: 0}
-  Ultimate: {fileID: 8953012459029955048, guid: 1eccb222177ccba4cb9e55220296cb8b,
-    type: 3}
+  SpellChangedSignal: {fileID: 11400000, guid: f23f7826ee9c99c4da7afe130fc97b59, type: 2}
+  Ultimate: {fileID: 11400000, guid: 0592b7c58088e014798e1934117bdf4a, type: 2}
   SpendUltimateSignal: {fileID: 11400000, guid: 82f574a709135644db28571bed95a86a,
     type: 2}
 --- !u!114 &548933281
@@ -631,6 +630,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 244566703}
         m_MethodName: ChangeActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9058059808089006317}
+        m_MethodName: SetCanInteract
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

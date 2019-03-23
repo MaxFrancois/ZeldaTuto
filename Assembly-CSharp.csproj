@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\RestMenuTest.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Camera\DungeonEnemyRoom.cs" />
     <Compile Include="Assets\Scripts\Camera\DungeonRoom.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\Objects\Interactables\Door.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Pot.cs" />
+    <Compile Include="Assets\Scripts\Objects\Interactables\RestZone.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Sign.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Switch.cs" />
     <Compile Include="Assets\Scripts\Objects\Pickups\Coin.cs" />
@@ -92,12 +94,9 @@
     <Compile Include="Assets\Scripts\Objects\Projectile.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\ContextClue.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\BoolValue.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\CustomSignal.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\FloatValue.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\Inventory.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\Item.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\LootTable.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\Inventory.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\Item.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Items\LootTable.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\FloatSignal.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\FloatSignalListener.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\SignalBase.cs" />
@@ -105,17 +104,24 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\VoidSignal.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\VoidSignalListener.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Spells\AvalancheConfig.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Spells\DashConfig.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Spells\FireballConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Spells\FirewallConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Spells\SpellBook.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\VectorValue.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Spells\SpellConfig.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Values\BoolValue.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Values\FloatValue.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Values\VectorValue.cs" />
     <Compile Include="Assets\Scripts\Spells\Avalanche.cs" />
     <Compile Include="Assets\Scripts\Spells\Dash.cs" />
     <Compile Include="Assets\Scripts\Spells\Fireball.cs" />
     <Compile Include="Assets\Scripts\Spells\Firewall.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellBar.cs" />
+    <Compile Include="Assets\Scripts\Spells\SpellContainer.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\AOEEffect.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\FallingRock.cs" />
+    <Compile Include="Assets\Scripts\Spells\SpellInstances\FireballInstance.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\ProjectileSpell.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\StaticFire.cs" />
     <Compile Include="Assets\Scripts\UI\BossHealthManager.cs" />
@@ -124,6 +130,11 @@
     <Compile Include="Assets\Scripts\UI\DamageDisplay.cs" />
     <Compile Include="Assets\Scripts\UI\HeartManager.cs" />
     <Compile Include="Assets\Scripts\UI\ManaManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Menus\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Menus\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Menus\RestMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Menus\SelectableButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Menus\SpellBookMenu.cs" />
     <Compile Include="Assets\Scripts\UI\SpellBarManager.cs" />
     <Compile Include="Assets\Scripts\UI\UltimateManager.cs" />
     <Compile Include="Assets\Scripts\UtilsClass.cs" />

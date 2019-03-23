@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488afcc49b1f71e46950ee802e8f33c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: {fileID: 11400000, guid: 0d48913423752d54c968664b87aae47a, type: 2}
+  MaxHealth: {fileID: 11400000, guid: 7bb196e5b23bccf4587ad8ee06c3fd7f, type: 2}
   Name: The Minotaur
   HomePosition: {x: 16.5, y: 29}
   LootTable: {fileID: 0}
@@ -896,9 +896,9 @@ MonoBehaviour:
   Avalanche: {fileID: 8155188773390139879, guid: ae116cea051c7e04091ac91f2bc0adc1,
     type: 3}
   AvalancheConfig: {fileID: 11400000, guid: 513744178a12da4438d9f17bf3db7e8c, type: 2}
-  SpawnFrequency: 0.2
-  SpawnQuantity: 2
-  SpawnDuration: 4
+  SpawnFrequency: 0.4
+  SpawnQuantity: 1
+  SpawnDuration: 6
   RoomZone:
     ZoneName: RoomZone
     BottomLeft: {x: 12, y: 22, z: 0}
@@ -923,8 +923,8 @@ MonoBehaviour:
   cameraShakeFrequency: 3
   EnragePercentage: 50
   EnragedMoveSpeed: 5
-  EnragedSpawnQuantity: 3
-  EnragedSpawnFrequency: 0.1
+  EnragedSpawnQuantity: 2
+  EnragedSpawnFrequency: 0.2
 --- !u!50 &5542084788087790294
 Rigidbody2D:
   serializedVersion: 4

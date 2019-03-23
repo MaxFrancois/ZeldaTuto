@@ -37,13 +37,14 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer ReceivedItemSprite;
     public VoidSignal PlayerHit;
     public GameObject DamageTakenCanvas;
-
     private Rigidbody2D rigidBody;
     private Vector3 change;
     private Animator animator;
     private Vector3 currentDirection;
     private List<StatusEffect> statusEffects = new List<StatusEffect>();
     private bool isFrozenForCutscene;
+    private bool canInteract = false;
+
 
     void Start()
     {
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (State == PlayerState.Interacting || isFrozenForCutscene) return;
+        if (State == PlayerState.Interacting || isFrozenForCutscene || MenuManager.IsPaused || MenuManager.RecentlyUnpaused) return;
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
             if (PlayerInventory.CurrentUltimate >= Spells.Ultimate.ManaCost)
                 Spells.CastUltimate(transform, currentDirection);
         }
-        else if (Input.GetButtonDown("Spell 0") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        else if (Input.GetButtonDown("Spell 0") && State != PlayerState.Attacking && State != PlayerState.Staggered && !canInteract)
         {
             CastSpell(0, currentDirection);
         }
@@ -82,10 +83,18 @@ public class PlayerMovement : MonoBehaviour
         {
             CastSpell(1, currentDirection);
         }
-        else if (Input.GetButtonDown("Dash") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        else if (Input.GetButtonDown("Spell 2") && State != PlayerState.Attacking && State != PlayerState.Staggered)
         {
-            Dash();
+            CastSpell(2, currentDirection);
         }
+        else if (Input.GetButtonDown("Spell 3") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        {
+            CastSpell(3, currentDirection);
+        }
+        //else if (Input.GetButtonDown("Dash") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        //{
+        //    Dash();
+        //}
         else if (State == PlayerState.Walking || State == PlayerState.Idle)
         {
             UpdateMovement();
@@ -98,39 +107,44 @@ public class PlayerMovement : MonoBehaviour
         isFrozenForCutscene = isFrozen;
     }
 
+    public void SetCanInteract()
+    {
+        canInteract = !canInteract;
+    }
+
     private void CastSpell(int spellIndex, Vector3 direction)
     {
-        if (PlayerInventory.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
+        if (Spells.Spells[spellIndex] != null && PlayerInventory.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
             Spells.CastSpell(spellIndex, transform, direction);
     }
 
-    private bool CanMove(Vector3 direction, float distance)
-    {
-        //can't find the right collider for map ?
-        return Physics2D.Raycast(transform.position, direction, distance).collider == null;
-    }
+    //private bool CanMove(Vector3 direction, float distance)
+    //{
+    //    //can't find the right collider for map ?
+    //    return Physics2D.Raycast(transform.position, direction, distance).collider == null;
+    //}
 
-    private void Dash()
-    {
-        var direction = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0);
-        if (CanMove(direction, DashDistance))
-        {
-            StartCoroutine(DashCo(direction, DashDistance));
-        }
-    }
+    //private void Dash()
+    //{
+    //    var direction = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0);
+    //    if (CanMove(direction, DashDistance))
+    //    {
+    //        StartCoroutine(DashCo(direction, DashDistance));
+    //    }
+    //}
 
-    private IEnumerator DashCo(Vector3 direction, float distance)
-    {
-        var currentPosition = transform.position;
-        var dashEffect = Instantiate(DashAnimation, currentPosition, Quaternion.identity);
-        dashEffect.transform.eulerAngles = new Vector3(0, 0, UtilsClass.GetAngleFromVectorFloat(direction));
-        float dashEffectWidth = 3f;
-        dashEffect.transform.localScale = new Vector3(DashDistance / dashEffectWidth, 1f, 1f);
-        transform.position += direction * DashDistance;
-        yield return new WaitForSeconds(0.1f);
-        Destroy(dashEffect);
-        yield return null;
-    }
+    //private IEnumerator DashCo(Vector3 direction, float distance)
+    //{
+    //    var currentPosition = transform.position;
+    //    var dashEffect = Instantiate(DashAnimation, currentPosition, Quaternion.identity);
+    //    dashEffect.transform.eulerAngles = new Vector3(0, 0, UtilsClass.GetAngleFromVectorFloat(direction));
+    //    float dashEffectWidth = 3f;
+    //    dashEffect.transform.localScale = new Vector3(DashDistance / dashEffectWidth, 1f, 1f);
+    //    transform.position += direction * DashDistance;
+    //    yield return new WaitForSeconds(0.1f);
+    //    Destroy(dashEffect);
+    //    yield return null;
+    //}
 
     private void UpdateMovement()
     {

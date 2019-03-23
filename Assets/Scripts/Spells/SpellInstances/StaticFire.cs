@@ -4,32 +4,41 @@ using UnityEngine;
 
 public class StaticFire : MonoBehaviour
 {
-    public float Duration;
-    public float PushTime;
-    public float PushForce;
-    public float Damage;
+    private float duration;
+    private float pushTime;
+    private float pushForce;
+    private float damage;
     private Animator animator;
     private bool isDestroyed = false;
-
+    private bool ready;
+    
     void Awake()
     {
+        ready = false;
         animator = GetComponent<Animator>();
     }
 
-    public void Initialize(float damage, float pushTime, float pushForce, float duration)
+    public void Initialize(float dmg, float pusht, float pushf, float dur, float delay)
     {
-        Duration = duration;
-        PushForce = pushForce;
-        PushTime = pushTime;
-        Damage = damage;
+        duration = dur;
+        pushForce = pushf;
+        pushTime = pusht;
+        damage = dmg;
+        StartCoroutine(DelayStart(delay));
+    }
+
+    IEnumerator DelayStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ready = true;
     }
 
     void Update()
     {
-        if (!isDestroyed)
+        if (!isDestroyed && ready)
         {
-            Duration -= Time.deltaTime;
-            if (Duration <= 0)
+            duration -= Time.deltaTime;
+            if (duration <= 0)
             {
                 isDestroyed = true;
                 animator.SetBool("IsBurning", false);
@@ -44,7 +53,7 @@ public class StaticFire : MonoBehaviour
             if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("MiniBoss"))
                 && collidedObject.isTrigger)
             {
-                collidedObject.GetComponent<EnemyBase>().Knock(transform, PushForce, PushTime, Damage);
+                collidedObject.GetComponent<EnemyBase>().Knock(transform, pushForce, pushTime, damage);
             }
     }
 }

@@ -4,38 +4,24 @@ using UnityEngine;
 
 public class Firewall : Spell
 {
-    public GameObject StaticFire;
-    public int NumberOfFires;
-    public float SpawnDistance;
+    public FirewallConfig Config;
     private List<GameObject> staticFireInstances = new List<GameObject>();
-
-    private void Start()
-    {
-        lifeTimeTracker = LifeTime;
-    }
 
     void Update()
     {
-        if (LifeTime != 0)
-        {
-            lifeTimeTracker -= Time.deltaTime;
-            if (lifeTimeTracker <= 0)
-            {
-                DestroyThis();
-            }
-        }
+        if (staticFireInstances.Count == Config.NumberOfFires)
+            Destroy(this.gameObject, 0.1f);
+        //DestroyThis();
     }
 
-    private void DestroyThis()
-    {
-        if (!isDestroyed)
-        {
-            isDestroyed = true;
-            //foreach (var inst in staticFireInstances)
-            //    Destroy(inst, 0.1f);
-            Destroy(this.gameObject, 0.1f);
-        }
-    }
+    //private void DestroyThis()
+    //{
+    //    if (!isDestroyed)
+    //    {
+    //        isDestroyed = true;
+    //        Destroy(this.gameObject, 0.1f);
+    //    }
+    //}
 
     public override void Cast(Transform source, Vector3 direction)
     {
@@ -44,9 +30,9 @@ public class Firewall : Spell
 
     IEnumerator StartWallCo(Transform source, Vector3 direction)
     {
-        for (int i = 0; i < NumberOfFires; i++)
+        for (int i = 0; i < Config.NumberOfFires; i++)
         {
-            var idx = i - Mathf.Ceil(NumberOfFires / 2);
+            var idx = i - Mathf.Ceil(Config.NumberOfFires / 2);
             StartCoroutine(StartFireCo(source, direction, idx));
             yield return new WaitForSeconds(0.1f);
         }
@@ -61,23 +47,23 @@ public class Firewall : Spell
             //straight line
             if (direction.y < 0)
             {
-                staticFirePosition.y -= SpawnDistance;
+                staticFirePosition.y -= Config.SpawnDistance;
                 staticFirePosition.x -= staticFireIndex;
             }
             if (direction.y > 0)
             {
-                staticFirePosition.y += SpawnDistance;
+                staticFirePosition.y += Config.SpawnDistance;
                 staticFirePosition.x += staticFireIndex;
             }
             if (direction.x > 0)
             {
                 staticFirePosition.y += staticFireIndex;
-                staticFirePosition.x += SpawnDistance;
+                staticFirePosition.x += Config.SpawnDistance;
             }
             if (direction.x < 0)
             {
                 staticFirePosition.y -= staticFireIndex;
-                staticFirePosition.x -= SpawnDistance;
+                staticFirePosition.x -= Config.SpawnDistance;
             }
         }
         else
@@ -86,32 +72,37 @@ public class Firewall : Spell
             if (direction.y > 0 && direction.x > 0)
             {
                 //top right
-                staticFirePosition.x += SpawnDistance + staticFireIndex;
-                staticFirePosition.y += SpawnDistance - staticFireIndex;
+                staticFirePosition.x += Config.SpawnDistance + staticFireIndex;
+                staticFirePosition.y += Config.SpawnDistance - staticFireIndex;
             }
             if (direction.y < 0 && direction.x < 0)
             {
                 //bottom left
-                staticFirePosition.x -= SpawnDistance + staticFireIndex;
-                staticFirePosition.y -= SpawnDistance - staticFireIndex;
+                staticFirePosition.x -= Config.SpawnDistance + staticFireIndex;
+                staticFirePosition.y -= Config.SpawnDistance - staticFireIndex;
             }
             if (direction.y > 0 && direction.x < 0)
             {
                 //top left
-                staticFirePosition.x -= SpawnDistance - staticFireIndex;
-                staticFirePosition.y += SpawnDistance + staticFireIndex;
+                staticFirePosition.x -= Config.SpawnDistance - staticFireIndex;
+                staticFirePosition.y += Config.SpawnDistance + staticFireIndex;
             }
             if (direction.y < 0 && direction.x > 0)
             {
                 //bottom right
-                staticFirePosition.x += SpawnDistance - staticFireIndex;
-                staticFirePosition.y -= SpawnDistance + staticFireIndex;
+                staticFirePosition.x += Config.SpawnDistance - staticFireIndex;
+                staticFirePosition.y -= Config.SpawnDistance + staticFireIndex;
             }
         }
-        var staticFireInstance = Instantiate(StaticFire, staticFirePosition, Quaternion.identity);
+        var staticFireInstance = Instantiate(Config.StaticFire, staticFirePosition, Quaternion.identity);
         var firescript = staticFireInstance.GetComponent<StaticFire>();
-        firescript.Initialize(Damage, PushTime, PushForce, LifeTime);
+        firescript.Initialize(Config.Damage, Config.PushTime, Config.PushForce, Config.LifeTime, 0);
         staticFireInstances.Add(staticFireInstance);
         yield return null;
+    }
+
+    public override SpellConfig GetConfig()
+    {
+        return Config;
     }
 }

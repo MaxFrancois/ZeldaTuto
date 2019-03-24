@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class RestZone : Interactable
 {
-    //public GameObject RestMenu;
     public VoidSignal RestZoneSignal;
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -13,8 +18,15 @@ public class RestZone : Interactable
         {
             //RestMenu.SetActive(true);
             //Context.Raise();
-            RestZoneSignal.Raise();
+            StartCoroutine(OpenBook());
         }
+    }
+
+    IEnumerator OpenBook()
+    {
+        animator.SetBool("IsOpen", true);
+        yield return new WaitForSeconds(0.5f);
+        RestZoneSignal.Raise();
     }
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
@@ -32,6 +44,7 @@ public class RestZone : Interactable
         {
             Context.Raise();
             IsActive = false;
+            animator.SetBool("IsOpen", false);
         }
     }
 }

@@ -19,7 +19,6 @@ public abstract class SpellConfig : ScriptableObject
     public Sprite SelectedIcon;
     public string Name;
     public string Description;
-    public VideoClip Video;
     public SpellElement Element;
     public float ManaCost;
     public float PushTime;

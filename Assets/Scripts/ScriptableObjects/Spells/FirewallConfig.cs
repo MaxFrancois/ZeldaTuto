@@ -76,6 +76,7 @@ public class FirewallConfig : SpellConfig
                 staticFirePosition.y -= SpawnDistance + staticFireIndex / 2;
             }
         }
+        new WaitForSeconds(DelayBetweenFires);
         var staticFireInstance = Instantiate(StaticFire, staticFirePosition, Quaternion.identity);
         var firescript = staticFireInstance.GetComponent<StaticFire>();
         firescript.Initialize(Damage, PushTime, PushForce, LifeTime, DelayBetweenFires);

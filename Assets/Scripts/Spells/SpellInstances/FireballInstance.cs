@@ -61,7 +61,7 @@ public class FireballInstance : MonoBehaviour
             //Destroy(AnimationInstance);
             var exp = Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(exp, 0.5f);
-            Destroy(this.gameObject, 0.5f);
+            Destroy(this.gameObject);
         }
     }
 

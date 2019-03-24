@@ -145,5 +145,5 @@ MonoBehaviour:
   VoidPowerupSignal: {fileID: 11400000, guid: 21961cdd4259b5d41aa43413708f8fcb, type: 2}
   FloatPowerupSignal: {fileID: 0}
   PlayerHealth: {fileID: 11400000, guid: 257a5a61a0a31de4e9d7f2d2e8098354, type: 2}
-  HeartContainers: {fileID: 11400000, guid: 39256d73d641b3e419773805d58ca6e9, type: 2}
+  HeartContainers: {fileID: 11400000, guid: 19d4e19b21fc6434980cc1da4298de03, type: 2}
   AmountToHeal: 2

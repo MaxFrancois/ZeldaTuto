@@ -18,7 +18,7 @@ MonoBehaviour:
   SelectedIcon: {fileID: 21300000, guid: e503154549f21d444a02dbee95684efd, type: 3}
   Name: Avalanche
   Description: Makes rocks fall
-  Video: {fileID: 0}
+  Video: {fileID: 32900000, guid: c478a5dd442fac742b0d7abdf10ae145, type: 3}
   Element: 4
   ManaCost: 0
   PushTime: 0.2

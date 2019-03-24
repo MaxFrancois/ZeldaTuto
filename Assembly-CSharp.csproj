@@ -135,6 +135,7 @@
     <Compile Include="Assets\Scripts\UI\Menus\RestMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Menus\SelectableButton.cs" />
     <Compile Include="Assets\Scripts\UI\Menus\SpellBookMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Menus\SpellDetailsMenu.cs" />
     <Compile Include="Assets\Scripts\UI\SpellBarManager.cs" />
     <Compile Include="Assets\Scripts\UI\UltimateManager.cs" />
     <Compile Include="Assets\Scripts\UtilsClass.cs" />

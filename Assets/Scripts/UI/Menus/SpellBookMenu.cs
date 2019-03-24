@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Linq;
 
 public class SpellBookMenu : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class SpellBookMenu : MonoBehaviour
     private bool buttonSelected;
     public SpellBar PlayerSpellBar;
     public SpellBook SpellBook;
+    public SpellDetailsMenu SpellDetailsMenu;
 
     private void OnEnable()
     {
@@ -70,6 +72,7 @@ public class SpellBookMenu : MonoBehaviour
         var newSpell = SpellButtons[idx].gameObject.GetComponent<SpellContainer>().Spell;
         if (newSpell != null)
         {
+            SpellDetailsMenu.gameObject.SetActive(false);
             Debug.Log("setting spell " + idx + " to button " + selectedButtonIndex);
             var alreadyBoundIdx = -1;
             for (int i = 0; i < BoundButtons.Count; i++)
@@ -150,8 +153,16 @@ public class SpellBookMenu : MonoBehaviour
         }
         else
         {
+            if (Input.GetButtonDown("Spell 2"))
+            {
+                SpellDetailsMenu.gameObject.SetActive(true);
+                var btn = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+                SpellDetailsMenu.Initialize(btn);
+
+            }
             if (Input.GetButtonDown("Spell 3"))
             {
+                SpellDetailsMenu.gameObject.SetActive(false);
                 Debug.Log("Returning to button select");
                 boundSpellSelected = false;
                 eventSystem.SetSelectedGameObject(BoundButtons[selectedButtonIndex].gameObject);

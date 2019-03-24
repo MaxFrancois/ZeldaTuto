@@ -28,7 +28,7 @@ public class MenuManager : MonoBehaviour
     public static void StopTime()
     {
         IsPaused = true;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     public static void StartTime()

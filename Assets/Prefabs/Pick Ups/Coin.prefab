@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VoidPowerupSignal: {fileID: 11400000, guid: 67797fb74257bb34b8e76e31a2cc797b, type: 2}
   FloatPowerupSignal: {fileID: 0}
-  PlayerCoins: {fileID: 11400000, guid: 3858d1a04bc7a5646a31fda91b391677, type: 2}
+  PlayerCoins: {fileID: 11400000, guid: 9c219d5ea818102458c55f1118df6203, type: 2}
   PlayerInventory: {fileID: 11400000, guid: 22c93857dcb5f0b4da541a91aec16de6, type: 2}
   AmountToAdd: 1
 --- !u!61 &8415342708137045467

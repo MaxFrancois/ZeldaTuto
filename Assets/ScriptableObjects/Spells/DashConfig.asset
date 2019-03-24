@@ -18,7 +18,7 @@ MonoBehaviour:
   SelectedIcon: {fileID: 21300000, guid: b54ba107e5f14054ca2b80eb99004336, type: 3}
   Name: Dash
   Description: Dash in one direction
-  Video: {fileID: 0}
+  FramesPath: F:\Unity 2019\TopDownRpg\Assets\Videos\dashFrames
   Element: 0
   ManaCost: 1
   PushTime: 0

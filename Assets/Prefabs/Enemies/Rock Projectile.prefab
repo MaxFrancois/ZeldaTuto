@@ -155,3 +155,4 @@ MonoBehaviour:
   Thrust: 1
   PushTime: 0.3
   Damage: 2
+  IsActive: 0

@@ -138,6 +138,9 @@
     <Compile Include="Assets\Scripts\UI\Menus\SpellDetailsMenu.cs" />
     <Compile Include="Assets\Scripts\UI\SpellBarManager.cs" />
     <Compile Include="Assets\Scripts\UI\UltimateManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Weather\DayTimeManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Weather\WeatherManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Weather\WeatherTrigger.cs" />
     <Compile Include="Assets\Scripts\UtilsClass.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

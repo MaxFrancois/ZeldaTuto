@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 21664689
+    totalSpriteSurfaceArea: 21679953
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -1839,6 +1839,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6becf50c5d862904cacebdac87f15502, type: 3}
   - {fileID: 21300000, guid: 8cb1161cd4b52534ba2ec2922764d061, type: 3}
   - {fileID: 21300000, guid: e9d4143c19529834981ac6821a04aecd, type: 3}
+  - {fileID: -4212923944897150090, guid: a811637ccce74d3468749447497df4fb, type: 3}
+  - {fileID: -4862841235950250610, guid: a811637ccce74d3468749447497df4fb, type: 3}
   - {fileID: 21300000, guid: 2f966a8cbfc59b8499ac40ea053b0fc3, type: 3}
   - {fileID: 21300000, guid: 2d0997ac1b1fd664e98202450e7ea2d7, type: 3}
   - {fileID: 21300002, guid: 376debac1c661464f8b1f801198c660f, type: 3}
@@ -3773,6 +3775,8 @@ SpriteAtlas:
   - SpellBookPreface_08
   - dashwind_05
   - Exclamation_Red
+  - rainDrops_0
+  - rainDrops_1
   - purple-circle-in
   - SpellBookPreface_18
   - DashSprite_1

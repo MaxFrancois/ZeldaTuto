@@ -14,8 +14,11 @@ public class DayTimeManager : MonoBehaviour
     public float NightTimeDuration;
     private float timeTracker;
     public float MaxLevelDarkness = 0.75f;
-    private Image darknessImage;
-    public bool toggleLightSource = false;
+    public float LightThreshold;
+    private SpriteRenderer darknessImage;
+    public BoolSignal PlayerLightSignal;
+    private bool isLightOn = false;
+    public GameObject Player;
 
     void Awake()
     {
@@ -32,14 +35,14 @@ public class DayTimeManager : MonoBehaviour
 
     void Start()
     {
-        darknessImage = GetComponent<Image>();
+        darknessImage = GetComponent<SpriteRenderer>();
         InitializeDayAndNightCycle();
     }
 
     void Update()
     {
-        //ToggleLightSource();
         DayNightCycle();
+        transform.position = Player.transform.position;
     }
 
     void InitializeDayAndNightCycle()
@@ -74,6 +77,12 @@ public class DayTimeManager : MonoBehaviour
             darknessImage.color = new Color(darknessImage.color.r, darknessImage.color.g, darknessImage.color.b,
                 Mathf.MoveTowards(darknessImage.color.a, 0f, TransitionSpeed * Time.deltaTime));
 
+            if (darknessImage.color.a <= LightThreshold && isLightOn)
+            {
+                PlayerLightSignal.Raise(false);
+                isLightOn = false;
+            }
+
             if (darknessImage.color.a == 0f)
             {
                 isGettingBrighter = false;
@@ -86,7 +95,11 @@ public class DayTimeManager : MonoBehaviour
         {
             darknessImage.color = new Color(darknessImage.color.r, darknessImage.color.g, darknessImage.color.b,
                 Mathf.MoveTowards(darknessImage.color.a, MaxLevelDarkness, TransitionSpeed * Time.deltaTime));
-
+            if (darknessImage.color.a >= LightThreshold && !isLightOn)
+            {
+                PlayerLightSignal.Raise(true);
+                isLightOn = true;
+            }
             if (darknessImage.color.a >= MaxLevelDarkness)
             {
                 isGettingDarker = false;
@@ -94,22 +107,5 @@ public class DayTimeManager : MonoBehaviour
                 timeTracker = NightTimeDuration;
             }
         }
-    }
-
-    void ToggleLightSource()
-    {
-        //if (toggleLightSource)
-        //{
-        //    if (darknessImage.sprite == nightFull)
-        //    {
-        //        darknessImage.sprite = nightWithLightSource;
-        //    }
-        //    else if (darknessImage.sprite == nightWithLightSource)
-        //    {
-        //        darknessImage.sprite = nightFull;
-        //    }
-        //}
-
-        //toggleLightSource = false;
     }
 }

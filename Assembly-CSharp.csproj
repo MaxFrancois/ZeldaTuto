@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\RestMenuTest.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Camera\DungeonEnemyRoom.cs" />
     <Compile Include="Assets\Scripts\Camera\DungeonRoom.cs" />
@@ -87,6 +86,8 @@
     <Compile Include="Assets\Scripts\Objects\Interactables\RestZone.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Sign.cs" />
     <Compile Include="Assets\Scripts\Objects\Interactables\Switch.cs" />
+    <Compile Include="Assets\Scripts\Objects\Lighting\LightFlicker.cs" />
+    <Compile Include="Assets\Scripts\Objects\Lighting\Torch.cs" />
     <Compile Include="Assets\Scripts\Objects\Pickups\Coin.cs" />
     <Compile Include="Assets\Scripts\Objects\Pickups\Heart.cs" />
     <Compile Include="Assets\Scripts\Objects\Pickups\ManaBottle.cs" />
@@ -97,8 +98,12 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\Inventory.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\Item.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Items\LootTable.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Signals\BoolSignal.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Signals\BoolSignalListener.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\FloatSignal.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\FloatSignalListener.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Signals\ObjectSignal.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Signals\ObjectSignalListener.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\SignalBase.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\SignalListenerBase.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\VoidSignal.cs" />
@@ -133,6 +138,7 @@
     <Compile Include="Assets\Scripts\UI\Menus\MenuManager.cs" />
     <Compile Include="Assets\Scripts\UI\Menus\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Menus\RestMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Menus\RestMenuTest.cs" />
     <Compile Include="Assets\Scripts\UI\Menus\SelectableButton.cs" />
     <Compile Include="Assets\Scripts\UI\Menus\SpellBookMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Menus\SpellDetailsMenu.cs" />

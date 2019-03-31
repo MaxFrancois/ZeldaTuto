@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 21679953
+    totalSpriteSurfaceArea: 23230322
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -95,6 +95,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 293276643bb2ddd408d9145f15db23e2, type: 3}
   - {fileID: 21300000, guid: 7066e0747291df44fa5c2bf93bee3a6e, type: 3}
   - {fileID: 21300000, guid: d75c3ea4f69088244983a84c88525796, type: 3}
+  - {fileID: 21300000, guid: 943c93e4cf87c2040abaf1ea233f1624, type: 3}
   - {fileID: -872947984015748712, guid: 58552c2580a759e419de383e7b77d8d7, type: 3}
   - {fileID: 4004008643541842471, guid: 58552c2580a759e419de383e7b77d8d7, type: 3}
   - {fileID: 6703265110210787806, guid: 58552c2580a759e419de383e7b77d8d7, type: 3}
@@ -1453,6 +1454,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9a6560e5bacb40847bb1b879ede354fb, type: 3}
   - {fileID: 21300000, guid: 65d211f55b476254ea778e5c4d2e5735, type: 3}
   - {fileID: 21300000, guid: 8b03ad0628d8cec43a17e35fbc3086e4, type: 3}
+  - {fileID: 21300000, guid: 90007626c76fa0148a07623ab423c2fb, type: 3}
   - {fileID: 21300000, guid: 9494e936ef153d148aaddfa6db5fb773, type: 3}
   - {fileID: 21300000, guid: 2c961366528f28c458c619797d0bbb2f, type: 3}
   - {fileID: 21300000, guid: a8963d66403e21a46b4935a666a9e731, type: 3}
@@ -1898,7 +1900,6 @@ SpriteAtlas:
   - {fileID: -4368128017131032598, guid: 70b395bde94b0e642b6ccb6d64699e16, type: 3}
   - {fileID: -5854043148819735878, guid: 70b395bde94b0e642b6ccb6d64699e16, type: 3}
   - {fileID: -2374539586131803789, guid: 70b395bde94b0e642b6ccb6d64699e16, type: 3}
-  - {fileID: -5811527082040612133, guid: 70b395bde94b0e642b6ccb6d64699e16, type: 3}
   - {fileID: -1656924786360755150, guid: 70b395bde94b0e642b6ccb6d64699e16, type: 3}
   - {fileID: -5942801516275120956, guid: 70b395bde94b0e642b6ccb6d64699e16, type: 3}
   - {fileID: -4896528378060453493, guid: 70b395bde94b0e642b6ccb6d64699e16, type: 3}
@@ -2031,6 +2032,7 @@ SpriteAtlas:
   - explosion_01
   - UI board Large stone
   - SpellBookPreface_07
+  - SpriteMaskCircle_big
   - modified gfx melee sprites_15
   - modified gfx melee sprites_14
   - modified gfx melee sprites_13
@@ -3389,6 +3391,7 @@ SpriteAtlas:
   - UI board Medium stone
   - SpellBookPreface_19
   - SpellBookPreface_21
+  - SpriteMaskCircle_big_frame
   - TextBTN_Cancel_Pressed
   - fireball_01
   - Zelda
@@ -3834,7 +3837,6 @@ SpriteAtlas:
   - cave_73
   - cave_23
   - cave_83
-  - cave_70
   - cave_38
   - cave_22
   - cave_82

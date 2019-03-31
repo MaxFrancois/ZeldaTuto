@@ -44,7 +44,9 @@ public class PlayerMovement : MonoBehaviour
     private List<StatusEffect> statusEffects = new List<StatusEffect>();
     private bool isFrozenForCutscene;
     private bool canInteract = false;
-
+    private SpriteMask lightMask;
+    private SpriteRenderer playerSpriteRenderer;
+    public ObjectSignal RoomSignal;
 
     void Start()
     {
@@ -53,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         Spells = GetComponent<SpellBar>();
+        lightMask = GetComponent<SpriteMask>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
         transform.position = StartingPosition.InitialValue;
@@ -221,6 +225,29 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(pushTime);
             State = PlayerState.Idle;
             body.velocity = Vector2.zero;
+        }
+    }
+
+    public void SetSpriteMask(bool isActive)
+    {
+        if (isActive)
+        {
+            playerSpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            lightMask.enabled = true;
+        }
+        else
+        {
+            playerSpriteRenderer.maskInteraction = SpriteMaskInteraction.None;
+            lightMask.enabled = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Room"))
+        {
+            RoomSignal.Raise(collision);
+            //WeatherManager.SetRoom(collision);
         }
     }
 }

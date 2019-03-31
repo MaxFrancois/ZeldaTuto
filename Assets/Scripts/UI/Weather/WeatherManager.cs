@@ -34,9 +34,31 @@ public class WeatherManager : MonoBehaviour
 {
     private WeatherType currentWeather;
     public List<Weather> WeatherOptions;
-    public GameObject FollowTarget;
     private float currentIncreaseWeatherIntensity;
     private float currentDecreaseWeatherIntensity;
+
+    public void SetRoom(Object roomObject)
+    {
+        Collider2D room = roomObject as Collider2D;
+        var middleOfRoom = (room.bounds.max.x + room.bounds.min.x) / 2;
+        var weatherManagerPosition = new Vector3(middleOfRoom, room.bounds.max.y, 0);
+        transform.position = weatherManagerPosition;
+        foreach (var weather in WeatherOptions) {
+            if (weather.Type != WeatherType.None)
+            {
+                var shape = weather.Particles.shape;
+                shape.scale = new Vector3(room.bounds.size.x, shape.scale.y, shape.scale.z);
+                var particleTransform = weather.Particles.gameObject.transform;
+                particleTransform.localScale = new Vector3(particleTransform.localScale.x, particleTransform.localScale.y, room.bounds.size.y * 0.07f);
+                if (weather.Particles.gameObject.activeInHierarchy)
+                {
+                    var mainModule = weather.Particles.main;
+                    mainModule.prewarm = true;
+                }
+            }
+        }
+    }
+
     public void SetWeather(float weatherType)
     {
         var previousWeather = WeatherOptions.FirstOrDefault(c => c.Type == currentWeather);
@@ -93,13 +115,13 @@ public class WeatherManager : MonoBehaviour
                 StartCoroutine(DisableWeatherCo(oldWeather));
             }
         }
-
-        transform.position = FollowTarget.transform.position;
     }
 
     private IEnumerator DisableWeatherCo(Weather w)
     {
         yield return new WaitForSeconds(5f);
+        var mainModule = w.Particles.main;
+        mainModule.prewarm = false;
         w.Particles.gameObject.SetActive(false);
     }
 }

@@ -9,6 +9,9 @@ public class Inventory : ScriptableObject
     public List<Item> Items = new List<Item>();
     public int NumberOfKeys;
     public int Coins;
+    public float MaxHealth = 120f;
+    public float CurrentHealth;
+    public float PassiveHealthRegenSpeed;
     public float MaxMana = 100f;
     public float CurrentMana;
     public float PassiveManaRegenSpeed;

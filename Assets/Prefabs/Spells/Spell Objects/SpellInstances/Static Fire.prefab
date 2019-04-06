@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5118117164854044226}
   - component: {fileID: 5118117164854044254}
   - component: {fileID: 5118117164854044255}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Static Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 6177272353785704195}
   - component: {fileID: 967578334456829582}
   - component: {fileID: 6932455470019815543}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,3 +239,9 @@ MonoBehaviour:
   MinFlickerTime: 0.08
   MaxFlickerTime: 0.08
   SizeDifference: 0.01
+  IsProgressiveFlickering: 0
+  MiddleScaleX: 0
+  MiddleScaleY: 0
+  FinalScaleX: 0
+  FinalScaleY: 0
+  Speed: 0

@@ -24,18 +24,17 @@ public class PlayerMovement : MonoBehaviour
     [Header("Basics")]
     public float speed;
     public PlayerState State;
-    public FloatValue CurrentHealth;
-    public VoidSignal HealthSignal;
     [Header("Movement")]
     public VectorValue StartingPosition;
-    public float DashDistance;
-    public GameObject DashAnimation;
     [Header("Inventories")]
     public Inventory PlayerInventory;
     private SpellBar Spells;
+    [Header("Signals")]
+    public FloatSignal LoseHealthSignal;
+    public VoidSignal PlayerHit;
+    public ObjectSignal RoomSignal;
     [Header("Other")]
     public SpriteRenderer ReceivedItemSprite;
-    public VoidSignal PlayerHit;
     public GameObject DamageTakenCanvas;
     private Rigidbody2D rigidBody;
     private Vector3 change;
@@ -46,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     private bool canInteract = false;
     private SpriteMask lightMask;
     private SpriteRenderer playerSpriteRenderer;
-    public ObjectSignal RoomSignal;
 
     void Start()
     {
@@ -95,10 +93,6 @@ public class PlayerMovement : MonoBehaviour
         {
             CastSpell(3, currentDirection);
         }
-        //else if (Input.GetButtonDown("Dash") && State != PlayerState.Attacking && State != PlayerState.Staggered)
-        //{
-        //    Dash();
-        //}
         else if (State == PlayerState.Walking || State == PlayerState.Idle)
         {
             UpdateMovement();
@@ -121,34 +115,6 @@ public class PlayerMovement : MonoBehaviour
         if (Spells.Spells[spellIndex] != null && PlayerInventory.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
             Spells.CastSpell(spellIndex, transform, direction);
     }
-
-    //private bool CanMove(Vector3 direction, float distance)
-    //{
-    //    //can't find the right collider for map ?
-    //    return Physics2D.Raycast(transform.position, direction, distance).collider == null;
-    //}
-
-    //private void Dash()
-    //{
-    //    var direction = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0);
-    //    if (CanMove(direction, DashDistance))
-    //    {
-    //        StartCoroutine(DashCo(direction, DashDistance));
-    //    }
-    //}
-
-    //private IEnumerator DashCo(Vector3 direction, float distance)
-    //{
-    //    var currentPosition = transform.position;
-    //    var dashEffect = Instantiate(DashAnimation, currentPosition, Quaternion.identity);
-    //    dashEffect.transform.eulerAngles = new Vector3(0, 0, UtilsClass.GetAngleFromVectorFloat(direction));
-    //    float dashEffectWidth = 3f;
-    //    dashEffect.transform.localScale = new Vector3(DashDistance / dashEffectWidth, 1f, 1f);
-    //    transform.position += direction * DashDistance;
-    //    yield return new WaitForSeconds(0.1f);
-    //    Destroy(dashEffect);
-    //    yield return null;
-    //}
 
     private void UpdateMovement()
     {
@@ -202,9 +168,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 difference = transform.position - thingThatHitYou.position;
         difference = difference.normalized * pushForce;
         rigidBody.AddForce(difference, ForceMode2D.Impulse);
-        CurrentHealth.RuntimeValue -= damage;
-        HealthSignal.Raise();
-        if (CurrentHealth.RuntimeValue > 0)
+        LoseHealthSignal.Raise(damage);
+        if (PlayerInventory.CurrentHealth > 0)
         {
             StartCoroutine(KnockbackCo(rigidBody, pushTime, damage));
         }

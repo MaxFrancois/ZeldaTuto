@@ -16,7 +16,8 @@ public enum PlayerState
     Interacting,
     Attacking,
     Staggered,
-    Dashing
+    Dashing,
+    Jumping
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -45,9 +46,13 @@ public class PlayerMovement : MonoBehaviour
     private bool canInteract = false;
     private SpriteMask lightMask;
     private SpriteRenderer playerSpriteRenderer;
+    private float defaultSpeed;
+    public BoxCollider2D BlockCollider;
+    public BoxCollider2D TriggerCollider;
 
     void Start()
     {
+        defaultSpeed = speed;
         isFrozenForCutscene = false;
         State = PlayerState.Idle;
         animator = GetComponent<Animator>();
@@ -61,14 +66,19 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (State == PlayerState.Interacting || isFrozenForCutscene || MenuManager.IsPaused || MenuManager.RecentlyUnpaused) return;
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown(KeyCode.H)) { Debug.Log("Pressed Jump " + State); }
         var currentDirection = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0);
-        if (Input.GetButtonDown("Attack") && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        if (State == PlayerState.Jumping)
+        {
+            UpdateJump();
+        }
+        else if (Input.GetButtonDown("Attack") && State != PlayerState.Attacking && State != PlayerState.Staggered)
         {
             StartCoroutine(AttackCo());
         }
@@ -93,10 +103,84 @@ public class PlayerMovement : MonoBehaviour
         {
             CastSpell(3, currentDirection);
         }
-        else if (State == PlayerState.Walking || State == PlayerState.Idle)
+        else if (Input.GetKeyDown(KeyCode.H) && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        {
+            Debug.Log("StartingJump");
+            Jump();
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && State != PlayerState.Attacking && State != PlayerState.Staggered)
+        {
+            Debug.Log("spawn circle");
+            SpawnCircle();
+        }
+        else if (State == PlayerState.Walking || State == PlayerState.Idle || State == PlayerState.Jumping)
         {
             UpdateMovement();
         }
+    }
+    public GameObject circle;
+    private void SpawnCircle()
+    {
+        var c = Instantiate(circle, transform.position, Quaternion.Euler(-45, 0, 0));
+        Destroy(c, 5f);
+    }
+
+    private bool isJumping = false;
+    public float JumpUpSpeed;
+    public float JumpDownSpeed;
+    public float JumpTime;
+    float currentJumpTime = 0;
+    bool goingUp = false;
+    bool goingDown = false;
+    void Jump()
+    {
+        Debug.Log("jump coord", rigidBody.transform);
+        State = PlayerState.Jumping;
+        animator.SetBool("IsJumping", true);
+        goingUp = true;
+        isJumping = true;
+        currentJumpTime = JumpTime;
+    }
+
+    void UpdateJump()
+    {
+        if (change != Vector3.zero)
+        {
+            animator.SetFloat("MoveX", change.x);
+            animator.SetFloat("MoveY", change.y);
+        }
+        if (goingUp)
+        {
+            if (currentJumpTime > 0)
+            {
+                currentJumpTime -= Time.deltaTime;
+                rigidBody.velocity = new Vector2(change.x, change.y + 1) * JumpUpSpeed * Time.deltaTime;
+            }
+            else
+            {
+                goingDown = true;
+                goingUp = false;
+                currentJumpTime = JumpTime;
+            }
+        }
+        else if (goingDown)
+        {
+            if (currentJumpTime > 0)
+            {
+                currentJumpTime -= Time.deltaTime;
+                rigidBody.velocity = new Vector2(change.x, change.y - 1) * JumpDownSpeed * Time.deltaTime;
+            }
+            else
+            {
+                Debug.Log("Landed coord", rigidBody.transform);
+                goingDown = false;
+                State = PlayerState.Idle;
+                rigidBody.velocity = Vector2.zero;
+                animator.SetBool("IsJumping", false);
+                isJumping = false;
+            }
+        }
+
     }
 
     //use timer instead
@@ -108,6 +192,18 @@ public class PlayerMovement : MonoBehaviour
     public void SetCanInteract()
     {
         canInteract = !canInteract;
+    }
+
+    public void SetMoveSpeed(float moveSpeedMultiplier)
+    {
+        if (moveSpeedMultiplier != -1)
+        {
+            speed = defaultSpeed * moveSpeedMultiplier;
+        }
+        else
+        {
+            speed = defaultSpeed;
+        }
     }
 
     private void CastSpell(int spellIndex, Vector3 direction)
@@ -183,6 +279,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (body != null)
         {
+            TriggerCollider.enabled = false;
             var damageTakenPosition = new Vector3(transform.position.x, transform.position.y + 1, 0);
             var damageTaken = Instantiate(DamageTakenCanvas, damageTakenPosition, Quaternion.identity);
             damageTaken.GetComponent<DamageDisplay>().DamageNumber = damage;
@@ -190,6 +287,7 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(pushTime);
             State = PlayerState.Idle;
             body.velocity = Vector2.zero;
+            TriggerCollider.enabled = true; 
         }
     }
 

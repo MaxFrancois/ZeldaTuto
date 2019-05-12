@@ -44,8 +44,6 @@ public class Minotaur : MiniBoss
     [Header("Attack")]
     public int ChargeAttackDamage;
     public int StompAttackDamage;
-    public float ChaseRadius;
-    public float AttackRadius;
     public Room AggroRoom;
     public float MaxChasingTime;
     public float MaxMeleeTime;
@@ -65,9 +63,7 @@ public class Minotaur : MiniBoss
     public float MinDistanceBetweenRocks;
     public float StunDuration;
     [Header("Movement")]
-    public float MoveSpeed;
     public float ChargeSpeed;
-    private float lastX;
     private float timeChasing;
     private float timeInMelee;
     private bool inCombat;
@@ -116,7 +112,7 @@ public class Minotaur : MiniBoss
         transform.position = HomePosition;
         currentHealth = MaxHealth.InitialValue;
         animator = GetComponent<Animator>();
-        Target = GameObject.FindWithTag("Player").transform;
+        target = GameObject.FindWithTag("Player").transform;
         if (RoomCamera != null)
             roomCameraNoise = RoomCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
@@ -166,12 +162,10 @@ public class Minotaur : MiniBoss
                 {
                     body.MovePosition(transform.position + chargingDirection.normalized * ChargeSpeed * Time.deltaTime);
                 }
-                else if (Vector3.Distance(Target.position, transform.position) <= ChaseRadius
-                    && Vector3.Distance(Target.position, transform.position) > AttackRadius
-                    && CurrentState != MinotaurState.Staggered && CurrentState != MinotaurState.Attacking)
+                else if (TargetInChasingRange && CurrentState != MinotaurState.Staggered && CurrentState != MinotaurState.Attacking)
                 {
-                    var temp = Vector3.MoveTowards(transform.position, Target.position, MoveSpeed * Time.deltaTime);
-                    ChangeAnim(temp - transform.position);
+                    var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+                    ChangeMovementDirection(temp - transform.position);
                     body.MovePosition(temp);
                     ChangeState(MinotaurState.Walking);
                     animator.SetBool("IsWalking", true);
@@ -198,8 +192,7 @@ public class Minotaur : MiniBoss
                         ResetCombatTimers();
                     }
                 }
-                else if (Vector3.Distance(Target.position, transform.position) < AttackRadius
-                    && CurrentState != MinotaurState.Attacking && CurrentState != MinotaurState.Staggered)
+                else if (TargetInAttackRange && CurrentState != MinotaurState.Attacking && CurrentState != MinotaurState.Staggered)
                 {
                     timeInMelee += Time.deltaTime;
                     if (timeInMelee > MaxMeleeTime)
@@ -209,27 +202,25 @@ public class Minotaur : MiniBoss
                         while (meleeAttack == (int)lastMeleeAttackUsed)
                             meleeAttack = Random.Range(1, 3);
                         if (meleeAttack == (int)MinotaurMeleeAttacks.Swing)
-                                StartCoroutine(Swing());
-                            else if (meleeAttack == (int)MinotaurMeleeAttacks.Cleave)
-                                StartCoroutine(Cleave());
-                            else if (meleeAttack == (int)MinotaurMeleeAttacks.Shove)
+                            StartCoroutine(Swing());
+                        else if (meleeAttack == (int)MinotaurMeleeAttacks.Cleave)
+                            StartCoroutine(Cleave());
+                        else if (meleeAttack == (int)MinotaurMeleeAttacks.Shove)
                             StartCoroutine(Shove());
                         ResetCombatTimers();
                     }
                 }
-                else if (Vector3.Distance(Target.position, transform.position) > ChaseRadius)
+                else if (TargetOutOfRange)
                 {
-                    var temp = Vector3.MoveTowards(transform.position, Target.position, MoveSpeed * Time.deltaTime);
-                    ChangeAnim(temp - transform.position);
+                    var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+                    ChangeMovementDirection(temp - transform.position);
                     body.MovePosition(temp);
                     ChangeState(MinotaurState.Walking);
                     animator.SetBool("IsWalking", true);
-                    //ChangeState(MinotaurState.Idle);
-                    //animator.SetBool("IsWalking", false);
-                    //ResetCombatTimers();
                 }
             }
-        } else
+        }
+        else
         {
             animator.SetBool("IsWalking", false);
             ChangeState(MinotaurState.Idle);
@@ -245,7 +236,7 @@ public class Minotaur : MiniBoss
         {
             roomCameraNoise.m_FrequencyGain = 0f;
             roomCameraNoise.m_AmplitudeGain = 0f;
-            Target.GetComponent<PlayerMovement>().SetFrozenForCutscene(false);
+            target.GetComponent<PlayerMovement>().SetFrozenForCutscene(false);
         }
     }
 
@@ -282,7 +273,7 @@ public class Minotaur : MiniBoss
     {
         if (RoomCamera != null)
         {
-            Target.GetComponent<PlayerMovement>().SetFrozenForCutscene(true);
+            target.GetComponent<PlayerMovement>().SetFrozenForCutscene(true);
             cameraShakeCurrentDuration = cameraShakeDuration;
             roomCameraNoise.m_AmplitudeGain = cameraShakeAmplitude;
             roomCameraNoise.m_FrequencyGain = cameraShakeFrequency;
@@ -339,7 +330,7 @@ public class Minotaur : MiniBoss
                 rockSpawnPosition = new Vector3(randomx, randomy, 0);
                 var tooCloseToOtherRock = recentFalls.Any(c => Vector3.Distance(c, rockSpawnPosition) < MinDistanceBetweenRocks);
                 var tooCloseToForbiddenZones = AreasToIgnore.Any(c => IsVectorInArea(rockSpawnPosition, c));
-                if ((!tooCloseToOtherRock  && !tooCloseToForbiddenZones))
+                if ((!tooCloseToOtherRock && !tooCloseToForbiddenZones))
                     goodDistance = true;
             }
             recentFalls.Add(rockSpawnPosition);
@@ -360,7 +351,7 @@ public class Minotaur : MiniBoss
     {
         ChangeState(MinotaurState.Attacking);
         animator.SetTrigger("Scrape");
-        chargingDirection = Target.position - transform.position;
+        chargingDirection = target.position - transform.position;
         yield return new WaitForSeconds(1.1f);
         ChangeState(MinotaurState.Charging);
         animator.SetBool("IsCharging", true);
@@ -419,32 +410,6 @@ public class Minotaur : MiniBoss
         yield return null;
     }
 
-    public void ChangeAnim(Vector2 direction)
-    {
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-        {
-            if (direction.x > 0) { SetAnimFloat(Vector2.right); }
-            else if (direction.x < 0) { SetAnimFloat(Vector2.left); }
-        }
-        else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
-        {
-            if (direction.y > 0) { SetAnimFloat(Vector2.up); }
-            else if (direction.y < 0) { SetAnimFloat(Vector2.down); }
-        }
-    }
-
-    public void SetAnimFloat(Vector2 setVector)
-    {
-        if (setVector.x == 0)
-            animator.SetFloat("MoveX", lastX);
-        else
-        {
-            animator.SetFloat("MoveX", setVector.x);
-            lastX = setVector.x;
-        }
-        animator.SetFloat("MoveY", setVector.y);
-    }
-
     protected void ChangeState(MinotaurState state)
     {
         if (state != CurrentState)
@@ -482,7 +447,6 @@ public class Minotaur : MiniBoss
         {
             GetLoot();
             StartCoroutine(Death());
-            //gameObject.SetActive(false);
         }
     }
 

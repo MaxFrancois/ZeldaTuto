@@ -30,7 +30,7 @@ public class RoomMove : MonoBehaviour
         {
             cam.minPosition = minCameraChange;
             cam.maxPosition = maxCameraChange;
-            collidedObject.transform.position += playerChange;
+            GameObject.FindWithTag("Player").transform.position += playerChange;
             if (showPlaceName)
             {
                 StartCoroutine(ShowPlaceName());

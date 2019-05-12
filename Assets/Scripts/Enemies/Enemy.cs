@@ -7,61 +7,79 @@ public enum EnemyState
     Idle,
     Walking,
     Attacking,
-    Staggered
+    Staggered,
+    Dead
 }
 
 public class Enemy : EnemyBase
 {
     public EnemyState CurrentState;
-    public float CurrentHealth;
-    public FloatValue MaxHealth;
-    public string Name;
-    public int BaseAttack;
-    public float MoveSpeed;
     public GameObject DeathAnimation;
-    public Vector2 HomePosition;
-    public Transform Target;
-    [Header("Death Signals")]
     public VoidSignal RoomSignal;
-    public LootTable LootTable;
 
     private void Awake()
     {
         transform.position = HomePosition;
-        CurrentHealth = MaxHealth.InitialValue;
+        currentHealth = MaxHealth.InitialValue;
+        isDead = false;
+        body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        target = GameObject.FindWithTag("Player").transform;
+        CurrentState = EnemyState.Idle;
+        AfterAwake();
     }
 
     private void OnEnable()
     {
         transform.position = HomePosition;
-        CurrentHealth = MaxHealth.InitialValue;
+        currentHealth = MaxHealth.InitialValue;
     }
 
     public override void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
         CurrentState = EnemyState.Staggered;
+        UpdateHealth(damage);
         Vector2 difference = transform.position - thingThatHitYou.position;
         difference = difference.normalized * pushForce;
         body.AddForce(difference, ForceMode2D.Impulse);
         if (transform.gameObject.activeInHierarchy)
             StartCoroutine(Knockback(body, pushTime));
-        UpdateHealth(damage);
     }
 
     private void UpdateHealth(float damage)
     {
-        CurrentHealth -= damage;
-        if (CurrentHealth <= 0)
+        currentHealth -= damage;
+        if (currentHealth <= 0 && !isDead)
         {
-            if (DeathAnimation != null) {
-                var deathAnim = Instantiate(DeathAnimation, transform.position, Quaternion.identity);
-                Destroy(deathAnim, 1f);
-            }
-            if (RoomSignal != null)
-                RoomSignal.Raise();
+            isDead = true;
+            if (DeadSignal) DeadSignal.Raise();
+            if (RoomSignal != null) RoomSignal.Raise();
             GetLoot();
-            gameObject.SetActive(false);
+            if (DeathAnimation != null)
+                StartCoroutine(DeathAnimationAndDestroy());
+            else
+                StartCoroutine(DieAndLeaveBody());
         }
+    }
+
+    private IEnumerator DieAndLeaveBody()
+    {
+        ChangeState(EnemyState.Dead);
+        animator.SetTrigger("Die");
+        animator.SetBool("IsDead", true);
+        if (TriggerCollider) TriggerCollider.enabled = false;
+        if (BlockCollider) BlockCollider.enabled = false;
+        body.isKinematic = true;
+        yield return null;
+    }
+
+    private IEnumerator DeathAnimationAndDestroy()
+    {
+        var deathAnim = Instantiate(DeathAnimation, transform.position, Quaternion.identity);
+        Destroy(deathAnim, 3f);
+        gameObject.SetActive(false);
+        yield return null;
     }
 
     private void GetLoot()
@@ -78,9 +96,37 @@ public class Enemy : EnemyBase
     {
         if (body != null)
         {
+            StartCoroutine(FlashOnHit());
+            animator.SetTrigger("Hit");
             yield return new WaitForSeconds(pushTime);
+            animator.ResetTrigger("Hit");
             body.velocity = Vector2.zero;
             CurrentState = EnemyState.Idle;
         }
+    }
+
+    protected void ChangeState(EnemyState state)
+    {
+        if (state != CurrentState)
+            CurrentState = state;
+    }
+
+    [Header("OnHit")]
+    public Color flashColor;
+    public Color regularColor;
+    public float numberOfFlashes;
+    public float flashDuration;
+    private IEnumerator FlashOnHit()
+    {
+        var i = 0;
+        while (i < numberOfFlashes)
+        {
+            spriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+            spriteRenderer.color = regularColor;
+            yield return new WaitForSeconds(flashDuration);
+            i++;
+        }
+        yield return null;
     }
 }

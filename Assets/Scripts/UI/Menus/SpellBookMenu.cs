@@ -37,16 +37,17 @@ public class SpellBookMenu : MonoBehaviour
         }
 
         int spellCount = 0;
-        while (spellCount < SpellBook.Spells.Count)
+        var unlockedSpells = SpellBook.Spells.Where(c => c.IsUnlocked).ToList();
+        while (spellCount < unlockedSpells.Count)
         {
-            if (SpellBook.Spells[spellCount].IsUnlocked)
-            {
-                UpdateButton(SpellButtons[spellCount], SpellBook.Spells[spellCount]);
-            }
-            else
-            {
-                SpellButtons[spellCount].gameObject.SetActive(false);
-            }
+            //if (unlockedSpells[spellCount].IsUnlocked)
+            //{
+                UpdateButton(SpellButtons[spellCount], unlockedSpells[spellCount]);
+            //}
+            //else
+            //{
+            //    SpellButtons[spellCount].gameObject.SetActive(false);
+            //}
             spellCount++;
         }
 

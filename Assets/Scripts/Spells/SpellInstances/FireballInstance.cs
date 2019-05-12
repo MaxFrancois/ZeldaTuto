@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireballInstance : MonoBehaviour
 {
@@ -10,26 +8,33 @@ public class FireballInstance : MonoBehaviour
     private Rigidbody2D body;
     private float lifeTimeTracker;
     private bool isDestroyed = false;
-    private SpriteRenderer sprite;
-    private GameObject explosion;
+    private GameObject projectileParticles;
+    private GameObject explosionParticles;
     private Vector3 direction;
     private float moveSpeed;
 
     void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
     }
 
-    public void Initialize(float pushf, float pusht, float dmg, float movesp, float lifeTime, GameObject exp, Vector3 dir)
+    public void Initialize(float pushf, float pusht, float dmg, float movesp, float lifeTime, GameObject projectile, GameObject explosion, Vector3 dir)
     {
         pushForce = pushf;
         pushTime = pusht;
         damage = dmg;
-        explosion = exp;
+        explosionParticles = explosion;
+        projectileParticles = projectile;
         direction = dir;
         moveSpeed = movesp;
         lifeTimeTracker = lifeTime;
+    }
+
+    void Start()
+    {
+        //projectileParticles = Instantiate(projectileParticles, transform.position, transform.rotation) as GameObject;
+        //projectileParticles.transform.parent = transform;
+        body.AddForce(transform.position + direction.normalized * moveSpeed);
     }
 
     void FixedUpdate()
@@ -47,7 +52,7 @@ public class FireballInstance : MonoBehaviour
 
     private void UpdatePosition()
     {
-        body.MovePosition(transform.position + direction.normalized * moveSpeed * Time.deltaTime);
+        //body.MovePosition(transform.position + direction.normalized * moveSpeed * Time.deltaTime);
         //if (fireEffectRigidBody != null)
         //    fireEffectRigidBody.MovePosition(transform.position + fireDirection.normalized * MoveSpeed * Time.deltaTime);
     }
@@ -59,8 +64,8 @@ public class FireballInstance : MonoBehaviour
             isDestroyed = true;
             Debug.Log("destroying fireball");
             //Destroy(AnimationInstance);
-            var exp = Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(exp, 0.5f);
+            var exp = Instantiate(explosionParticles, transform.position, Quaternion.identity);
+            Destroy(exp, 3f);
             Destroy(this.gameObject);
         }
     }

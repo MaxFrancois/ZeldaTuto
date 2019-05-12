@@ -8,31 +8,28 @@ public class PatrolLog : Log
     public int currentPoint;
     public Transform currentGoal;
     public float RoundingDistance;
-    
-    public override void CheckRange()
-    {
-        Animator.SetBool("IsAwake", true);
 
-        if (Vector3.Distance(Target.position, transform.position) <= ChaseRadius
-            && Vector3.Distance(Target.position, transform.position) > AttackRadius
-            && CurrentState != EnemyState.Staggered)
+    void FixedUpdate()
+    {
+        animator.SetBool("IsAwake", true);
+
+        if (TargetInChasingRange && CurrentState != EnemyState.Staggered)
         {
-            var temp = Vector3.MoveTowards(transform.position, Target.position, MoveSpeed * Time.deltaTime);
-            ChangeAnim(temp - transform.position);
+            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+            ChangeMovementDirection(temp - transform.position);
             body.MovePosition(temp);
         }
-        else if (Vector3.Distance(Target.position, transform.position) > ChaseRadius)
+        else if (TargetOutOfRange)
         {
             if (Vector3.Distance(transform.position, currentGoal.position) > RoundingDistance)
             {
                 var temp = Vector3.MoveTowards(transform.position, currentGoal.position, MoveSpeed * Time.deltaTime);
-                ChangeAnim(temp - transform.position);
+                ChangeMovementDirection(temp - transform.position);
                 body.MovePosition(temp);
             } else
             {
                 ChangeGoal();
             }
-            
         }
     }
 

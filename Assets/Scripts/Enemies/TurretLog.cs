@@ -19,22 +19,20 @@ public class TurretLog : Log
         }
     }
 
-    public override void CheckRange()
+    void FixedUpdate()
     {
-        if (Vector3.Distance(Target.position, transform.position) <= ChaseRadius
-            && Vector3.Distance(Target.position, transform.position) > AttackRadius
-            && CurrentState != EnemyState.Staggered && canFire)
+        if (TargetInChasingRange && CurrentState != EnemyState.Staggered && canFire)
         {
             canFire = false;
-            Vector3 tempVector = Target.transform.position - transform.position;
+            Vector3 tempVector = target.transform.position - transform.position;
             var projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
             projectile.GetComponent<Projectile>().Launch(tempVector);
-            Animator.SetBool("IsAwake", true);
+            animator.SetBool("IsAwake", true);
         }
-        else if (Vector3.Distance(Target.position, transform.position) > ChaseRadius)
+        else if (TargetOutOfRange)
         {
             ChangeState(EnemyState.Idle);
-            Animator.SetBool("IsAwake", false);
+            animator.SetBool("IsAwake", false);
         }
     }
 }

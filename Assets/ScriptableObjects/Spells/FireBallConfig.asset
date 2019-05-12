@@ -24,10 +24,9 @@ MonoBehaviour:
   PushForce: 5
   Damage: 1
   Cooldown: 2
-  LifeTime: 1
+  LifeTime: 0.5
   IsUnlocked: 1
-  FireballExplosion: {fileID: 4454976489121103695, guid: 271ce3f37eefd434896abd5560efef76,
+  FireballExplosion: {fileID: 183222, guid: f2ee009e61b1177489331d95174281b1, type: 3}
+  FireballInstance: {fileID: 8347690773220751109, guid: 4b974c3e47635f94cb0f736b9f4b4ed6,
     type: 3}
-  FireballInstance: {fileID: 24008093422199903, guid: 5e948dbc1f879414fb6b2f30f38a4d50,
-    type: 3}
-  MoveSpeed: 6
+  MoveSpeed: 600

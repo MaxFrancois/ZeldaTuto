@@ -61,7 +61,7 @@ public class Fireball : Spell
         var script = instance.GetComponent<FireballInstance>();
         var dir = new Vector2(direction.x, direction.y);
         //fireEffect.transform.rotation = Quaternion.Euler(dir);
-        script.Initialize(Config.PushForce, Config.PushTime, Config.Damage, Config.MoveSpeed, Config.LifeTime, Config.FireballExplosion, dir);
+        //script.Initialize(Config.PushForce, Config.PushTime, Config.Damage, Config.MoveSpeed, Config.LifeTime, Config.FireballExplosion, dir);
         instance.transform.eulerAngles = new Vector3(0, 0, UtilsClass.GetAngleFromVectorFloat(direction));
         Destroy(this.gameObject);
     }

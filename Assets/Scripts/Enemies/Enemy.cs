@@ -16,6 +16,7 @@ public class Enemy : EnemyBase
     public EnemyState CurrentState;
     public GameObject DeathAnimation;
     public VoidSignal RoomSignal;
+    BlinkOnHit onHit;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class Enemy : EnemyBase
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        onHit = GetComponent<BlinkOnHit>();
         target = GameObject.FindWithTag("Player").transform;
         CurrentState = EnemyState.Idle;
         AfterAwake();
@@ -96,10 +98,11 @@ public class Enemy : EnemyBase
     {
         if (body != null)
         {
-            StartCoroutine(FlashOnHit());
-            animator.SetTrigger("Hit");
+            if (onHit) onHit.Blink(spriteRenderer);
+            if (animator)
+                animator.SetTrigger("Hit");
             yield return new WaitForSeconds(pushTime);
-            animator.ResetTrigger("Hit");
+            //animator.ResetTrigger("Hit");
             body.velocity = Vector2.zero;
             CurrentState = EnemyState.Idle;
         }
@@ -109,24 +112,5 @@ public class Enemy : EnemyBase
     {
         if (state != CurrentState)
             CurrentState = state;
-    }
-
-    [Header("OnHit")]
-    public Color flashColor;
-    public Color regularColor;
-    public float numberOfFlashes;
-    public float flashDuration;
-    private IEnumerator FlashOnHit()
-    {
-        var i = 0;
-        while (i < numberOfFlashes)
-        {
-            spriteRenderer.color = flashColor;
-            yield return new WaitForSeconds(flashDuration);
-            spriteRenderer.color = regularColor;
-            yield return new WaitForSeconds(flashDuration);
-            i++;
-        }
-        yield return null;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Video;
 
 public enum SpellElement
 {
@@ -7,8 +6,10 @@ public enum SpellElement
     Fire,
     Ice,
     Air,
+    Lightning,
     Earth,
-    Dark
+    Dark,
+    Light
 }
 
 public abstract class SpellConfig : ScriptableObject

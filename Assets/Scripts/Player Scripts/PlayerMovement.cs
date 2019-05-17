@@ -121,8 +121,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject circle;
     private void SpawnCircle()
     {
-        var c = Instantiate(circle, transform.position, Quaternion.Euler(-45, 0, 0));
-        Destroy(c, 5f);
+        var spawnposition = new Vector3(transform.position.x + 3, transform.position.y, 0);
+        var c = Instantiate(circle, spawnposition, Quaternion.identity);
+        //Destroy(c, 5f);
     }
 
     private bool isJumping = false;

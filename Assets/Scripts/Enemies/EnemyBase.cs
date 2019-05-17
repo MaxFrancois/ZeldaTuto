@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour
+public class EnemyBase : ITime
 {
     [Header("Basic")]
     protected Rigidbody2D body;
@@ -20,6 +20,7 @@ public class EnemyBase : MonoBehaviour
     public FloatSignal HitSignal;
     public VoidSignal DeadSignal;
     public FloatValue MaxHealth;
+    public GameObject DeathAnimation;
     protected float currentHealth;
     protected bool isDead;
 

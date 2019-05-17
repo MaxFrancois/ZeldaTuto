@@ -651,7 +651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39209467}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -1.3, z: -10}
+  m_LocalPosition: {x: 30.33, y: -9.51, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1111644001}
@@ -14276,7 +14276,7 @@ MonoBehaviour:
   DefaultSelectedObject: {fileID: 1768397360}
   DefaultSelectedSpell: {fileID: 1646246802}
   PlayerSpellBar: {fileID: 548933280}
-  SpellBook: {fileID: 11400000, guid: 0d2e144759f726e4191c7c5cf764a106, type: 2}
+  SpellBook: {fileID: 11400000, guid: 8f2cae907ce4bbd449f6e23774a4cc09, type: 2}
   SpellDetailsMenu: {fileID: 1915633684}
 --- !u!1 &214773991
 GameObject:
@@ -15710,7 +15710,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &401280026
 GameObject:
@@ -15925,12 +15925,27 @@ PrefabInstance:
     - target: {fileID: 548933280, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
       propertyPath: Spells.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: f0730f8df7087024d91416321ab1c30a,
+      objectReference: {fileID: 11400000, guid: 2968764c0a4f39846969cd08122c6270,
         type: 2}
     - target: {fileID: 548933280, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
       propertyPath: Spells.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 43e30d4ee1ed28c44afcf8efbba6f4f9,
+        type: 2}
+    - target: {fileID: 548933280, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
+      propertyPath: Spells.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: fe9d59ee23be8914e9ae3ec89ddf02a6,
+        type: 2}
+    - target: {fileID: 548933280, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
+      propertyPath: Ultimate
+      value: 
+      objectReference: {fileID: 11400000, guid: f2140e4090e16e24b916733e2a50271f,
+        type: 2}
+    - target: {fileID: 548933280, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
+      propertyPath: Spells.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 447896eb93cf6d5489aa525cae93116e,
         type: 2}
     - target: {fileID: 1598482291, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
       propertyPath: m_TagString
@@ -23191,7 +23206,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &653850245
 GameObject:
@@ -101884,7 +101899,7 @@ PrefabInstance:
     - target: {fileID: 1076370975486146246, guid: dacd2d1405e9a63409a53cb1f0b1e4ab,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1076370975486146246, guid: dacd2d1405e9a63409a53cb1f0b1e4ab,
         type: 3}
@@ -102728,7 +102743,7 @@ PrefabInstance:
     - target: {fileID: 4799011598253740569, guid: 660b6d937f4526f458a1a916717bba23,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4799011598253740569, guid: 660b6d937f4526f458a1a916717bba23,
         type: 3}
@@ -102956,6 +102971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195a487f19f33d44f9ab6dd865a70c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlowTimeCoefficient: 0
   Name: Turret Log
   ChaseRadius: 6
   AttackRadius: 0
@@ -102967,9 +102983,9 @@ MonoBehaviour:
   HitSignal: {fileID: 0}
   DeadSignal: {fileID: 0}
   MaxHealth: {fileID: 11400000, guid: f5c017bbb55e3664cb04df1ee251c2d9, type: 2}
-  CurrentState: 0
   DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
     type: 3}
+  CurrentState: 0
   RoomSignal: {fileID: 0}
   Projectile: {fileID: 6685199209679393938, guid: 243df43deece3114a910c92efed3b226,
     type: 3}

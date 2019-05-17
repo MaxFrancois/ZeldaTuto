@@ -37,7 +37,7 @@ public class SpellBookMenu : MonoBehaviour
         }
 
         int spellCount = 0;
-        var unlockedSpells = SpellBook.Spells.Where(c => c.IsUnlocked).ToList();
+        var unlockedSpells = SpellBook.Spells.Where(c => c != null && c.IsUnlocked).ToList();
         while (spellCount < unlockedSpells.Count)
         {
             //if (unlockedSpells[spellCount].IsUnlocked)

@@ -15,7 +15,7 @@ public class PatrolLog : Log
 
         if (TargetInChasingRange && CurrentState != EnemyState.Staggered)
         {
-            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
             ChangeMovementDirection(temp - transform.position);
             body.MovePosition(temp);
         }
@@ -23,7 +23,7 @@ public class PatrolLog : Log
         {
             if (Vector3.Distance(transform.position, currentGoal.position) > RoundingDistance)
             {
-                var temp = Vector3.MoveTowards(transform.position, currentGoal.position, MoveSpeed * Time.deltaTime);
+                var temp = Vector3.MoveTowards(transform.position, currentGoal.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                 ChangeMovementDirection(temp - transform.position);
                 body.MovePosition(temp);
             } else

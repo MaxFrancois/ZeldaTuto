@@ -24,10 +24,8 @@ public class Spooder : Enemy
                 var r = Random.Range(0, 300);
                 if (r != 0)
                 {
-                    var temp = Vector2.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+                    var temp = Vector2.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                     ChangeMovementDirection(temp - (Vector2)transform.position);
-                    //body.MovePosition(temp);
-                    //body.velocity = temp;
                     transform.position = temp;
                     ChangeState(EnemyState.Walking);
                     animator.SetBool("IsWalking", true);
@@ -70,7 +68,7 @@ public class Spooder : Enemy
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(1f);
         Vector2 difference = target.transform.position - transform.position;
-        difference = difference.normalized * DashSpeed;
+        difference = difference.normalized * DashSpeed * (1 - SlowTimeCoefficient);
         body.AddForce(difference, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.4f);
         body.velocity = Vector2.zero;

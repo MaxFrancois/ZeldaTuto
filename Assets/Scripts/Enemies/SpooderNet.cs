@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpooderNet : MonoBehaviour
+public class SpooderNet : ITime
 {
     public float LifeTime;
     public float MoveSpeed;
@@ -29,7 +29,7 @@ public class SpooderNet : MonoBehaviour
             Destroy(gameObject);
         if (moving && target != Vector2.zero)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
         }
     }
 

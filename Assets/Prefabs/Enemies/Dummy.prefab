@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66eae58cc07c6ea4486d5dc37e4cc84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeScale: 0
   Name: Dummy
   ChaseRadius: 0
   AttackRadius: 0
@@ -110,8 +111,8 @@ MonoBehaviour:
   HitSignal: {fileID: 0}
   DeadSignal: {fileID: 0}
   MaxHealth: {fileID: 11400000, guid: f5e58e53bf7e5a14a9203ace404c5bf5, type: 2}
-  CurrentState: 0
   DeathAnimation: {fileID: 0}
+  CurrentState: 0
   RoomSignal: {fileID: 0}
   ResetAfterTime: 3
   ResetAnimation: {fileID: 171086, guid: 6749a1da7a6538e4bae6c320db525d94, type: 3}
@@ -201,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33b1571b97fdd442a03135de74a47b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashColor: {r: 1, g: 0.75, b: 0.75, a: 0.7137255}
+  flashColor: {r: 1, g: 0.50980395, b: 0.50980395, a: 0.7058824}
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   numberOfFlashes: 3
   flashDuration: 0.07

@@ -13,7 +13,7 @@ public class AreaEnemy : Log
            && CurrentState != EnemyState.Staggered
            && Boundary.bounds.Contains(target.transform.position))
         {
-            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
             ChangeMovementDirection(temp - transform.position);
             body.MovePosition(temp);
             ChangeState(EnemyState.Walking);

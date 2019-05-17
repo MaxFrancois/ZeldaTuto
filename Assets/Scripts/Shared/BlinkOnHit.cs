@@ -4,13 +4,13 @@ using UnityEngine;
 public class BlinkOnHit : MonoBehaviour
 {
     [SerializeField]
-    Color flashColor;
+    protected Color flashColor = new Color(255, 130, 130, 180);
     [SerializeField]
-    Color regularColor;
+    protected Color regularColor = new Color(255, 255, 255, 255);
     [SerializeField]
-    float numberOfFlashes;
+    protected float numberOfFlashes = 3;
     [SerializeField]
-    float flashDuration;
+    protected float flashDuration = 0.07f;
 
     public void Blink(SpriteRenderer spriteRenderer)
     {

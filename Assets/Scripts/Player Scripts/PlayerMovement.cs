@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         //Destroy(c, 5f);
     }
 
-    private bool isJumping = false;
+    //private bool isJumping = false;
     public float JumpUpSpeed;
     public float JumpDownSpeed;
     public float JumpTime;
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         State = PlayerState.Jumping;
         animator.SetBool("IsJumping", true);
         goingUp = true;
-        isJumping = true;
+        //isJumping = true;
         currentJumpTime = JumpTime;
     }
 
@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
                 State = PlayerState.Idle;
                 rigidBody.velocity = Vector2.zero;
                 animator.SetBool("IsJumping", false);
-                isJumping = false;
+                //isJumping = false;
             }
         }
 

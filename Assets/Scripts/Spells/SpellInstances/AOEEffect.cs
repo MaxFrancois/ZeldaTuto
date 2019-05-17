@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AOEEffect : MonoBehaviour
+public class AOEEffect : ITime
 {
     public GameObject zone;
     private Vector3 maxZoneSize;
@@ -30,7 +30,7 @@ public class AOEEffect : MonoBehaviour
     void Update()
     {
         if (zone.transform.localScale.x < maxZoneSize.x) {
-            zone.transform.localScale = new Vector3(zone.transform.localScale.x + Time.deltaTime * expandSpeed, zone.transform.localScale.y + Time.deltaTime * expandSpeed, 0);
+            zone.transform.localScale = new Vector3(zone.transform.localScale.x + Time.deltaTime * expandSpeed * (1 - SlowTimeCoefficient), zone.transform.localScale.y + Time.deltaTime * expandSpeed * (1 - SlowTimeCoefficient), 0);
         }
         else
         {

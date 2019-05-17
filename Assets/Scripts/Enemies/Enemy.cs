@@ -14,7 +14,6 @@ public enum EnemyState
 public class Enemy : EnemyBase
 {
     public EnemyState CurrentState;
-    public GameObject DeathAnimation;
     public VoidSignal RoomSignal;
     BlinkOnHit onHit;
 
@@ -43,7 +42,7 @@ public class Enemy : EnemyBase
         CurrentState = EnemyState.Staggered;
         UpdateHealth(damage);
         Vector2 difference = transform.position - thingThatHitYou.position;
-        difference = difference.normalized * pushForce;
+        difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
         body.AddForce(difference, ForceMode2D.Impulse);
         if (transform.gameObject.activeInHierarchy)
             StartCoroutine(Knockback(body, pushTime));

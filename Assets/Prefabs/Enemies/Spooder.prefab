@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0809bb0127bc6e045815e19108aca045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeScale: 0
   Name: Spooder
   ChaseRadius: 8
   AttackRadius: 3
@@ -131,8 +132,8 @@ MonoBehaviour:
   HitSignal: {fileID: 0}
   DeadSignal: {fileID: 0}
   MaxHealth: {fileID: 11400000, guid: e9b64e571b1a45840abbca6f6b8efd85, type: 2}
-  CurrentState: 0
   DeathAnimation: {fileID: 173590, guid: 7469283484e0dcc4887fa575d1fd7ecc, type: 3}
+  CurrentState: 0
   RoomSignal: {fileID: 0}
   SpooderNet: {fileID: 1168303258240033692, guid: 701144212e973f045a2c6e917349fe34,
     type: 3}

@@ -164,7 +164,7 @@ public class Minotaur : MiniBoss
                 }
                 else if (TargetInChasingRange && CurrentState != MinotaurState.Staggered && CurrentState != MinotaurState.Attacking)
                 {
-                    var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+                    var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                     ChangeMovementDirection(temp - transform.position);
                     body.MovePosition(temp);
                     ChangeState(MinotaurState.Walking);
@@ -212,7 +212,7 @@ public class Minotaur : MiniBoss
                 }
                 else if (TargetOutOfRange)
                 {
-                    var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime);
+                    var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                     ChangeMovementDirection(temp - transform.position);
                     body.MovePosition(temp);
                     ChangeState(MinotaurState.Walking);
@@ -313,9 +313,9 @@ public class Minotaur : MiniBoss
     {
         for (int i = 0; i < SpawnQuantity; i++)
         {
-            var rock = Instantiate(Avalanche, transform.position, Quaternion.identity);
-            var rockscript = rock.GetComponent<Avalanche>();
-            rockscript.Config = AvalancheConfig;
+            //var rock = Instantiate(Avalanche, transform.position, Quaternion.identity);
+            //var rockscript = rock.GetComponent<Avalanche>();
+            //rockscript.Config = AvalancheConfig;
             //calculate rnadom location
             var goodDistance = false;
             int count = 0;
@@ -334,7 +334,7 @@ public class Minotaur : MiniBoss
                     goodDistance = true;
             }
             recentFalls.Add(rockSpawnPosition);
-            rockscript.Cast(null, rockSpawnPosition);
+            AvalancheConfig.Cast(null, rockSpawnPosition);
         }
         yield return null;
     }

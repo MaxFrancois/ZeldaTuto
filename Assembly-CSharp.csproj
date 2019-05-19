@@ -125,6 +125,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\VoidSignal.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\VoidSignalListener.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Air\WhirlwindConfig.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Dark\DarkTotemConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Earth\AvalancheConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Fire\FireballConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Fire\FirewallConfig.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Assets\Scripts\Shared\ITime.cs" />
     <Compile Include="Assets\Scripts\Shared\KnockBack.cs" />
     <Compile Include="Assets\Scripts\Spells\Air\Whirlwind.cs" />
+    <Compile Include="Assets\Scripts\Spells\Dark\DarkTotem.cs" />
     <Compile Include="Assets\Scripts\Spells\Earth\Avalanche.cs" />
     <Compile Include="Assets\Scripts\Spells\Fire\Fireball.cs" />
     <Compile Include="Assets\Scripts\Spells\Lightning\LightningBalls.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Assets\Scripts\Spells\Shared\SpellBar.cs" />
     <Compile Include="Assets\Scripts\Spells\Shared\SpellContainer.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\AOEEffect.cs" />
+    <Compile Include="Assets\Scripts\Spells\SpellInstances\DarkTotemProjectile.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\FallingRock.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\LightningBallInstance.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\StaticFire.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="Assets\Scripts\UI\Weather\DayTimeManager.cs" />
     <Compile Include="Assets\Scripts\UI\Weather\WeatherManager.cs" />
     <Compile Include="Assets\Scripts\UI\Weather\WeatherTrigger.cs" />
+    <Compile Include="Assets\Scripts\Utilities.cs" />
     <Compile Include="Assets\Scripts\UtilsClass.cs" />
     <None Include="Assets\Art\Spells\LICENSE.txt" />
     <None Include="Assets\Art\Enemies\free_crusher_enemy\style_C\spritesheet\descriptive\spritesheet.txt" />

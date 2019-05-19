@@ -26,7 +26,8 @@ MonoBehaviour:
   Cooldown: 1
   LifeTime: 0.5
   IsUnlocked: 1
-  FireballExplosion: {fileID: 183222, guid: f2ee009e61b1177489331d95174281b1, type: 3}
+  FireballExplosion: {fileID: 4807733082465155857, guid: caef607c6eb51b448bdae1522844093f,
+    type: 3}
   FireballInstance: {fileID: 8347690773220751109, guid: 4b974c3e47635f94cb0f736b9f4b4ed6,
     type: 3}
   MoveSpeed: 600

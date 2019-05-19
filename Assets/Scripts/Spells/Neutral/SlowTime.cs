@@ -38,7 +38,7 @@ public class SlowTime : MonoBehaviour
             if (transform.localScale.x <= 0.2)
             {
                 foreach (var so in slowedObjects)
-                    so.SlowTimeCoefficient = 0;
+                    so.SetSlowTimeCoefficient(0);
                 Destroy(gameObject);
             }
         }
@@ -51,7 +51,7 @@ public class SlowTime : MonoBehaviour
             var timeComponent = collision.GetComponent<ITime>();
             if (timeComponent)
             {
-                timeComponent.SlowTimeCoefficient = config.SlowSpeed;
+                timeComponent.SetSlowTimeCoefficient(config.SlowSpeed);
                 slowedObjects.Add(timeComponent);
             }
             else
@@ -61,7 +61,7 @@ public class SlowTime : MonoBehaviour
                     var parentTime = collision.transform.parent.GetComponent<ITime>();
                     if (parentTime)
                     {
-                        parentTime.SlowTimeCoefficient = config.SlowSpeed;
+                        parentTime.SetSlowTimeCoefficient(config.SlowSpeed);
                         slowedObjects.Add(parentTime);
                     }
                 }
@@ -76,7 +76,7 @@ public class SlowTime : MonoBehaviour
             var timeComponent = collision.GetComponent<ITime>();
             if (timeComponent)
             {
-                timeComponent.SlowTimeCoefficient = 0;
+                timeComponent.SetSlowTimeCoefficient(0);
                 slowedObjects.Remove(timeComponent);
             }
             else
@@ -86,7 +86,7 @@ public class SlowTime : MonoBehaviour
                     var parentTime = collision.transform.parent.GetComponent<ITime>();
                     if (parentTime)
                     {
-                        parentTime.SlowTimeCoefficient = 0;
+                        parentTime.SetSlowTimeCoefficient(0);
                         slowedObjects.Remove(parentTime);
                     }
                 }

@@ -15925,7 +15925,7 @@ PrefabInstance:
     - target: {fileID: 548933280, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
       propertyPath: Spells.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 2968764c0a4f39846969cd08122c6270,
+      objectReference: {fileID: 11400000, guid: d820ba0e499764649b2afa3dca58fb50,
         type: 2}
     - target: {fileID: 548933280, guid: fcaa4193de8ad024a84fe18af455f427, type: 3}
       propertyPath: Spells.Array.data[1]
@@ -102971,7 +102971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195a487f19f33d44f9ab6dd865a70c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlowTimeCoefficient: 0
   Name: Turret Log
   ChaseRadius: 6
   AttackRadius: 0

@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 230555132
+    totalSpriteSurfaceArea: 230529006
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -3368,7 +3368,24 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2b95295d6c5be544ea22d43abe3cd268, type: 3}
   - {fileID: 21300000, guid: ae7ebb5d9818d80478387122af6cba9a, type: 3}
   - {fileID: 21300000, guid: b5900c5dd8726394c90d165b44dbce04, type: 3}
-  - {fileID: 21300000, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -2339991373425133476, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -1319384292982839510, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 7561146792202026734, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -6897198793591560688, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 6660480546085855985, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 1209109734849163107, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 5945700752645930117, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 5972299230280946040, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 3139110239071873985, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -7382309547621629886, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 6820920527245418059, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -6461431366265752384, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -5365264193117940098, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -7794928505495220108, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -3224560177037468580, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: 303216840272089031, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -6385890697809329410, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
+  - {fileID: -8259467057777611205, guid: 1a46ed5d05b7a1342a5bef30f88a3121, type: 3}
   - {fileID: 21300000, guid: 7872956d4aa43e0478268acca9526e4a, type: 3}
   - {fileID: 21300000, guid: 7209096d26716044fae183577a3fad47, type: 3}
   - {fileID: 21300000, guid: 5edc196dbf4833948a389d74303d5aec, type: 3}
@@ -7114,7 +7131,24 @@ SpriteAtlas:
   - frame0001
   - s_115
   - frame0010
-  - Buff Totem Donezo
+  - Buff Totem Donezo_1
+  - Buff Totem Donezo_0
+  - Buff Totem Donezo_3
+  - Buff Totem Donezo_2
+  - Buff Totem Donezo_5
+  - Buff Totem Donezo_4
+  - Buff Totem Donezo_7
+  - Buff Totem Donezo_6
+  - Buff Totem Donezo_9
+  - Buff Totem Donezo_8
+  - Buff Totem Donezo_10
+  - Buff Totem Donezo_11
+  - Buff Totem Donezo_12
+  - Buff Totem Donezo_13
+  - Buff Totem Donezo_14
+  - Buff Totem Donezo_15
+  - Buff Totem Donezo_16
+  - Buff Totem Donezo_17
   - frame0000
   - frame0053
   - frame0019

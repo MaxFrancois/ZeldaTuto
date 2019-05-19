@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Whirlwind : MonoBehaviour
+public class Whirlwind : ITime
 {
     private float duration;
     private float damage;
@@ -17,7 +17,7 @@ public class Whirlwind : MonoBehaviour
 
     void Update()
     {
-        duration -= Time.deltaTime;
+        duration -= Time.deltaTime * (1 - SlowTimeCoefficient);
         if (duration <= 0)
         {
             foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, pullRadius))
@@ -38,7 +38,7 @@ public class Whirlwind : MonoBehaviour
                 // calculate direction from target to me
                 Vector3 forceDirection = transform.position - collider.transform.position;
                 // apply force on target towards me
-                collider.GetComponent<Rigidbody2D>().AddForce(forceDirection.normalized * pullForce * Time.fixedDeltaTime);
+                collider.GetComponent<Rigidbody2D>().AddForce(forceDirection.normalized * pullForce * Time.fixedDeltaTime * (1 - SlowTimeCoefficient));
             }
         }
     }

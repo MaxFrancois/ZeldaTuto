@@ -30,7 +30,7 @@ MonoBehaviour:
     type: 3}
   LightningBallInstance: {fileID: 4439980281858775148, guid: ce084baf35386344486f7c153bb02b8d,
     type: 3}
-  LightningBallExplosion: {fileID: 160900, guid: 1b1f4eecb848b384f93fd0216a95f56e,
+  LightningBallExplosion: {fileID: 3320927472524968467, guid: fd555735149ffd34e8fdff043be0b8e9,
     type: 3}
   Radius: 2
   AmountOfBalls: 3

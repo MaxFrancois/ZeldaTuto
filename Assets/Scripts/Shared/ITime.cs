@@ -2,5 +2,10 @@
 
 public abstract class ITime : MonoBehaviour
 {
-    public float SlowTimeCoefficient;
+    protected float SlowTimeCoefficient;
+
+    public void SetSlowTimeCoefficient(float value)
+    {
+        SlowTimeCoefficient = value;
+    }
 }

@@ -28,6 +28,6 @@ MonoBehaviour:
   IsUnlocked: 1
   SlowTimeInstance: {fileID: 1517907635147998951, guid: 0f439b1215ceb0045930ab17ad5f5afc,
     type: 3}
-  SlowSpeed: 0.5
+  SlowSpeed: 0.838
   ExpandSpeed: 1
   MaxScale: 1

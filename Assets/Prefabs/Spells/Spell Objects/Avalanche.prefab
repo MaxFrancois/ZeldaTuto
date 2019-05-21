@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8155188773390139873}
-  - component: {fileID: 8155188773390139878}
+  - component: {fileID: 6398739147615720054}
   m_Layer: 0
   m_Name: Avalanche
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8155188773390139878
+--- !u!114 &6398739147615720054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,21 +41,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: e526d5a8e6f880b44972a84a4ff8df24, type: 3}
+  m_Script: {fileID: 11500000, guid: a9411525d1e55384185a69d51f6cc571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: 8cfb7309ecb4fa14fa40431963ae59ea, type: 3}
-  Name: Avalanche
-  Cooldown: 0
-  ManaCost: 0
-  PushTime: 0
-  PushForce: 0
-  Damage: 0
-  Animation: {fileID: 0}
-  LifeTime: 0
-  AnimationInstance: {fileID: 0}
-  AOEEffect: {fileID: 6905066975315071746, guid: f2042bd04f5261547a15d5a206443c7d,
-    type: 3}
-  FallingRock: {fileID: 6532221454363518139, guid: 9509cc187ebf79844a72f782b780ab10,
-    type: 3}
-  Config: {fileID: 11400000, guid: 513744178a12da4438d9f17bf3db7e8c, type: 2}

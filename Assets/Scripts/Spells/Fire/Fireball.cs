@@ -62,7 +62,6 @@ public class Fireball : MonoBehaviour
         if (!isDestroyed)
         {
             isDestroyed = true;
-            Debug.Log("destroying fireball");
             //Destroy(AnimationInstance);
             var exp = Instantiate(explosionParticles, transform.position, Quaternion.identity);
             Destroy(exp, 3f);

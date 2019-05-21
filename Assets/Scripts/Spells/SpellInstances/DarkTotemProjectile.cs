@@ -32,6 +32,7 @@ public class DarkTotemProjectile : ITime
 
     void DestroyThis()
     {
+        //particle
         Destroy(gameObject);
     }
 

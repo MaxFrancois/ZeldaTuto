@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f8075dc1a2cb175499f4b206c09d58e5, type: 3}
+  m_Name: EarthTotemConfig
+  m_EditorClassIdentifier: 
+  Id: E002
+  Icon: {fileID: 21300000, guid: a18684c9df6d98542b1c7b51ecc7f49d, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 6341005da49c17b4ebc0bd19107f0945, type: 3}
+  Name: Earth Totem
+  Description: Summon an earth totem
+  Element: 5
+  ManaCost: 0
+  PushTime: 0
+  PushForce: 0
+  Damage: 0
+  Cooldown: 1
+  LifeTime: 8
+  IsUnlocked: 1
+  Totem: {fileID: 6539392869294584393, guid: 6446d53b411f05649b0b4cac26403703, type: 3}
+  Circle: {fileID: 8155067939835898879, guid: a5d170a69f7fd5a44b909959676acfb8, type: 3}
+  TimeBetweenAttacks: 0
+  DeathFadeSpeed: 1

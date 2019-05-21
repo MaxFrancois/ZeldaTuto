@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aeca2c8d73baa248aad0af110b3494a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlowTimeCoefficient: 0
   zone: {fileID: 6905066975386875584}
 --- !u!1 &6905066975386875584
 GameObject:

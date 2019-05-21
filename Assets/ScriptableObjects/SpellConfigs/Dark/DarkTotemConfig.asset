@@ -24,15 +24,15 @@ MonoBehaviour:
   PushForce: 0
   Damage: 1
   Cooldown: 1
-  LifeTime: 10
+  LifeTime: 7
   IsUnlocked: 1
   Totem: {fileID: 9065694545435912829, guid: 8275a4467bb476c4dbd382b8d54a1aa9, type: 3}
   AttackRadius: 5
-  TimeBetweenAttacks: 3
-  DeathFadeSpeed: 100
+  TimeBetweenAttacks: 2
+  DeathFadeSpeed: 2
   Projectile: {fileID: 6217178689373811995, guid: b37b20cec92ba064baeb5696d072891a,
     type: 3}
   AmountOfProjectiles: 5
-  AngleBetweenProjectiles: 1
-  ProjectileSpeed: 20
+  AngleBetweenProjectiles: 10
+  ProjectileSpeed: 100
   ProjectileLifeTime: 1

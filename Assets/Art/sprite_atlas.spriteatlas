@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 230529006
+    totalSpriteSurfaceArea: 230554425
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -3318,6 +3318,21 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6aebc1ec343514f49b2192fa1eacd810, type: 3}
   - {fileID: 21300000, guid: a00cf1ecf1d3fdd46850804af732e76b, type: 3}
   - {fileID: 21300000, guid: 5c1a75ecc0939e544a313111f93bfd22, type: 3}
+  - {fileID: 2925279602860196932, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 6004739868758258797, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 2059616115735804656, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 6048437549117963303, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 5494490866752732285, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: -471837834037224903, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 7921421254580896832, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 5117429117409804114, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 8044931951307140030, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: -8306282088390072537, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 848071076575857793, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: 6912084256274302956, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: -4035746850229498089, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: -6333370235711370210, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
+  - {fileID: -480517093643130968, guid: b3e787ec1d234424497e41c4140629e0, type: 3}
   - {fileID: 21300000, guid: c534c2fc1b92f834c8591295eafe1c57, type: 3}
   - {fileID: 21300000, guid: b01664fc4e754064e98bb7ae7a34a588, type: 3}
   - {fileID: 21300000, guid: f5d5a4fc8bc41a848ad7ffda4217b348, type: 3}
@@ -3582,6 +3597,23 @@ SpriteAtlas:
   - {fileID: 21300000, guid: be7827fde1d956243a21a6a15e140b5a, type: 3}
   - {fileID: 21300000, guid: 3e50a8fdda497b7478c457e8d2d87f8c, type: 3}
   - {fileID: 21300000, guid: d0f30bfdd7df0f14591a739cfb8289e9, type: 3}
+  - {fileID: -5905371360524152767, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -2162683529295547635, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -7751730153935079146, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -5781621341478753758, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -6142972679758277152, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -851195839235975809, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -5481697737932692061, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: 5737911935634877364, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -2884074593545203013, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -6272001939483734068, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -2170425164647598101, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: 684152200970077154, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: 1273519123814704712, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: 4756765669667585606, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -3810498799773785064, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -1290060498527196457, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
+  - {fileID: -6216833462901399636, guid: f4a7cbfd1f445604ba5c9cb5bab8b902, type: 3}
   - {fileID: 21300000, guid: 171aedfd554db5e488c8171cb8827a32, type: 3}
   - {fileID: 21300000, guid: b8b97ffd3c62b9748a6de26bec4b874b, type: 3}
   - {fileID: 21300000, guid: e972e00e52ee21c429004cf863f5e3b9, type: 3}
@@ -7081,6 +7113,21 @@ SpriteAtlas:
   - frame0009
   - JumpSword_01
   - RunGun01_01
+  - Fire TotemSprite Sheet_12
+  - Fire TotemSprite Sheet_13
+  - Fire TotemSprite Sheet_10
+  - Fire TotemSprite Sheet_11
+  - Fire TotemSprite Sheet_14
+  - Fire TotemSprite Sheet_7
+  - Fire TotemSprite Sheet_6
+  - Fire TotemSprite Sheet_5
+  - Fire TotemSprite Sheet_4
+  - Fire TotemSprite Sheet_3
+  - Fire TotemSprite Sheet_2
+  - Fire TotemSprite Sheet_1
+  - Fire TotemSprite Sheet_0
+  - Fire TotemSprite Sheet_9
+  - Fire TotemSprite Sheet_8
   - frame0008
   - frame0024
   - frame0000
@@ -7345,6 +7392,23 @@ SpriteAtlas:
   - DeathOutline_15
   - DeathPose01_14
   - 7
+  - Heal Totem Sprite Sheet_5
+  - Heal Totem Sprite Sheet_4
+  - Heal Totem Sprite Sheet_7
+  - Heal Totem Sprite Sheet_6
+  - Heal Totem Sprite Sheet_1
+  - Heal Totem Sprite Sheet_0
+  - Heal Totem Sprite Sheet_3
+  - Heal Totem Sprite Sheet_2
+  - Heal Totem Sprite Sheet_9
+  - Heal Totem Sprite Sheet_8
+  - Heal Totem Sprite Sheet_14
+  - Heal Totem Sprite Sheet_15
+  - Heal Totem Sprite Sheet_16
+  - Heal Totem Sprite Sheet_10
+  - Heal Totem Sprite Sheet_11
+  - Heal Totem Sprite Sheet_12
+  - Heal Totem Sprite Sheet_13
   - Idle_05
   - 68
   - frame0013

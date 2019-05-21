@@ -23,7 +23,6 @@ public static class Utilities
         var startFadeTime = time;
         float t = (Time.time - startFadeTime) / fadeSpeed;
         sprite.color = new Color(1f, 1f, 1f, Mathf.SmoothStep(1f, 0f, t));
-        Debug.Log("Fading color " + sprite.color);
         if (sprite.color.a == 0f)
             return true;
         return false;

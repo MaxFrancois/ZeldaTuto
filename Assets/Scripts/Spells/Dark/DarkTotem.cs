@@ -35,12 +35,10 @@ public class DarkTotem : ITime
                 isDead = true;
                 anim.SetTrigger("Die");
                 anim.SetBool("IsDead", true);
-                //StartCoroutine(Die());
             }
             timeSinceLastAttack += Time.deltaTime * (1 - SlowTimeCoefficient);
             if (timeSinceLastAttack >= config.TimeBetweenAttacks && Utilities.FindClosestEnemyInRadius(transform, config.AttackRadius) != null && !isDead)
             {
-                Debug.Log("Dark totem cast");
                 timeSinceLastAttack = 0;
                 StartCoroutine(Attack());
             }
@@ -55,20 +53,17 @@ public class DarkTotem : ITime
     IEnumerator Attack()
     {
         anim.SetTrigger("Cast");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         var closestEnemy = Utilities.FindClosestEnemyInRadius(transform, config.AttackRadius);
-        var direction = closestEnemy.transform.position - transform.position;
+        var enemyDirection = closestEnemy.transform.position - transform.position;
         for (int i = 0; i < config.AmountOfProjectiles; i++)
         {
+            var idx = i - Mathf.Floor(config.AmountOfProjectiles / 2);
+            var direction = enemyDirection;
             var projectileInstance = Instantiate(config.Projectile, transform.position, Quaternion.identity);
+            direction = Quaternion.AngleAxis(config.AngleBetweenProjectiles * idx, Vector3.back) * direction;
             projectileInstance.GetComponent<DarkTotemProjectile>().Initialize(config, direction);
         }
-        yield return null;
-    }
-
-    IEnumerator Die()
-    {
-        
         yield return null;
     }
 }

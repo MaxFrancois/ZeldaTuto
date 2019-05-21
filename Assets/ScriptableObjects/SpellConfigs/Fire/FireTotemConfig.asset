@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 08cba236e2061214297dbca8b29ae737, type: 3}
+  m_Name: FireTotemConfig
+  m_EditorClassIdentifier: 
+  Id: F003
+  Icon: {fileID: 21300000, guid: a6de44afda0790f4dbc48564f6714c1f, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: 6341005da49c17b4ebc0bd19107f0945, type: 3}
+  Name: Fire Totem
+  Description: Summon a fire totem that explodes
+  Element: 1
+  ManaCost: 1
+  PushTime: 0
+  PushForce: 0
+  Damage: 0
+  Cooldown: 1
+  LifeTime: 7
+  IsUnlocked: 1
+  Totem: {fileID: 6648208112731336049, guid: 3476f83bd1d83b343a442dc611999cab, type: 3}
+  AttackRadius: 3
+  TimeBetweenAttacks: 2
+  DeathFadeSpeed: 2
+  Explosion: {fileID: 1622485100173115570, guid: b625a6ee95762c24899b75dc35a4521e,
+    type: 3}

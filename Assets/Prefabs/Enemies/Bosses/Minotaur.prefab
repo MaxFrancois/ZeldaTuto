@@ -774,9 +774,10 @@ GameObject:
   - component: {fileID: 5542084788087790289}
   - component: {fileID: 5542084788087790290}
   - component: {fileID: 5542084788087790291}
+  - component: {fileID: 1278983401329727861}
   m_Layer: 0
   m_Name: Minotaur
-  m_TagString: MiniBoss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -878,18 +879,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488afcc49b1f71e46950ee802e8f33c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: {fileID: 11400000, guid: 7bb196e5b23bccf4587ad8ee06c3fd7f, type: 2}
   Name: The Minotaur
+  ChaseRadius: 10
+  AttackRadius: 3
+  MoveSpeed: 3
+  BlockCollider: {fileID: 5542084788087790295}
+  TriggerCollider: {fileID: 5542084788087790288}
   HomePosition: {x: 16.5, y: 29}
   LootTable: {fileID: 0}
-  HitSignal: {fileID: 11400000, guid: 1ef836c0240a750419afbecd196cd3e6, type: 2}
   DeadSignal: {fileID: 11400000, guid: 5eeb22198f88d4e4d90ffa7247208133, type: 2}
+  DeathAnimation: {fileID: 0}
   CurrentState: 0
+  RoomSignal: {fileID: 0}
+  BossState: 0
   triggerCollider: {fileID: 5542084788087790288}
   ChargeAttackDamage: 1
   StompAttackDamage: 1
-  ChaseRadius: 10
-  AttackRadius: 3
   AggroRoom: {fileID: 0}
   MaxChasingTime: 2
   MaxMeleeTime: 0.3
@@ -915,7 +920,6 @@ MonoBehaviour:
     TopRight: {x: 14.5, y: 25.5, z: 0}
   MinDistanceBetweenRocks: 3
   StunDuration: 2
-  MoveSpeed: 3
   ChargeSpeed: 10
   RoomCamera: {fileID: 0}
   cameraShakeDuration: 2
@@ -1075,6 +1079,22 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1278983401329727861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542084788087790281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f3ff060518bc0fd4a92bb4a5d4ea8bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHealthLost: {fileID: 11400000, guid: 1ef836c0240a750419afbecd196cd3e6, type: 2}
+  OnHealthGained: {fileID: 0}
+  Health: {fileID: 11400000, guid: 55517c9c7dab8214d9a9c1a1caa0ed38, type: 2}
 --- !u!1 &5542084788379692026
 GameObject:
   m_ObjectHideFlags: 0

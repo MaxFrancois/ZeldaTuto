@@ -1,13 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyBase : ITime
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CharacterHealth))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
+public abstract class EnemyBase : ITime
 {
     [Header("Basic")]
     protected Rigidbody2D body;
     protected Transform target;
     protected Animator animator;
+    protected CharacterHealth EnemyHealth;
     protected SpriteRenderer spriteRenderer;
     public string Name;
     public float ChaseRadius;
@@ -17,12 +21,14 @@ public class EnemyBase : ITime
     public Collider2D TriggerCollider;
     public Vector2 HomePosition;
     public LootTable LootTable;
-    public FloatSignal HitSignal;
+    //public FloatSignal HitSignal;
     public VoidSignal DeadSignal;
-    public FloatValue MaxHealth;
     public GameObject DeathAnimation;
-    protected float currentHealth;
-    protected bool isDead;
+    //public FloatValue MaxHealth;
+    //protected float currentHealth;
+    protected bool IsDead { get { return EnemyHealth.Health.CurrentHealth <= 0; } }
+    protected float CurrentHealth { get { return EnemyHealth.Health.CurrentHealth; } }
+    protected float MaxHealth { get { return EnemyHealth.Health.MaxHealth; } }
 
     protected float lastX;
     protected bool TargetInChasingRange
@@ -50,14 +56,14 @@ public class EnemyBase : ITime
         }
     }
 
-    public virtual void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public virtual void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
 
     }
 
-    protected virtual void AfterAwake()
+    protected virtual void OnEnable()
     {
-
+        EnemyHealth.Health.CurrentHealth = MaxHealth;
     }
 
     protected virtual void ChangeMovementDirection(Vector2 direction)
@@ -92,8 +98,8 @@ public class EnemyBase : ITime
         animator.SetFloat("MoveY", setVector.y);
     }
 
-    public float GetCurrentHealth()
+    public Health GetEnemyHealth()
     {
-        return currentHealth;
+        return EnemyHealth.Health;
     }
 }

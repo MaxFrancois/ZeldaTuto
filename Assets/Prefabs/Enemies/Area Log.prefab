@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 9213509434662060307}
   - component: {fileID: 9213509434662060306}
   - component: {fileID: 9213509434662060523}
+  - component: {fileID: 2075370798}
   m_Layer: 8
   m_Name: Area Log Character
   m_TagString: Enemy
@@ -298,19 +299,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74548e0d51a4f514c8d0c19bd36314ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentState: 0
-  CurrentHealth: 0
-  MaxHealth: {fileID: 11400000, guid: f5c017bbb55e3664cb04df1ee251c2d9, type: 2}
   Name: Area Log
-  BaseAttack: 1
-  MoveSpeed: 2
-  DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
-    type: 3}
-  HomePosition: {x: 0.5, y: 29}
-  Target: {fileID: 0}
-  RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
-  LootTable: {fileID: 11400000, guid: 3ddd46dc8530b8e48a042b62515a10df, type: 2}
   ChaseRadius: 4
   AttackRadius: 1
-  Animator: {fileID: 0}
+  MoveSpeed: 2
+  BlockCollider: {fileID: 9213509434662060305}
+  TriggerCollider: {fileID: 9213509434662060307}
+  HomePosition: {x: 0.5, y: 29}
+  LootTable: {fileID: 11400000, guid: 3ddd46dc8530b8e48a042b62515a10df, type: 2}
+  DeadSignal: {fileID: 0}
+  DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
+    type: 3}
+  CurrentState: 0
+  RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
   Boundary: {fileID: 8174733465292277441}
+--- !u!114 &2075370798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9213509434662060522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f3ff060518bc0fd4a92bb4a5d4ea8bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHealthLost: {fileID: 0}
+  OnHealthGained: {fileID: 0}
+  Health: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}

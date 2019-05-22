@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4268939622143116634}
   - component: {fileID: 4268939622143116635}
   - component: {fileID: 837083458}
+  - component: {fileID: 463615363}
   m_Layer: 8
   m_Name: Patrol Log
   m_TagString: Enemy
@@ -209,24 +210,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a614dff85ef3ef54fbbd083b5ecb62f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentState: 0
-  CurrentHealth: 0
-  MaxHealth: {fileID: 11400000, guid: f5c017bbb55e3664cb04df1ee251c2d9, type: 2}
   Name: Patrol Log
-  BaseAttack: 1
-  MoveSpeed: 2
-  DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
-    type: 3}
-  HomePosition: {x: -7.5, y: 29}
-  Target: {fileID: 0}
-  RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
-  LootTable: {fileID: 11400000, guid: 7177c74a6835c3f45b6dde15d1f1b787, type: 2}
   ChaseRadius: 3
   AttackRadius: 1
-  Animator: {fileID: 4268939622143116638}
+  MoveSpeed: 2
+  BlockCollider: {fileID: 4268939622143116632}
+  TriggerCollider: {fileID: 4268939622143116634}
+  HomePosition: {x: -7.5, y: 29}
+  LootTable: {fileID: 11400000, guid: 7177c74a6835c3f45b6dde15d1f1b787, type: 2}
+  DeadSignal: {fileID: 0}
+  DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
+    type: 3}
+  CurrentState: 0
+  RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
   Path:
   - {fileID: 0}
   - {fileID: 0}
   currentPoint: 0
   currentGoal: {fileID: 0}
   RoundingDistance: 0.1
+--- !u!114 &463615363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268939622143116580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f3ff060518bc0fd4a92bb4a5d4ea8bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHealthLost: {fileID: 0}
+  OnHealthGained: {fileID: 0}
+  Health: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}

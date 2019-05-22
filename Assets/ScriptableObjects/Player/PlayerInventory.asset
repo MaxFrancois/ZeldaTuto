@@ -15,14 +15,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItem: {fileID: 0}
   Items: []
-  NumberOfKeys: 96
-  Coins: 0
-  MaxHealth: 6
-  CurrentHealth: 6
-  PassiveHealthRegenSpeed: 0
-  MaxMana: 100
-  CurrentMana: 92.56764
-  PassiveManaRegenSpeed: 2
-  CurrentUltimate: 100
-  MaxUltimate: 100
-  PassiveUltimateRegenSpeed: 1
+  NumberOfKeys: 94
+  Coins: 2
+  UpdateCoinsSignal: {fileID: 11400000, guid: 67797fb74257bb34b8e76e31a2cc797b, type: 2}

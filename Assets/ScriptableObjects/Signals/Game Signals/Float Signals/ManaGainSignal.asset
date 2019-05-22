@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 2ffe90f97c738624c943b75a6f4922d6, type: 3}
-  m_Name: LoseLifeSignal
+  m_Name: ManaGainSignal
   m_EditorClassIdentifier: 
   Listeners: []

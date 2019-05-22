@@ -116,11 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ebc0326d9f93a4fac3a67b24ccdb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VoidPowerupSignal: {fileID: 11400000, guid: 67797fb74257bb34b8e76e31a2cc797b, type: 2}
-  FloatPowerupSignal: {fileID: 0}
-  PlayerCoins: {fileID: 11400000, guid: 9c219d5ea818102458c55f1118df6203, type: 2}
-  PlayerInventory: {fileID: 11400000, guid: 22c93857dcb5f0b4da541a91aec16de6, type: 2}
-  AmountToAdd: 1
+  Quantity: 1
 --- !u!61 &8415342708137045467
 BoxCollider2D:
   m_ObjectHideFlags: 0

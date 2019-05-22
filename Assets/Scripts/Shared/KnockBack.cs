@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class KnockBack : MonoBehaviour
 {
-    public float Thrust;
+    public float PushForce;
     public float PushTime;
     public float Damage;
+    [HideInInspector]
     public bool IsActive;
 
     private void Awake()
@@ -18,28 +19,26 @@ public class KnockBack : MonoBehaviour
     {
         if (IsActive)
         {
-            if (collidedObject.CompareTag("Breakable") && gameObject.CompareTag("Player"))
+            if (collidedObject.CompareTag("Breakable"))// && gameObject.CompareTag("Player"))
             {
                 collidedObject.GetComponent<Pot>().Destroy();
             }
-            if (collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("Player")
-                || collidedObject.gameObject.CompareTag("MiniBoss"))
+            if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("Player")) && collidedObject.isTrigger)
             {
                 var collidedBody = collidedObject.GetComponent<Rigidbody2D>();
                 if (collidedBody != null)
                 {
-                    Vector2 difference = collidedBody.transform.position - transform.position;
-                    difference = difference.normalized * Thrust;
-                    collidedBody.AddForce(difference, ForceMode2D.Impulse);
-                    if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("MiniBoss"))
-                        && collidedObject.isTrigger)
+                    //Vector2 difference = collidedBody.transform.position - transform.position;
+                    //difference = difference.normalized * PushForce;
+                    //collidedBody.AddForce(difference, ForceMode2D.Impulse);
+                    if (collidedObject.gameObject.CompareTag("Enemy"))
                     {
-                        collidedObject.GetComponent<EnemyBase>().Knock(transform, PushTime, Thrust, Damage);
+                        collidedObject.GetComponent<EnemyBase>().TakeDamage(transform, PushTime, PushForce, Damage);
                     }
                     if (collidedObject.gameObject.CompareTag("Player")
                         && collidedObject.GetComponent<PlayerMovement>().State != PlayerState.Staggered)
                     {
-                        collidedObject.GetComponent<PlayerMovement>().Knock(transform, PushTime, Thrust, Damage);
+                        collidedObject.GetComponent<PlayerMovement>().TakeDamage(transform, PushTime, PushForce, Damage);
                     }
                 }
             }

@@ -76,7 +76,7 @@ public class Fireball : MonoBehaviour
             if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("MiniBoss"))
                 && collidedObject.isTrigger)
             {
-                collidedObject.GetComponent<EnemyBase>().Knock(transform, pushTime, pushForce, damage);
+                collidedObject.GetComponent<EnemyBase>().TakeDamage(transform, pushTime, pushForce, damage);
                 DestroyThis();
             }
             else if (collidedObject.gameObject.CompareTag("Breakable") || collidedObject.gameObject.CompareTag("WorldCollision"))

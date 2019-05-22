@@ -12,7 +12,7 @@ public class CutsceneTrigger : MonoBehaviour
     public VoidSignal CutsceneFinishedSignal;
     public float TimeBeforeAnimation;
     public TextMeshProUGUI BossTitle;
-    public MiniBoss Boss;
+    public EnemyBase Boss;
     public BossHealthManager BossHealthManager;
     public PlayerMovement Player;
 
@@ -42,7 +42,7 @@ public class CutsceneTrigger : MonoBehaviour
         if (CutsceneFinishedSignal)
             CutsceneFinishedSignal.Raise();
         if (BossHealthManager)
-            BossHealthManager.Initialize(Boss.MaxHealth.InitialValue, Boss.Name);
+            BossHealthManager.Initialize(Boss.GetEnemyHealth().MaxHealth, Boss.Name);
         Player.SetFrozenForCutscene(false);
         this.gameObject.SetActive(false);
         yield return null;

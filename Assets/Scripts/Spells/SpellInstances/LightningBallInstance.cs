@@ -22,7 +22,7 @@ public class LightningBallInstance : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && collision.isTrigger)
         {
-            collision.GetComponent<Enemy>().Knock(transform, config.PushTime, config.PushForce, config.Damage);
+            collision.GetComponent<EnemyBase>().TakeDamage(transform, config.PushTime, config.PushForce, config.Damage);
             var explosion = Instantiate(config.LightningBallExplosion, transform.position, Quaternion.identity);
             Destroy(explosion, 1f);
             Destroy(gameObject);

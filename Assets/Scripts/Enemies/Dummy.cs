@@ -35,9 +35,14 @@ public class Dummy : Enemy
         transform.position = HomePosition;
     }
 
-    public override void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
-        base.Knock(thingThatHitYou, pushTime, pushForce, 0);
+        CurrentState = EnemyState.Staggered;
+        Vector2 difference = transform.position - thingThatHitYou.position;
+        difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
+        body.AddForce(difference, ForceMode2D.Impulse);
+        if (transform.gameObject.activeInHierarchy)
+            StartCoroutine(Knockback(body, pushTime));
         timeSinceLastHit = 0;
         inCombat = true;
     }

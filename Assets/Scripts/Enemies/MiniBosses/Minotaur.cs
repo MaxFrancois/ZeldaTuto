@@ -37,9 +37,9 @@ public class AOEZone
     public Vector3 TopRight;
 }
 
-public class Minotaur : MiniBoss
+public class Minotaur : Enemy
 {
-    public MinotaurState CurrentState;
+    public MinotaurState BossState;
     public BoxCollider2D triggerCollider;
     [Header("Attack")]
     public int ChargeAttackDamage;
@@ -99,19 +99,15 @@ public class Minotaur : MiniBoss
         isEnraged = true;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         chargeInProgress = false;
         currentChargeDuration = 0;
         inCombat = false;
         isSpawningRocks = false;
-        isDead = false;
         hasSpawnedFirstRock = false;
         isEnraged = false;
-        body = GetComponent<Rigidbody2D>();
-        transform.position = HomePosition;
-        currentHealth = MaxHealth.InitialValue;
-        animator = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").transform;
         if (RoomCamera != null)
             roomCameraNoise = RoomCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -148,21 +144,21 @@ public class Minotaur : MiniBoss
         {
             UpdateCameraShake();
 
-            if (currentHealth > 0 && !isDead)
+            if (!IsDead)
             {
                 if (currentChargeDuration > 0)
                     currentChargeDuration -= Time.deltaTime;
-                if (currentChargeDuration <= 0 && chargeInProgress && CurrentState == MinotaurState.Charging)
+                if (currentChargeDuration <= 0 && chargeInProgress && BossState == MinotaurState.Charging)
                     FailedCharge();
-                if (!isEnraged && currentHealth <= MaxHealth.InitialValue * EnragePercentage / 100)
+                if (!isEnraged && CurrentHealth <= MaxHealth * EnragePercentage / 100)
                     Enrage();
                 UpdateFallingRocks();
 
-                if (CurrentState == MinotaurState.Charging)
+                if (BossState == MinotaurState.Charging)
                 {
                     body.MovePosition(transform.position + chargingDirection.normalized * ChargeSpeed * Time.deltaTime);
                 }
-                else if (TargetInChasingRange && CurrentState != MinotaurState.Staggered && CurrentState != MinotaurState.Attacking)
+                else if (TargetInChasingRange && BossState != MinotaurState.Staggered && BossState != MinotaurState.Attacking)
                 {
                     var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                     ChangeMovementDirection(temp - transform.position);
@@ -192,7 +188,7 @@ public class Minotaur : MiniBoss
                         ResetCombatTimers();
                     }
                 }
-                else if (TargetInAttackRange && CurrentState != MinotaurState.Attacking && CurrentState != MinotaurState.Staggered)
+                else if (TargetInAttackRange && BossState != MinotaurState.Attacking && BossState != MinotaurState.Staggered)
                 {
                     timeInMelee += Time.deltaTime;
                     if (timeInMelee > MaxMeleeTime)
@@ -284,7 +280,6 @@ public class Minotaur : MiniBoss
     {
         ChangeState(MinotaurState.Dead);
         animator.SetTrigger("Die");
-        isDead = true;
         triggerCollider.enabled = false;
         DeadSignal.Raise();
         body.isKinematic = true;
@@ -412,23 +407,17 @@ public class Minotaur : MiniBoss
 
     protected void ChangeState(MinotaurState state)
     {
-        if (state != CurrentState)
-            CurrentState = state;
+        if (state != BossState)
+            BossState = state;
     }
 
-    private void OnEnable()
+    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
-        transform.position = HomePosition;
-        currentHealth = MaxHealth.InitialValue;
-    }
-
-    public override void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
-    {
-        if (!isDead)
+        if (!IsDead)
         {
-            if (CurrentState != MinotaurState.Attacking)
+            if (BossState != MinotaurState.Attacking)
             {
-                CurrentState = MinotaurState.Staggered;
+                BossState = MinotaurState.Staggered;
                 Vector2 difference = transform.position - thingThatHitYou.position;
                 difference = difference.normalized * pushForce / 3;
                 body.AddForce(difference, ForceMode2D.Impulse);
@@ -441,9 +430,9 @@ public class Minotaur : MiniBoss
 
     private void UpdateHealth(float damage)
     {
-        currentHealth -= damage;
-        HitSignal.Raise(damage);
-        if (currentHealth <= 0)
+        EnemyHealth.LoseHealth(damage);
+        //HitSignal.Raise(damage);
+        if (IsDead)
         {
             GetLoot();
             StartCoroutine(Death());
@@ -476,7 +465,7 @@ public class Minotaur : MiniBoss
     {
         if (!collidedObject.CompareTag("Room"))
         {
-            if (CurrentState == MinotaurState.Charging)
+            if (BossState == MinotaurState.Charging)
             {
                 StartCoroutine(AfterCharge());
                 if (collidedObject.CompareTag("Player") && collidedObject.isTrigger)

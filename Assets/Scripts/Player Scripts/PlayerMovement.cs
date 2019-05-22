@@ -20,7 +20,10 @@ public enum PlayerState
     Jumping
 }
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(CharacterUltimate))]
+[RequireComponent(typeof(CharacterHealth))]
+[RequireComponent(typeof(CharacterMana))]
+public class PlayerMovement : ITime
 {
     [Header("Basics")]
     public float speed;
@@ -28,8 +31,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public VectorValue StartingPosition;
     [Header("Inventories")]
+    protected CharacterHealth PlayerHealth;
+    protected CharacterMana PlayerMana;
+    protected CharacterUltimate PlayerUltimate;
     public Inventory PlayerInventory;
-    private SpellBar Spells;
+    protected SpellBar Spells;
     [Header("Signals")]
     public FloatSignal LoseHealthSignal;
     public VoidSignal PlayerHit;
@@ -60,6 +66,9 @@ public class PlayerMovement : MonoBehaviour
         Spells = GetComponent<SpellBar>();
         lightMask = GetComponent<SpriteMask>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        PlayerHealth = GetComponent<CharacterHealth>();
+        PlayerMana = GetComponent<CharacterMana>();
+        PlayerUltimate = GetComponent<CharacterUltimate>();
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
         transform.position = StartingPosition.InitialValue;
@@ -84,8 +93,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetButtonDown("Ultimate") && State != PlayerState.Attacking && State != PlayerState.Staggered)
         {
-            if (PlayerInventory.CurrentUltimate >= Spells.Ultimate.ManaCost)
+            if (PlayerUltimate.Ultimate.CurrentUltimate >= Spells.Ultimate.ManaCost)
+            {
+                PlayerUltimate.LoseUltimate(Spells.Ultimate.ManaCost);
                 Spells.CastUltimate(transform, currentDirection);
+            }
         }
         else if (Input.GetButtonDown("Spell 0") && State != PlayerState.Attacking && State != PlayerState.Staggered && !canInteract)
         {
@@ -209,8 +221,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void CastSpell(int spellIndex, Vector3 direction)
     {
-        if (Spells.Spells[spellIndex] != null && PlayerInventory.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
+        if (Spells.Spells[spellIndex] != null && PlayerMana.Mana.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
+        {
+            PlayerMana.LoseMana(Spells.Spells[spellIndex].ManaCost);
             Spells.CastSpell(spellIndex, transform, direction);
+        }
     }
 
     private void UpdateMovement()
@@ -259,14 +274,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
         State = PlayerState.Staggered;
         Vector2 difference = transform.position - thingThatHitYou.position;
         difference = difference.normalized * pushForce;
         rigidBody.AddForce(difference, ForceMode2D.Impulse);
-        LoseHealthSignal.Raise(damage);
-        if (PlayerInventory.CurrentHealth > 0)
+        //LoseHealthSignal.Raise(damage);
+        PlayerHealth.LoseHealth(damage);
+        if (PlayerHealth.Health.CurrentHealth > 0)
         {
             StartCoroutine(KnockbackCo(rigidBody, pushTime, damage));
         }

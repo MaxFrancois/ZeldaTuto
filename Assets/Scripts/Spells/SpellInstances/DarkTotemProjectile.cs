@@ -41,7 +41,7 @@ public class DarkTotemProjectile : ITime
         if (collision.CompareTag("Enemy") && collision.isTrigger)
         {
             var enemy = collision.GetComponent<EnemyBase>();
-            enemy.Knock(transform, config.PushTime, config.PushForce, config.Damage);
+            enemy.TakeDamage(transform, config.PushTime, config.PushForce, config.Damage);
         }
         if (collision.CompareTag("WorldCollision"))
         {

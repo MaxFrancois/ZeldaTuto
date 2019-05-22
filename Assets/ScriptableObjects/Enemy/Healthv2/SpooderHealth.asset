@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: 2ffe90f97c738624c943b75a6f4922d6, type: 3}
-  m_Name: LoseManaSignal
+  m_Script: {fileID: 11500000, guid: 59d7c9c586071aa4a82fa6dd52bc88d6, type: 3}
+  m_Name: SpooderHealth
   m_EditorClassIdentifier: 
-  Listeners: []
+  MaxHealth: 5
+  CurrentHealth: 0
+  PassiveHealthRegenSpeed: 0

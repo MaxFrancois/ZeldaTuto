@@ -18,10 +18,8 @@ public class SpellBar : MonoBehaviour
     [Header("Spells")]
     public List<Image> CooldownImages;
     public List<SpellConfig> Spells;
-    public FloatSignal SpendManaSignal;
     public VoidSignal SpellChangedSignal;
     public SpellConfig Ultimate;
-    public FloatSignal SpendUltimateSignal;
 
     public void AddSpell(SpellConfig spell)
     {
@@ -37,8 +35,6 @@ public class SpellBar : MonoBehaviour
 
     public void CastUltimate(Transform source, Vector3 direction)
     {
-        SpendUltimateSignal.Raise(Ultimate.ManaCost);
-        //var ult = Instantiate(Ultimate, source.position, Quaternion.identity);
         Ultimate.Cast(source, direction);
     }
 
@@ -53,7 +49,6 @@ public class SpellBar : MonoBehaviour
         if (spellIndex < MaxQuantity && spellIndex >= 0)
             if (Spells[spellIndex] != null && !Cooldowns.Any(c => c.Spell.Name == Spells[spellIndex].Name))
             {
-                SpendManaSignal.Raise(Spells[spellIndex].ManaCost);
                 var spell = Spells[spellIndex];//, source.position, Quaternion.identity);
                 if (Spells[spellIndex].Cooldown > 0)
                 {

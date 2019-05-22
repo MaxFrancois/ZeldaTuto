@@ -161,120 +161,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1598482291
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1598482292}
-  - component: {fileID: 1598482293}
-  m_Layer: 2
-  m_Name: Collision
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1598482292
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598482291}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9058059808089006289}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1598482293
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598482291}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: c12908f92f6c5a347bb30f4ffe565ff5, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.000000074505806, y: -0.49381125}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5095941, y: 0.27676845}
-  m_EdgeRadius: 0
---- !u!1 &1993158221
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1993158222}
-  - component: {fileID: 1993158223}
-  m_Layer: 2
-  m_Name: Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1993158222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993158221}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9058059808089006289}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1993158223
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993158221}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.015544295, y: -0.085494995}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7201984, y: 1.0206957}
-  m_EdgeRadius: 0
 --- !u!1 &9058059806658038968
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd881faab92a4944b198c0b163bae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thrust: 4
+  PushForce: 0
   PushTime: 0.3
   Damage: 1
   IsActive: 0
@@ -433,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd881faab92a4944b198c0b163bae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thrust: 4
+  PushForce: 0
   PushTime: 0.3
   Damage: 1
   IsActive: 0
@@ -459,6 +345,9 @@ GameObject:
   - component: {fileID: 748696293}
   - component: {fileID: 748696284}
   - component: {fileID: 748696292}
+  - component: {fileID: 4491016482428674939}
+  - component: {fileID: 748696296}
+  - component: {fileID: 748696297}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -483,8 +372,6 @@ Transform:
   - {fileID: 9058059807489499173}
   - {fileID: 26292941}
   - {fileID: 487798825}
-  - {fileID: 1598482292}
-  - {fileID: 1993158222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -566,7 +453,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9058059808089006316}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: c12908f92f6c5a347bb30f4ffe565ff5, type: 2}
   m_IsTrigger: 0
@@ -608,9 +495,9 @@ MonoBehaviour:
   ReceivedItemSprite: {fileID: 487798826}
   DamageTakenCanvas: {fileID: 8702429126016056855, guid: 00624395a594fb64b8488b2443ae1d3e,
     type: 3}
-  BlockCollider: {fileID: 1598482293}
-  TriggerCollider: {fileID: 1993158223}
-  circle: {fileID: 3950160272585902025, guid: 39fc2ecd5cdf75248a625a27fc29127e, type: 3}
+  BlockCollider: {fileID: 9058059808089006318}
+  TriggerCollider: {fileID: 9058059808089006291}
+  circle: {fileID: 7004805708833448588, guid: 9c03ec2c21945eb44b1cca5755248756, type: 3}
   JumpUpSpeed: 300
   JumpDownSpeed: 300
   JumpTime: 0.5
@@ -640,7 +527,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9058059808089006316}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -694,15 +581,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Spells:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  SpendManaSignal: {fileID: 11400000, guid: 289c9ed159456e641883406ea14f244d, type: 2}
+  - {fileID: 11400000, guid: d820ba0e499764649b2afa3dca58fb50, type: 2}
+  - {fileID: 11400000, guid: ce40a06778fa9bf47bafa5b3deaeecc1, type: 2}
+  - {fileID: 11400000, guid: fe9d59ee23be8914e9ae3ec89ddf02a6, type: 2}
+  - {fileID: 11400000, guid: 08bc225ce226968488c20bc40fbd1cc9, type: 2}
   SpellChangedSignal: {fileID: 11400000, guid: f23f7826ee9c99c4da7afe130fc97b59, type: 2}
-  Ultimate: {fileID: 11400000, guid: 0592b7c58088e014798e1934117bdf4a, type: 2}
-  SpendUltimateSignal: {fileID: 11400000, guid: 82f574a709135644db28571bed95a86a,
-    type: 2}
+  Ultimate: {fileID: 11400000, guid: f2140e4090e16e24b916733e2a50271f, type: 2}
 --- !u!114 &548933281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +757,54 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: BoolEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &4491016482428674939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058059808089006316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f3ff060518bc0fd4a92bb4a5d4ea8bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHealthLost: {fileID: 11400000, guid: a5814ebeedb79bd48a4ba20a7b91bcdc, type: 2}
+  OnHealthGained: {fileID: 11400000, guid: 5c17f1e337406224ca0cb4f49821c51c, type: 2}
+  Health: {fileID: 11400000, guid: 700be72a920452d488cba7107197f460, type: 2}
+--- !u!114 &748696296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058059808089006316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 6119515a724910548af7accf55f6ed32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnUltimateLost: {fileID: 11400000, guid: 82f574a709135644db28571bed95a86a, type: 2}
+  OnUltimateGained: {fileID: 11400000, guid: efdf8457db63322498bf489cbc67fd83, type: 2}
+  Ultimate: {fileID: 11400000, guid: 9dcf50a3f4b759449822a9d2b6dd484e, type: 2}
+--- !u!114 &748696297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058059808089006316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: fc03aae3108abe3438d6d04e9e01fc3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnManaLost: {fileID: 11400000, guid: 289c9ed159456e641883406ea14f244d, type: 2}
+  OnManaGained: {fileID: 11400000, guid: 96773ef0ccadac742ab54d78fc564abf, type: 2}
+  Mana: {fileID: 11400000, guid: bdf6078f118dcc248996dbe02c6fbb63, type: 2}
 --- !u!1 &9058059808153127259
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,7 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd881faab92a4944b198c0b163bae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thrust: 4
+  PushForce: 0
   PushTime: 0.3
   Damage: 1
   IsActive: 0
@@ -1030,7 +962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd881faab92a4944b198c0b163bae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thrust: 4
+  PushForce: 0
   PushTime: 0.3
   Damage: 1
   IsActive: 0

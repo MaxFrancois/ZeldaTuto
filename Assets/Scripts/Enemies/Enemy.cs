@@ -15,29 +15,22 @@ public class Enemy : EnemyBase
 {
     public EnemyState CurrentState;
     public VoidSignal RoomSignal;
-    BlinkOnHit onHit;
+    protected BlinkOnHit onHit;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         transform.position = HomePosition;
-        currentHealth = MaxHealth.InitialValue;
-        isDead = false;
+        EnemyHealth = GetComponent<CharacterHealth>();
+        EnemyHealth.Health.CurrentHealth = EnemyHealth.Health.MaxHealth;
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         onHit = GetComponent<BlinkOnHit>();
         target = GameObject.FindWithTag("Player").transform;
         CurrentState = EnemyState.Idle;
-        AfterAwake();
     }
 
-    private void OnEnable()
-    {
-        transform.position = HomePosition;
-        currentHealth = MaxHealth.InitialValue;
-    }
-
-    public override void Knock(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
         CurrentState = EnemyState.Staggered;
         UpdateHealth(damage);
@@ -50,10 +43,9 @@ public class Enemy : EnemyBase
 
     private void UpdateHealth(float damage)
     {
-        currentHealth -= damage;
-        if (currentHealth <= 0 && !isDead)
+        EnemyHealth.LoseHealth(damage);
+        if (IsDead)
         {
-            isDead = true;
             if (DeadSignal) DeadSignal.Raise();
             if (RoomSignal != null) RoomSignal.Raise();
             GetLoot();
@@ -93,7 +85,7 @@ public class Enemy : EnemyBase
         }
     }
 
-    private IEnumerator Knockback(Rigidbody2D body, float pushTime)
+    protected IEnumerator Knockback(Rigidbody2D body, float pushTime)
     {
         if (body != null)
         {

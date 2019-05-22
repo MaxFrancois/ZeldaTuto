@@ -88,7 +88,7 @@ public class FallingRock : MonoBehaviour
             if (!isDestroyed && circleCollider.enabled)
                 if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
                 {
-                    collidedObject.GetComponent<PlayerMovement>().Knock(transform, pushTime, pushForce, damage);
+                    collidedObject.GetComponent<PlayerMovement>().TakeDamage(transform, pushTime, pushForce, damage);
                 }
         }
     }

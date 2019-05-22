@@ -10,10 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: 545f2abb28069b243bb324e87b3b34e5, type: 3}
-  m_Name: Mana
+  m_Script: {fileID: 11500000, guid: 2ffe90f97c738624c943b75a6f4922d6, type: 3}
+  m_Name: HealthLossSignal
   m_EditorClassIdentifier: 
-  Loots:
-  - LootItem: {fileID: 4295335562242709045, guid: a2b6375ad65dbff40bbcda5de8934bbb,
-      type: 3}
-    LootChance: 100
+  Listeners: []

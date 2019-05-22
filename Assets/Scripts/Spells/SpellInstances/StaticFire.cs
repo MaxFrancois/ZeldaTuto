@@ -53,7 +53,7 @@ public class StaticFire : MonoBehaviour
             if ((collidedObject.gameObject.CompareTag("Enemy") || collidedObject.gameObject.CompareTag("MiniBoss"))
                 && collidedObject.isTrigger)
             {
-                collidedObject.GetComponent<EnemyBase>().Knock(transform, pushForce, pushTime, damage);
+                collidedObject.GetComponent<EnemyBase>().TakeDamage(transform, pushForce, pushTime, damage);
             }
     }
 }

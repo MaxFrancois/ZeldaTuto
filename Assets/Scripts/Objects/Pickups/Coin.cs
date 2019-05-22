@@ -1,26 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Coin : Powerup
 {
-    public FloatValue PlayerCoins;
-    public Inventory PlayerInventory;
-    public float AmountToAdd;
-
-    private void Awake()
-    {
-        VoidPowerupSignal.Raise();
-    }
+    public int Quantity;
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
-            PlayerInventory.Coins++;
-            PlayerCoins.RuntimeValue += AmountToAdd;
-            VoidPowerupSignal.Raise();
-            Destroy(this.gameObject);
+            collidedObject.GetComponent<PlayerMovement>().PlayerInventory.GainCoins(Quantity);
+            Destroy(gameObject);
         }
     }
 }

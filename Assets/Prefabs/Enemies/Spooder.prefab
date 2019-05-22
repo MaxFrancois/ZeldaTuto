@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4799011598253740564}
   - component: {fileID: 4799011598253740562}
   - component: {fileID: 4799011598253740563}
+  - component: {fileID: 8727154076884094698}
   m_Layer: 8
   m_Name: Spooder
   m_TagString: Enemy
@@ -120,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0809bb0127bc6e045815e19108aca045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeScale: 0
   Name: Spooder
   ChaseRadius: 8
   AttackRadius: 3
@@ -129,9 +129,7 @@ MonoBehaviour:
   TriggerCollider: {fileID: 4799011598253740565}
   HomePosition: {x: 27, y: -5}
   LootTable: {fileID: 11400000, guid: 7177c74a6835c3f45b6dde15d1f1b787, type: 2}
-  HitSignal: {fileID: 0}
   DeadSignal: {fileID: 0}
-  MaxHealth: {fileID: 11400000, guid: e9b64e571b1a45840abbca6f6b8efd85, type: 2}
   DeathAnimation: {fileID: 173590, guid: 7469283484e0dcc4887fa575d1fd7ecc, type: 3}
   CurrentState: 0
   RoomSignal: {fileID: 0}
@@ -227,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 4
   PushTime: 0.3
-  Damage: 0
+  Damage: 0.5
   IsActive: 0
 --- !u!114 &4799011598253740563
 MonoBehaviour:
@@ -246,3 +244,19 @@ MonoBehaviour:
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   numberOfFlashes: 4
   flashDuration: 0.07
+--- !u!114 &8727154076884094698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799011598253740570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f3ff060518bc0fd4a92bb4a5d4ea8bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHealthLost: {fileID: 0}
+  OnHealthGained: {fileID: 0}
+  Health: {fileID: 11400000, guid: 2604d215e483bc94893827efa092ce47, type: 2}

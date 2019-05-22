@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1076370975486146244}
   - component: {fileID: 1076370975486146245}
   - component: {fileID: 1076370975486146243}
+  - component: {fileID: 412666927}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Enemy
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66eae58cc07c6ea4486d5dc37e4cc84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeScale: 0
   Name: Dummy
   ChaseRadius: 0
   AttackRadius: 0
@@ -108,9 +108,7 @@ MonoBehaviour:
   TriggerCollider: {fileID: 1076370975486146245}
   HomePosition: {x: 5, y: 0}
   LootTable: {fileID: 0}
-  HitSignal: {fileID: 0}
   DeadSignal: {fileID: 0}
-  MaxHealth: {fileID: 11400000, guid: f5e58e53bf7e5a14a9203ace404c5bf5, type: 2}
   DeathAnimation: {fileID: 0}
   CurrentState: 0
   RoomSignal: {fileID: 0}
@@ -206,3 +204,19 @@ MonoBehaviour:
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   numberOfFlashes: 3
   flashDuration: 0.07
+--- !u!114 &412666927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076370975486146250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f3ff060518bc0fd4a92bb4a5d4ea8bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHealthLost: {fileID: 0}
+  OnHealthGained: {fileID: 0}
+  Health: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}

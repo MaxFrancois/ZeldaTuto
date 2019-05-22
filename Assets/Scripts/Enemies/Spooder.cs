@@ -17,16 +17,16 @@ public class Spooder : Enemy
 
     void FixedUpdate()
     {
-        if (!isDead)
+        if (!IsDead)
         {
-            if (TargetInChasingRange && CurrentState != EnemyState.Staggered)
+            if (TargetInChasingRange && CurrentState != EnemyState.Staggered && CurrentState != EnemyState.Attacking)
             {
                 var r = Random.Range(0, 300);
                 if (r != 0)
                 {
                     var temp = Vector2.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                     ChangeMovementDirection(temp - (Vector2)transform.position);
-                    transform.position = temp;
+                    //transform.position = temp;
                     ChangeState(EnemyState.Walking);
                     animator.SetBool("IsWalking", true);
                 }
@@ -50,13 +50,13 @@ public class Spooder : Enemy
 
     private IEnumerator ThrowNet()
     {
-        Debug.Log("throwing net");
-        CurrentState = EnemyState.Attacking;
+        animator.SetBool("IsWalking", false);
+        ChangeState(EnemyState.Attacking);
         animator.SetTrigger("ThrowNet");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.2f);
         var net = Instantiate(SpooderNet, transform.position, Quaternion.identity);
         net.Init(new Vector2(target.position.x, target.position.y));
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         ChangeState(EnemyState.Idle);
     }
 
@@ -66,7 +66,7 @@ public class Spooder : Enemy
         body.velocity = Vector2.zero;
         ChangeState(EnemyState.Attacking);
         animator.SetTrigger("Attack");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.2f);
         Vector2 difference = target.transform.position - transform.position;
         difference = difference.normalized * DashSpeed * (1 - SlowTimeCoefficient);
         body.AddForce(difference, ForceMode2D.Impulse);

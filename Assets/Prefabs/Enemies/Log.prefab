@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7887866619615499779}
   - component: {fileID: 7887866619615499776}
   - component: {fileID: 7887866619615499777}
+  - component: {fileID: 362944086}
   m_Layer: 8
   m_Name: Log
   m_TagString: Enemy
@@ -166,21 +167,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cfff18f1c8c124ab7b58ceee1a7eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentState: 0
-  CurrentHealth: 0
-  MaxHealth: {fileID: 11400000, guid: f5c017bbb55e3664cb04df1ee251c2d9, type: 2}
   Name: Log
-  BaseAttack: 1
-  MoveSpeed: 2
-  DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
-    type: 3}
-  HomePosition: {x: -8, y: 22}
-  Target: {fileID: 0}
-  RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
-  LootTable: {fileID: 11400000, guid: 7177c74a6835c3f45b6dde15d1f1b787, type: 2}
   ChaseRadius: 4
   AttackRadius: 1
-  Animator: {fileID: 0}
+  MoveSpeed: 2
+  BlockCollider: {fileID: 7887866619615499778}
+  TriggerCollider: {fileID: 7887866619615499776}
+  HomePosition: {x: -8, y: 22}
+  LootTable: {fileID: 11400000, guid: 7177c74a6835c3f45b6dde15d1f1b787, type: 2}
+  DeadSignal: {fileID: 0}
+  DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
+    type: 3}
+  CurrentState: 0
+  RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
 --- !u!61 &7887866619615499776
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224,3 +223,19 @@ MonoBehaviour:
   PushTime: 0.3
   Damage: 1
   IsActive: 0
+--- !u!114 &362944086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7887866619615500025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f3ff060518bc0fd4a92bb4a5d4ea8bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHealthLost: {fileID: 0}
+  OnHealthGained: {fileID: 0}
+  Health: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}

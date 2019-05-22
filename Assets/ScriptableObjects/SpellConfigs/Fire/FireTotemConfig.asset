@@ -19,7 +19,7 @@ MonoBehaviour:
   Name: Fire Totem
   Description: Summon a fire totem that explodes
   Element: 1
-  ManaCost: 1
+  ManaCost: 20
   PushTime: 0
   PushForce: 0
   Damage: 0
@@ -27,8 +27,7 @@ MonoBehaviour:
   LifeTime: 7
   IsUnlocked: 1
   Totem: {fileID: 6648208112731336049, guid: 3476f83bd1d83b343a442dc611999cab, type: 3}
-  AttackRadius: 3
-  TimeBetweenAttacks: 2
-  DeathFadeSpeed: 2
   Explosion: {fileID: 1622485100173115570, guid: b625a6ee95762c24899b75dc35a4521e,
     type: 3}
+  TimeBetweenAttacks: 2
+  DeathFadeSpeed: 2

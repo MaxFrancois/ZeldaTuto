@@ -28,5 +28,6 @@ MonoBehaviour:
   IsUnlocked: 1
   Totem: {fileID: 6539392869294584393, guid: 6446d53b411f05649b0b4cac26403703, type: 3}
   Circle: {fileID: 8155067939835898879, guid: a5d170a69f7fd5a44b909959676acfb8, type: 3}
-  TimeBetweenAttacks: 0
+  TimeBetweenAttacks: 2
   DeathFadeSpeed: 1
+  Healing: 1

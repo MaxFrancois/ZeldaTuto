@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd881faab92a4944b198c0b163bae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thrust: 1
+  PushForce: 0
   PushTime: 0.3
   Damage: 2
   IsActive: 0

@@ -12,6 +12,7 @@ public class EarthTotem : ITime
     Animator anim;
     SpriteRenderer spriteRenderer;
     GameObject healingCircle;
+    EarthTotemCircle healingCircleScript;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -25,6 +26,8 @@ public class EarthTotem : ITime
         var spawnPosition = transform.position;
         spawnPosition.y -= 0.5f;
         healingCircle = Instantiate(config.Circle, spawnPosition, Quaternion.identity);
+        healingCircleScript = healingCircle.GetComponent<EarthTotemCircle>();
+        healingCircleScript.Initialize(config);
         healingCircle.transform.Rotate(new Vector3(45, 0, 0));
     }
 
@@ -61,6 +64,7 @@ public class EarthTotem : ITime
     {
         anim.SetTrigger("Cast");
         yield return null;
+        healingCircleScript.TriggerHealing();
         //yield return new WaitForSeconds(0.3f);
         //Instantiate(config.Explosion, transform.position, Quaternion.identity);
     }

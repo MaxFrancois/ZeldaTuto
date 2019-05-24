@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -12114295
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -5034061168752090764, guid: ac10a04214c3aeb41ae2eba4b34c5682,
     type: 3}
@@ -110,6 +110,7 @@ MonoBehaviour:
   LootTable: {fileID: 0}
   DeadSignal: {fileID: 0}
   DeathAnimation: {fileID: 0}
+  DirectionalArrow: {fileID: 0}
   CurrentState: 0
   RoomSignal: {fileID: 0}
   ResetAfterTime: 3
@@ -219,4 +220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnHealthLost: {fileID: 0}
   OnHealthGained: {fileID: 0}
-  Health: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}
+  DamageDisplayCanvas: {fileID: 8702429126016056852, guid: 00624395a594fb64b8488b2443ae1d3e,
+    type: 3}
+  Health: {fileID: 11400000, guid: cde02e79f96e5434eae4a224c16f06b4, type: 2}

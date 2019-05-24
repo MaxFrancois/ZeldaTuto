@@ -8,7 +8,7 @@ public class HealthOrb : Powerup
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
-            collidedObject.GetComponent<CharacterHealth>().GainHealth(Quantity);
+            collidedObject.GetComponent<CharacterHealth>().GainHealth(Quantity, true);
             Destroy(gameObject);
         }
     }

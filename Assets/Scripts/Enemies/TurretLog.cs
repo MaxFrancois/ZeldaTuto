@@ -9,7 +9,7 @@ public class TurretLog : Log
     private float fireDelayTracker;
     private bool canFire = true;
 
-    private void Update()
+    protected override void Update()
     {
         fireDelayTracker -= Time.deltaTime;
         if (fireDelayTracker <= 0)

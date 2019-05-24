@@ -24,7 +24,7 @@ public class SpooderNet : ITime
 
     void Update()
     {
-        remainingLifeTime -= Time.deltaTime;
+        remainingLifeTime -= Time.deltaTime * (1 - SlowTimeCoefficient);
         if (remainingLifeTime <= 0)
             Destroy(gameObject);
         if (moving && target != Vector2.zero)
@@ -42,6 +42,7 @@ public class SpooderNet : ITime
         }
         if (collidedObject.gameObject.CompareTag("WorldCollision"))
         {
+            //if it spawns close to a wall it gets stuck on spawn
             moving = false;
         }
     }

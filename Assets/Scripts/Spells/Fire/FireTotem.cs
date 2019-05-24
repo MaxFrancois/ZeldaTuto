@@ -57,7 +57,10 @@ public class FireTotem : ITime
         var spawnPosition = transform.position;
         spawnPosition.y -= 0.5f;
         var explosion = Instantiate(config.Explosion, spawnPosition, Quaternion.identity);
+        explosion.GetComponent<FireTotemExplosion>().Initialize(config);
         explosion.transform.Rotate(new Vector3(45, 0, 0));
+        yield return new WaitForSeconds(0.2f);
+        explosion.GetComponent<CircleCollider2D>().enabled = false;
         Destroy(explosion, 2f);
     }
 }

@@ -4,22 +4,45 @@ public class CharacterHealth : ITime
 {
     public FloatSignal OnHealthLost;
     public FloatSignal OnHealthGained;
+    public DamageDisplay DamageDisplayCanvas;
     public Health Health;
 
-    public void GainHealth(float amount)
+    private void Start()
     {
-        Health.CurrentHealth += amount;
-        if (Health.CurrentHealth > Health.MaxHealth)
-            Health.CurrentHealth = Health.MaxHealth;
-        if (OnHealthGained) OnHealthGained.Raise(amount);
+        Health.CurrentHealth = Health.MaxHealth;
     }
 
-    public void LoseHealth(float amount)
+    public void GainHealth(float amount, bool display = true)
+    {
+        float actualHealing = Health.CurrentHealth + amount > Health.MaxHealth ? Health.MaxHealth - Health.CurrentHealth : amount;
+        if (actualHealing != 0)
+        {
+            Health.CurrentHealth += actualHealing;
+            //if (Health.CurrentHealth > Health.MaxHealth)
+            //    Health.CurrentHealth = Health.MaxHealth;
+            //else
+            //{
+                if (OnHealthGained) OnHealthGained.Raise(actualHealing);
+                if (DamageDisplayCanvas && display)
+                {
+                    var canvas = Instantiate(DamageDisplayCanvas, transform.position, Quaternion.identity);
+                    canvas.Initialize(amount, true);
+                }
+            //}
+        }
+    }
+
+    public void LoseHealth(float amount, bool display = true)
     {
         Health.CurrentHealth -= amount;
         if (Health.CurrentHealth < 0)
             Health.CurrentHealth = 0;
         if (OnHealthLost) OnHealthLost.Raise(amount);
+        if (DamageDisplayCanvas && display)
+        {
+            var canvas = Instantiate(DamageDisplayCanvas, transform.position, Quaternion.identity);
+            canvas.Initialize(amount, false);
+        }
     }
 
     void Update()
@@ -30,7 +53,7 @@ public class CharacterHealth : ITime
             //Health.CurrentHealth += healthDifference;
             if (healthDifference > 0)
             {
-                GainHealth(healthDifference);
+                GainHealth(healthDifference, false);
                 //if (Health.CurrentHealth > Health.MaxHealth)
                 //    Health.CurrentHealth = Health.MaxHealth;
                 //else if (OnHealthGained) OnHealthGained.Raise(healthDifference);

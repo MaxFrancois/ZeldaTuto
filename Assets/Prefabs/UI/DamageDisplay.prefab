@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 1328880142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 8702429126016056848}
   m_RootOrder: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -219,8 +219,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1679573765
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &8702429126016056850
 MonoBehaviour:
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 1.5
-  DamageNumber: 0
   DisplayDuration: 1
   displayText: {fileID: 1328880144}
+  DamageColor: {r: 1, g: 0, b: 0, a: 1}
+  HealColor: {r: 0, g: 1, b: 0, a: 1}

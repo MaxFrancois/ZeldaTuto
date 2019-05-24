@@ -14,5 +14,5 @@ MonoBehaviour:
   m_Name: PlayerCharacterHealth
   m_EditorClassIdentifier: 
   MaxHealth: 5
-  CurrentHealth: 2
-  PassiveHealthRegenSpeed: 0
+  CurrentHealth: 5
+  PassiveHealthRegenSpeed: 0.01

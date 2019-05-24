@@ -42,7 +42,7 @@ public class PlayerMovement : ITime
     public ObjectSignal RoomSignal;
     [Header("Other")]
     public SpriteRenderer ReceivedItemSprite;
-    public GameObject DamageTakenCanvas;
+    //public GameObject DamageTakenCanvas;
     private Rigidbody2D rigidBody;
     private Vector3 change;
     private Animator animator;
@@ -55,6 +55,7 @@ public class PlayerMovement : ITime
     private float defaultSpeed;
     public BoxCollider2D BlockCollider;
     public BoxCollider2D TriggerCollider;
+    public GameObject DirectionalArrow;
 
     void Start()
     {
@@ -82,7 +83,6 @@ public class PlayerMovement : ITime
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown(KeyCode.H)) { Debug.Log("Pressed Jump " + State); }
-        var currentDirection = new Vector3(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"), 0);
         if (State == PlayerState.Jumping)
         {
             UpdateJump();
@@ -235,6 +235,8 @@ public class PlayerMovement : ITime
             animator.SetBool("IsMoving", true);
             animator.SetFloat("MoveX", change.x);
             animator.SetFloat("MoveY", change.y);
+            currentDirection = change;
+            DirectionalArrow.transform.up = change;
             rigidBody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
         }
         else
@@ -298,13 +300,13 @@ public class PlayerMovement : ITime
         {
             TriggerCollider.enabled = false;
             var damageTakenPosition = new Vector3(transform.position.x, transform.position.y + 1, 0);
-            var damageTaken = Instantiate(DamageTakenCanvas, damageTakenPosition, Quaternion.identity);
-            damageTaken.GetComponent<DamageDisplay>().DamageNumber = damage;
+            //var damageTaken = Instantiate(DamageTakenCanvas, damageTakenPosition, Quaternion.identity);
+            //damageTaken.GetComponent<DamageDisplay>().Initialize(damage, false);
             PlayerHit.Raise();
             yield return new WaitForSeconds(pushTime);
             State = PlayerState.Idle;
             body.velocity = Vector2.zero;
-            TriggerCollider.enabled = true; 
+            TriggerCollider.enabled = true;
         }
     }
 

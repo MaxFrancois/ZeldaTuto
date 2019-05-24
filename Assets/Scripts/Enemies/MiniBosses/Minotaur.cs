@@ -411,7 +411,7 @@ public class Minotaur : Enemy
             BossState = state;
     }
 
-    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
         if (!IsDead)
         {

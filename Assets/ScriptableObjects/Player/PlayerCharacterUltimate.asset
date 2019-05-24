@@ -15,4 +15,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxUltimate: 100
   CurrentUltimate: 0
-  PassiveUltimateRegenSpeed: -4
+  PassiveUltimateRegenSpeed: -1

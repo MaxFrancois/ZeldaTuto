@@ -11,6 +11,7 @@ public class EarthTotemConfig : SpellConfig
     public GameObject Circle;
     public float TimeBetweenAttacks;
     public float DeathFadeSpeed;
+    public float Healing;
 
     public override void Cast(Transform source, Vector3 direction)
     {

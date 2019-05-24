@@ -24,6 +24,8 @@ public abstract class EnemyBase : ITime
     //public FloatSignal HitSignal;
     public VoidSignal DeadSignal;
     public GameObject DeathAnimation;
+    public GameObject DirectionalArrow;
+    protected Vector3 CurrentDirection;
     //public FloatValue MaxHealth;
     //protected float currentHealth;
     protected bool IsDead { get { return EnemyHealth.Health.CurrentHealth <= 0; } }
@@ -56,9 +58,15 @@ public abstract class EnemyBase : ITime
         }
     }
 
-    public virtual void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public virtual void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
 
+    }
+
+    protected virtual void Update()
+    {
+        if (DirectionalArrow && CurrentDirection != Vector3.zero)
+            DirectionalArrow.transform.up = CurrentDirection;
     }
 
     protected virtual void OnEnable()
@@ -68,6 +76,7 @@ public abstract class EnemyBase : ITime
 
     protected virtual void ChangeMovementDirection(Vector2 direction)
     {
+        CurrentDirection = direction;
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
             if (direction.x > 0) { SetMovementDirectionFloat(Vector2.right); }

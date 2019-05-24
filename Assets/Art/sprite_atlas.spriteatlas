@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 230554425
+    totalSpriteSurfaceArea: 230555449
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -2953,6 +2953,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4675eb7a44a644143994c0a860d07677, type: 3}
   - {fileID: 21300000, guid: 7df7ef7a23e39fb45a91256052a868e8, type: 3}
   - {fileID: 21300000, guid: 422e228a2323e55419ba069231e5a1ca, type: 3}
+  - {fileID: 21300000, guid: 74d9d48af00297046aded42d37b792f3, type: 3}
   - {fileID: 21300000, guid: 1723558aa6c016149af12cd9ef3b95e1, type: 3}
   - {fileID: 21300000, guid: f312278a8e120be4399695f3dd46a68c, type: 3}
   - {fileID: 21300000, guid: 76c4598a87bcd2e4fa1acff1179b679c, type: 3}
@@ -6748,6 +6749,7 @@ SpriteAtlas:
   - RunPose02_06
   - SpellBookPreface_04
   - frame0019
+  - Directional Arrow
   - frame0019
   - frame0069
   - I5050-6

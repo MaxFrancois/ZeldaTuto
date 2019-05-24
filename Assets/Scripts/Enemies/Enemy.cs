@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum EnemyState
@@ -30,10 +30,10 @@ public class Enemy : EnemyBase
         CurrentState = EnemyState.Idle;
     }
 
-    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
         CurrentState = EnemyState.Staggered;
-        UpdateHealth(damage);
+        LoseHealth(damage, display);
         Vector2 difference = transform.position - thingThatHitYou.position;
         difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
         body.AddForce(difference, ForceMode2D.Impulse);
@@ -41,10 +41,10 @@ public class Enemy : EnemyBase
             StartCoroutine(Knockback(body, pushTime));
     }
 
-    private void UpdateHealth(float damage)
+    protected void LoseHealth(float damage, bool display)
     {
-        EnemyHealth.LoseHealth(damage);
-        if (IsDead)
+        EnemyHealth.LoseHealth(damage, display);
+        if (IsDead && CurrentState != EnemyState.Dead)
         {
             if (DeadSignal) DeadSignal.Raise();
             if (RoomSignal != null) RoomSignal.Raise();
@@ -56,11 +56,19 @@ public class Enemy : EnemyBase
         }
     }
 
+    protected void GainHealth(float healing, bool display)
+    {
+        EnemyHealth.GainHealth(healing, display);
+    }
+
     private IEnumerator DieAndLeaveBody()
     {
         ChangeState(EnemyState.Dead);
-        animator.SetTrigger("Die");
-        animator.SetBool("IsDead", true);
+        if (animator && animator.parameters.Any(c => c.name == "IsDead") && animator.parameters.Any(c => c.name == "Die"))
+        {
+            animator.SetTrigger("Die");
+            animator.SetBool("IsDead", true);
+        }
         if (TriggerCollider) TriggerCollider.enabled = false;
         if (BlockCollider) BlockCollider.enabled = false;
         body.isKinematic = true;
@@ -90,7 +98,7 @@ public class Enemy : EnemyBase
         if (body != null)
         {
             if (onHit) onHit.Blink(spriteRenderer);
-            if (animator)
+            if (animator && animator.parameters.Any(c => c.name == "Hit"))
                 animator.SetTrigger("Hit");
             yield return new WaitForSeconds(pushTime);
             //animator.ResetTrigger("Hit");

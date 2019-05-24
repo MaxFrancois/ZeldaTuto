@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Dummy : Enemy
 {
@@ -15,7 +13,7 @@ public class Dummy : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (inCombat)
         {
@@ -35,9 +33,12 @@ public class Dummy : Enemy
         transform.position = HomePosition;
     }
 
-    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
+    public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
         CurrentState = EnemyState.Staggered;
+        LoseHealth(damage, display);
+        GainHealth(damage, false);
+
         Vector2 difference = transform.position - thingThatHitYou.position;
         difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
         body.AddForce(difference, ForceMode2D.Impulse);

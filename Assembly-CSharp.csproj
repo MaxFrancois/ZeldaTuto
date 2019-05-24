@@ -147,6 +147,7 @@
     <Compile Include="Assets\Scripts\Shared\CharacterHealth.cs" />
     <Compile Include="Assets\Scripts\Shared\CharacterMana.cs" />
     <Compile Include="Assets\Scripts\Shared\CharacterUltimate.cs" />
+    <Compile Include="Assets\Scripts\Shared\DirectionalArrow.cs" />
     <Compile Include="Assets\Scripts\Shared\ITime.cs" />
     <Compile Include="Assets\Scripts\Shared\KnockBack.cs" />
     <Compile Include="Assets\Scripts\Spells\Air\Whirlwind.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Assets\Scripts\Spells\SpellInstances\DarkTotemProjectile.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\EarthTotemCircle.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\FallingRock.cs" />
+    <Compile Include="Assets\Scripts\Spells\SpellInstances\FireTotemExplosion.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\LightningBallInstance.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellInstances\StaticFire.cs" />
     <Compile Include="Assets\Scripts\UI\GUI\BossHealthManager.cs" />

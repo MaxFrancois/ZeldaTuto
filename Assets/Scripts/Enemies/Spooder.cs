@@ -9,8 +9,9 @@ public class Spooder : Enemy
     public float TimeBetweenAttacks;
     private float timeSinceLastAttack;
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (timeSinceLastAttack > 0)
             timeSinceLastAttack -= Time.deltaTime;
     }
@@ -24,8 +25,8 @@ public class Spooder : Enemy
                 var r = Random.Range(0, 300);
                 if (r != 0)
                 {
-                    var temp = Vector2.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
-                    ChangeMovementDirection(temp - (Vector2)transform.position);
+                    var temp  = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
+                    ChangeMovementDirection(temp - transform.position);
                     //transform.position = temp;
                     ChangeState(EnemyState.Walking);
                     animator.SetBool("IsWalking", true);
@@ -53,9 +54,10 @@ public class Spooder : Enemy
         animator.SetBool("IsWalking", false);
         ChangeState(EnemyState.Attacking);
         animator.SetTrigger("ThrowNet");
+        var targetPosition = new Vector2(target.position.x, target.position.y);
         yield return new WaitForSeconds(1.2f);
         var net = Instantiate(SpooderNet, transform.position, Quaternion.identity);
-        net.Init(new Vector2(target.position.x, target.position.y));
+        net.Init(targetPosition);
         yield return new WaitForSeconds(0.4f);
         ChangeState(EnemyState.Idle);
     }
@@ -66,8 +68,8 @@ public class Spooder : Enemy
         body.velocity = Vector2.zero;
         ChangeState(EnemyState.Attacking);
         animator.SetTrigger("Attack");
-        yield return new WaitForSeconds(1.2f);
         Vector2 difference = target.transform.position - transform.position;
+        yield return new WaitForSeconds(1.2f);
         difference = difference.normalized * DashSpeed * (1 - SlowTimeCoefficient);
         body.AddForce(difference, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.4f);

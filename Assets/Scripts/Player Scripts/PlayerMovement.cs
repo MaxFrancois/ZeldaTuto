@@ -48,7 +48,6 @@ public class PlayerMovement : ITime
     private Animator animator;
     private Vector3 currentDirection;
     private List<StatusEffect> statusEffects = new List<StatusEffect>();
-    private bool isFrozenForCutscene;
     private bool canInteract = false;
     private SpriteMask lightMask;
     private SpriteRenderer playerSpriteRenderer;
@@ -56,11 +55,12 @@ public class PlayerMovement : ITime
     public BoxCollider2D BlockCollider;
     public BoxCollider2D TriggerCollider;
     public GameObject DirectionalArrow;
+    private RespawnPoint respawnPoint;
+    private BlinkOnHit blinkOnHit;
 
     void Start()
     {
         defaultSpeed = speed;
-        isFrozenForCutscene = false;
         State = PlayerState.Idle;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -73,12 +73,13 @@ public class PlayerMovement : ITime
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
         transform.position = StartingPosition.InitialValue;
+        blinkOnHit = GetComponent<BlinkOnHit>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (State == PlayerState.Interacting || isFrozenForCutscene || MenuManager.IsPaused || MenuManager.RecentlyUnpaused) return;
+        if (State == PlayerState.Interacting || State == PlayerState.Staggered || MenuManager.IsPaused || MenuManager.RecentlyUnpaused) return;
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
@@ -199,7 +200,10 @@ public class PlayerMovement : ITime
     //use timer instead
     public void SetFrozenForCutscene(bool isFrozen)
     {
-        isFrozenForCutscene = isFrozen;
+        if (isFrozen)
+            State = PlayerState.Staggered;
+        else
+            State = PlayerState.Idle;
     }
 
     public void SetCanInteract()
@@ -279,11 +283,15 @@ public class PlayerMovement : ITime
     public void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage)
     {
         State = PlayerState.Staggered;
-        Vector2 difference = transform.position - thingThatHitYou.position;
-        difference = difference.normalized * pushForce;
-        rigidBody.AddForce(difference, ForceMode2D.Impulse);
+        if (thingThatHitYou)
+        {
+            Vector2 difference = transform.position - thingThatHitYou.position;
+            difference = difference.normalized * pushForce;
+            rigidBody.AddForce(difference, ForceMode2D.Impulse);
+        }
         //LoseHealthSignal.Raise(damage);
         PlayerHealth.LoseHealth(damage);
+        blinkOnHit.Blink(playerSpriteRenderer);
         if (PlayerHealth.Health.CurrentHealth > 0)
         {
             StartCoroutine(KnockbackCo(rigidBody, pushTime, damage));
@@ -331,5 +339,43 @@ public class PlayerMovement : ITime
             RoomSignal.Raise(collision);
             //WeatherManager.SetRoom(collision);
         }
+    }
+
+    public void SetRespawnPoint(RespawnPoint rp)
+    {
+        respawnPoint = rp;
+    }
+
+    public void TriggerFall(float damage, Vector3 fallTowards)
+    {
+        fallingTowards = fallTowards;
+        StartCoroutine(FallCo(damage));
+    }
+
+    private void Update()
+    {
+        if (isShrinking && transform.localScale.x > 0 && fallingTowards != Vector3.zero)
+        {
+            transform.localScale -= Vector3.one * Time.deltaTime * 0.4f;
+            transform.position = Vector3.MoveTowards(transform.position, fallingTowards, 1   * Time.deltaTime);
+        }
+    }
+
+    Vector3 fallingTowards;
+    bool isShrinking = false;
+    IEnumerator FallCo(float damage)
+    {
+        State = PlayerState.Staggered;
+        animator.SetBool("IsMoving", false);
+        animator.SetBool("IsPickingUp", true);
+        isShrinking = true;
+        yield return new WaitForSeconds(2);
+        fallingTowards = Vector3.zero;
+        isShrinking = false;
+        transform.localScale = new Vector3(1, 1, 1);
+        animator.SetBool("IsPickingUp", false);
+        transform.position = respawnPoint.RespawnPosition;
+        TakeDamage(null, 0, 0, damage);
+        State = PlayerState.Idle;
     }
 }

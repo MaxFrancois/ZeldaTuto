@@ -30,4 +30,9 @@ public abstract class SpellConfig : ScriptableObject
     public bool IsUnlocked;
 
     public abstract void Cast(Transform source, Vector3 direction);
+
+    public virtual bool CanCast(Transform source, Vector3 direction)
+    {
+        return true;
+    }
 }

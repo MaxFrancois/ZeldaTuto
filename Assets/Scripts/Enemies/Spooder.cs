@@ -27,7 +27,7 @@ public class Spooder : Enemy
                 {
                     var temp  = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                     ChangeMovementDirection(temp - transform.position);
-                    //transform.position = temp;
+                    transform.position = temp;
                     ChangeState(EnemyState.Walking);
                     animator.SetBool("IsWalking", true);
                 }

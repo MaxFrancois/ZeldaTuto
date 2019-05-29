@@ -46,23 +46,26 @@ public class SpellBar : MonoBehaviour
 
     public void CastSpell(int spellIndex, Transform source, Vector3 direction)
     {
-        if (spellIndex < MaxQuantity && spellIndex >= 0)
-            if (Spells[spellIndex] != null && !Cooldowns.Any(c => c.Spell.Name == Spells[spellIndex].Name))
-            {
-                var spell = Spells[spellIndex];//, source.position, Quaternion.identity);
-                if (Spells[spellIndex].Cooldown > 0)
+        if (Spells[spellIndex] != null && Spells[spellIndex].CanCast(source, direction))
+        {
+            if (spellIndex < MaxQuantity && spellIndex >= 0)
+                if (!Cooldowns.Any(c => c.Spell.Name == Spells[spellIndex].Name))
                 {
-                    CooldownImages[spellIndex].fillAmount = 1;
-                    Cooldowns.Add(new Cooldown()
+                    var spell = Spells[spellIndex];//, source.position, Quaternion.identity);
+                    if (Spells[spellIndex].Cooldown > 0)
                     {
-                        TimeTracker = Spells[spellIndex].Cooldown,
-                        CooldownTime = Spells[spellIndex].Cooldown,
-                        Spell = Spells[spellIndex],
-                        CooldownImage = CooldownImages[spellIndex]
-                    });
+                        CooldownImages[spellIndex].fillAmount = 1;
+                        Cooldowns.Add(new Cooldown()
+                        {
+                            TimeTracker = Spells[spellIndex].Cooldown,
+                            CooldownTime = Spells[spellIndex].Cooldown,
+                            Spell = Spells[spellIndex],
+                            CooldownImage = CooldownImages[spellIndex]
+                        });
+                    }
+                    spell.Cast(source, direction);
                 }
-                spell.Cast(source, direction);
-            }
+        }
     }
 
     private void Update()

@@ -9,15 +9,16 @@ public class DashConfig : SpellConfig
     public float Distance;
     public float DashWidth;
 
-    private bool CanMove(Transform source, Vector3 direction)
+    public override bool CanCast(Transform source, Vector3 direction)
     {
         //can't find the right collider for map ?
-        return Physics2D.Raycast(source.position, direction, Distance).collider == null;
+        return Physics2D.Raycast(source.position, direction, Distance).collider == null ||
+            !Physics2D.Raycast(source.position, direction, Distance).collider.CompareTag("WorldCollision");
     }
 
     public override void Cast(Transform source, Vector3 direction)
     {
-        if (CanMove(source, direction))
+        if (CanCast(source, direction))
         {
             //StartCoroutine(DashCo(source, direction));
             var currentPosition = source.position;

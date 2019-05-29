@@ -32,6 +32,6 @@ MonoBehaviour:
     type: 3}
   LightningBallExplosion: {fileID: 3320927472524968467, guid: fd555735149ffd34e8fdff043be0b8e9,
     type: 3}
-  Radius: 2
+  Radius: 1.4
   AmountOfBalls: 3
   RotationSpeed: 200

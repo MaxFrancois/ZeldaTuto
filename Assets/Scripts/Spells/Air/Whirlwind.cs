@@ -48,7 +48,7 @@ public class Whirlwind : ITime
         if (collision.isTrigger && collision.gameObject.CompareTag("Enemy"))
         {
             var enemy = collision.GetComponent<EnemyBase>();
-            enemy.TakeDamage(transform, 0, 0, damage);
+            enemy.TakeDamage(transform, 0, 0, damage, false);
         }
     }
 }

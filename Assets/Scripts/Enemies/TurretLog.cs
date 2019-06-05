@@ -21,18 +21,21 @@ public class TurretLog : Log
 
     void FixedUpdate()
     {
-        if (TargetInChasingRange && CurrentState != EnemyState.Staggered && canFire)
+        if (CanAct())
         {
-            canFire = false;
-            Vector3 tempVector = target.transform.position - transform.position;
-            var projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
-            projectile.GetComponent<Projectile>().Launch(tempVector);
-            animator.SetBool("IsAwake", true);
-        }
-        else if (TargetOutOfRange)
-        {
-            ChangeState(EnemyState.Idle);
-            animator.SetBool("IsAwake", false);
+            if (TargetInChasingRange && canFire)
+            {
+                canFire = false;
+                Vector3 tempVector = target.transform.position - transform.position;
+                var projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
+                projectile.GetComponent<Projectile>().Launch(tempVector);
+                animator.SetBool("IsAwake", true);
+            }
+            else if (TargetOutOfRange)
+            {
+                EnemyState.MovementState = CharacterMovementState.Idle;
+                animator.SetBool("IsAwake", false);
+            }
         }
     }
 }

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 9d0b746e71a4d2a408ed505a6fd6e7bd, type: 3}
+  m_Name: DisengageConfig
+  m_EditorClassIdentifier: 
+  Id: E003
+  Icon: {fileID: 21300000, guid: 80f0a146499524248b6a9e85bb685065, type: 3}
+  SelectedIcon: {fileID: 21300000, guid: d36ff141f29742442b7da36040e6a028, type: 3}
+  Name: Disengage
+  Description: Jump backwards, leaving an image of yourself behind that explodes after
+    a short delay, stunning and leaving a cloud of poison
+  Element: 5
+  ManaCost: 1
+  PushTime: 0
+  PushForce: 0
+  Damage: 1
+  Cooldown: 1
+  LifeTime: 2
+  IsUnlocked: 1
+  DashSpeed: 6
+  DashDuration: 0.2
+  Illusion: {fileID: 3173658868358132114, guid: d52bf2bc95fed4b49b38fe312471d1ba,
+    type: 3}
+  ExplosionParticles: {fileID: 2597134266949596173, guid: f9b7fa062d122884f9abf65d7f5cb4fc,
+    type: 3}
+  StunStatusConfig: {fileID: 11400000, guid: 6b07d87a1e1e3c640ad51ada33869daa, type: 2}
+  Gas: {fileID: 694404935711757565, guid: 7730f04ed5d7ee947a1ca29655830a83, type: 3}
+  GasDuration: 10
+  PoisonStatusConfig: {fileID: 11400000, guid: 39a0034aa9d0eb947b55a954a7fd4e86, type: 2}

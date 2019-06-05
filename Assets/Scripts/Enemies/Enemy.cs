@@ -13,38 +13,59 @@ public enum EnemyState
 
 public class Enemy : EnemyBase
 {
-    public EnemyState CurrentState;
     public VoidSignal RoomSignal;
-    protected BlinkOnHit onHit;
 
     protected virtual void Awake()
     {
-        transform.position = HomePosition;
+        //transform.position = HomePosition;
         EnemyHealth = GetComponent<CharacterHealth>();
+        EnemyState = GetComponent<CharacterState>();
         EnemyHealth.Health.CurrentHealth = EnemyHealth.Health.MaxHealth;
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        onHit = GetComponent<BlinkOnHit>();
+        BlinkOnHit = GetComponent<BlinkOnHit>();
         target = GameObject.FindWithTag("Player").transform;
-        CurrentState = EnemyState.Idle;
+        EnemyState.MovementState = CharacterMovementState.Idle;
     }
 
     public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
-        CurrentState = EnemyState.Staggered;
+        EnableEnemyStateUI();
+        if (pushTime > 0)
+            EnemyState.MovementState = CharacterMovementState.Stunned;
         LoseHealth(damage, display);
-        Vector2 difference = transform.position - thingThatHitYou.position;
-        difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
-        body.AddForce(difference, ForceMode2D.Impulse);
         if (transform.gameObject.activeInHierarchy)
-            StartCoroutine(Knockback(body, pushTime));
+        {
+            if (thingThatHitYou && pushForce > 0)
+            {
+                Vector2 difference = transform.position - thingThatHitYou.position;
+                difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
+                body.AddForce(difference, ForceMode2D.Impulse);
+            }
+            if (BlinkOnHit) BlinkOnHit.Blink(spriteRenderer);
+            if (animator && animator.parameters.Any(c => c.name == "Hit"))
+                animator.SetTrigger("Hit");
+            if (pushTime > 0)
+                StartCoroutine(Knockback(body, pushTime));
+        }
+    }
+
+    protected IEnumerator Knockback(Rigidbody2D body, float pushTime)
+    {
+        if (body != null)
+        {
+            yield return new WaitForSeconds(pushTime);
+            body.velocity = Vector2.zero;
+            EnemyState.MovementState = CharacterMovementState.Idle;
+        }
     }
 
     protected void LoseHealth(float damage, bool display)
     {
+        EnableEnemyStateUI();
         EnemyHealth.LoseHealth(damage, display);
-        if (IsDead && CurrentState != EnemyState.Dead)
+        if (IsDead && EnemyState.MovementState != CharacterMovementState.Dead)
         {
             if (DeadSignal) DeadSignal.Raise();
             if (RoomSignal != null) RoomSignal.Raise();
@@ -63,7 +84,7 @@ public class Enemy : EnemyBase
 
     private IEnumerator DieAndLeaveBody()
     {
-        ChangeState(EnemyState.Dead);
+        EnemyState.MovementState = CharacterMovementState.Dead;
         if (animator && animator.parameters.Any(c => c.name == "IsDead") && animator.parameters.Any(c => c.name == "Die"))
         {
             animator.SetTrigger("Die");
@@ -77,6 +98,7 @@ public class Enemy : EnemyBase
 
     private IEnumerator DeathAnimationAndDestroy()
     {
+        EnemyState.MovementState = CharacterMovementState.Dead;
         var deathAnim = Instantiate(DeathAnimation, transform.position, Quaternion.identity);
         Destroy(deathAnim, 3f);
         gameObject.SetActive(false);
@@ -91,25 +113,5 @@ public class Enemy : EnemyBase
             if (loot != null)
                 Instantiate(loot.gameObject, transform.position, Quaternion.identity);
         }
-    }
-
-    protected IEnumerator Knockback(Rigidbody2D body, float pushTime)
-    {
-        if (body != null)
-        {
-            if (onHit) onHit.Blink(spriteRenderer);
-            if (animator && animator.parameters.Any(c => c.name == "Hit"))
-                animator.SetTrigger("Hit");
-            yield return new WaitForSeconds(pushTime);
-            //animator.ResetTrigger("Hit");
-            body.velocity = Vector2.zero;
-            CurrentState = EnemyState.Idle;
-        }
-    }
-
-    protected void ChangeState(EnemyState state)
-    {
-        if (state != CurrentState)
-            CurrentState = state;
     }
 }

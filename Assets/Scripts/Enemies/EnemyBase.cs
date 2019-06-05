@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterHealth))]
+[RequireComponent(typeof(CharacterState))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Collider2D))]
-public abstract class EnemyBase : ITime
+public abstract class EnemyBase : IHasHealth
 {
     [Header("Basic")]
     protected Rigidbody2D body;
     protected Transform target;
     protected Animator animator;
     protected CharacterHealth EnemyHealth;
+    protected CharacterState EnemyState;
+    protected BlinkOnHit BlinkOnHit;
     protected SpriteRenderer spriteRenderer;
     public string Name;
     public float ChaseRadius;
@@ -21,6 +24,7 @@ public abstract class EnemyBase : ITime
     public Collider2D TriggerCollider;
     public Vector2 HomePosition;
     public LootTable LootTable;
+    public GameObject EnemyStateUI;
     //public FloatSignal HitSignal;
     public VoidSignal DeadSignal;
     public GameObject DeathAnimation;
@@ -58,9 +62,16 @@ public abstract class EnemyBase : ITime
         }
     }
 
-    public virtual void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
+    protected void EnableEnemyStateUI()
     {
+        if (!EnemyStateUI.activeInHierarchy)
+            EnemyStateUI.SetActive(true);
+    }
 
+    protected void HideEnemyStateUI()
+    {
+        if (EnemyStateUI.activeInHierarchy)
+            EnemyStateUI.SetActive(false);
     }
 
     protected virtual void Update()
@@ -72,6 +83,7 @@ public abstract class EnemyBase : ITime
     protected virtual void OnEnable()
     {
         EnemyHealth.Health.CurrentHealth = MaxHealth;
+        EnemyState.MovementState = CharacterMovementState.Idle;
     }
 
     protected virtual void ChangeMovementDirection(Vector2 direction)
@@ -110,5 +122,14 @@ public abstract class EnemyBase : ITime
     public Health GetEnemyHealth()
     {
         return EnemyHealth.Health;
+    }
+
+    protected bool CanAct()
+    {
+        if ((EnemyState.MovementState != CharacterMovementState.Idle &&
+            EnemyState.MovementState != CharacterMovementState.Walking) ||
+            MenuManager.IsPaused || MenuManager.RecentlyUnpaused)
+            return false;
+        return true;
     }
 }

@@ -30,4 +30,9 @@ public class BlinkOnHit : MonoBehaviour
         }
         yield return null;
     }
+
+    public void SetRegularColor(Color c)
+    {
+        regularColor = c;
+    }
 }

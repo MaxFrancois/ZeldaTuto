@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 230555449
+    totalSpriteSurfaceArea: 230987789
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -84,6 +84,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d8669c50ff6b55c4eb54a8080e4dd733, type: 3}
   - {fileID: 21300000, guid: 4660cf50f851d954a995199bfa59f694, type: 3}
   - {fileID: 21300000, guid: 7efd5660fff6fdd41a084035f453fa33, type: 3}
+  - {fileID: 21300000, guid: 930ef66063e650d4c8d4508acd328f52, type: 3}
   - {fileID: 21300000, guid: f6d8aa60c73907143a7a03746e9298a3, type: 3}
   - {fileID: 21300000, guid: 97cc0c602046d534fbcdf982baae61f0, type: 3}
   - {fileID: 21300000, guid: b0328c609980efb4583ba43e86a72dac, type: 3}
@@ -144,6 +145,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: abee0dd058e00d54c9c8f85f6c3682f4, type: 3}
   - {fileID: 21300000, guid: 49dc7dd0cad84ca468a4c2513b6ebd73, type: 3}
   - {fileID: 21300000, guid: 41db9dd05590b794e919f6316007d16c, type: 3}
+  - {fileID: 21300000, guid: 3758ded086cc39440958c586fa9f6a16, type: 3}
   - {fileID: 21300000, guid: bedd5fd0dac5e244e9349ba71775951b, type: 3}
   - {fileID: 21300000, guid: 07a083e002653d649a4dae46c1bbf5ab, type: 3}
   - {fileID: 21300000, guid: 80569ce033ffee044bec436a8d62d7af, type: 3}
@@ -2868,6 +2870,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7c7c08798323a8f429d23af397cc6742, type: 3}
   - {fileID: 21300000, guid: f6f42879b5ca81c47865cc67fab4c98f, type: 3}
   - {fileID: 21300000, guid: 50a07b790eb688f48a237097ed214955, type: 3}
+  - {fileID: 21300000, guid: e56261898c6efff48acee1379216a6dd, type: 3}
   - {fileID: 21300000, guid: 5052148989f796d44aad7bd062b9d897, type: 3}
   - {fileID: 21300000, guid: ff42a689ad961fd4b9da0a00643acce7, type: 3}
   - {fileID: 21300000, guid: 399e6989b63df45489db993decba51e8, type: 3}
@@ -3350,7 +3353,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 826d87dcd2df9d345b1ede6b29be16b5, type: 3}
   - {fileID: 21300000, guid: 2e1b49dc48e4b0244b4ffdf28b97f2cc, type: 3}
   - {fileID: 21300000, guid: 269ff9dc207efad44ab95f213c617d3c, type: 3}
-  - {fileID: 21300000, guid: 51eb1bdc87bf5c7459050c48cc71e911, type: 3}
   - {fileID: 21300000, guid: c9ee4ddcf46b46c42bbb3194a6570919, type: 3}
   - {fileID: 21300000, guid: 51ea5edc82f5da44f8ac67723ff9fdec, type: 3}
   - {fileID: 21300000, guid: d2107edc75d20b54598857e60ce5c994, type: 3}
@@ -3623,6 +3625,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e54cc1ed61e6bb64cabd2170fc279f81, type: 3}
   - {fileID: 21300000, guid: d13e62ed0094ec7448545b04af6f0a36, type: 3}
   - {fileID: 21300000, guid: e17dc2ed3ebc51247a2bd4789232dbcc, type: 3}
+  - {fileID: 21300000, guid: 32c127ed655f7a94baf9b96c25f0dc29, type: 3}
   - {fileID: 21300000, guid: 8e5629edaa8ef0d4999e2ddff5f6b8a8, type: 3}
   - {fileID: 21300000, guid: f40e7ced366cb624eb5fdf967a9f343b, type: 3}
   - {fileID: 21300000, guid: 090e9ced42f2ff34c913bf7fa05aee5b, type: 3}
@@ -3718,7 +3721,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d97a2c8e3065f6c4c9fd91332f255fa8, type: 3}
   - {fileID: 21300000, guid: a8196e8ebf3f20748b1cb913fa2fde8d, type: 3}
   - {fileID: 21300000, guid: 296ac19e2147e67408eed4611d3f93f4, type: 3}
-  - {fileID: 21300000, guid: 16f7569ee9446ab43acd6509aa012770, type: 3}
+  - {fileID: -4981027512063062209, guid: 16f7569ee9446ab43acd6509aa012770, type: 3}
   - {fileID: 21300000, guid: 05c8079ef09058f46ade7f0d0ecbfd20, type: 3}
   - {fileID: 21300000, guid: d33f989efe224c84e971b09409bb12f2, type: 3}
   - {fileID: 21300000, guid: 4686f1ae076f2d44280600f15cbbd5a0, type: 3}
@@ -3919,6 +3922,7 @@ SpriteAtlas:
   - 4
   - AttackOutline_05
   - 80
+  - StunIcon-mini
   - s_117
   - DeathOutline_12
   - s_069
@@ -3979,6 +3983,7 @@ SpriteAtlas:
   - frame0000
   - DeathOutline_06
   - frame0036
+  - StunIcon
   - s_100
   - Gun01ToAxe_14
   - DeathPose02_07
@@ -6703,6 +6708,7 @@ SpriteAtlas:
   - Death_13
   - frame0003
   - frame0002
+  - PoisonIcon
   - Attack_07
   - SpellBookPreface_06
   - 32
@@ -7185,7 +7191,6 @@ SpriteAtlas:
   - frame0058
   - s_013
   - frame0057
-  - Destructible Objects Sprite Sheet
   - s_059
   - frame0002
   - 31
@@ -7458,6 +7463,7 @@ SpriteAtlas:
   - RunSword_06
   - 36
   - frame0025
+  - PoisonIcon-mini
   - frame0001
   - frame0051
   - frame0067
@@ -7553,7 +7559,7 @@ SpriteAtlas:
   - s_068
   - frame0005
   - explosion_04
-  - Dungeon Collectables
+  - Dungeon Collectables_0
   - frame0012
   - frame0001
   - Death_01

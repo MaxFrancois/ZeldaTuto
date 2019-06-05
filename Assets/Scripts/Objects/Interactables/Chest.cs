@@ -47,7 +47,7 @@ public class Chest : Interactable
         PlayerInventory.AddItem(Contents);
         IsOpened = true;
         ReceivedItemSignal.Raise();
-        Context.Raise();
+        Context.Raise(false);
         anim.SetBool("IsOpened", true);
         StoredOpen.RuntimeValue = IsOpened;
     }
@@ -58,21 +58,8 @@ public class Chest : Interactable
         ReceivedItemSignal.Raise();
     }
 
-    private void OnTriggerEnter2D(Collider2D collidedObject)
+    protected override bool CanInteract()
     {
-        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger && !IsOpened)
-        {
-            Context.Raise();
-            IsActive = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collidedObject)
-    {
-        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger && !IsOpened)
-        {
-            IsActive = false;
-            Context.Raise();
-        }
+        return !IsOpened;
     }
 }

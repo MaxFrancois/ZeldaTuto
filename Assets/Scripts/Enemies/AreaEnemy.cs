@@ -8,22 +8,21 @@ public class AreaEnemy : Log
 
     void FixedUpdate()
     {
-        if (Vector3.Distance(target.position, transform.position) <= ChaseRadius
-           && Vector3.Distance(target.position, transform.position) > AttackRadius
-           && CurrentState != EnemyState.Staggered
-           && Boundary.bounds.Contains(target.transform.position))
+        if (CanAct())
         {
-            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
-            ChangeMovementDirection(temp - transform.position);
-            body.MovePosition(temp);
-            ChangeState(EnemyState.Walking);
-            animator.SetBool("IsAwake", true);
-        }
-        else if (Vector3.Distance(target.position, transform.position) > ChaseRadius
-            || !Boundary.bounds.Contains(target.transform.position))
-        {
-            ChangeState(EnemyState.Idle);
-            animator.SetBool("IsAwake", false);
+            if (TargetInChasingRange && Boundary.bounds.Contains(target.transform.position))
+            {
+                var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
+                ChangeMovementDirection(temp - transform.position);
+                body.MovePosition(temp);
+                EnemyState.MovementState = CharacterMovementState.Walking;
+                animator.SetBool("IsAwake", true);
+            }
+            else if (TargetOutOfRange)
+            {
+                EnemyState.MovementState = CharacterMovementState.Idle;
+                animator.SetBool("IsAwake", false);
+            }
         }
     }
 }

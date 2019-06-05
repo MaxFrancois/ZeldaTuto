@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 4799011598253740562}
   - component: {fileID: 4799011598253740563}
   - component: {fileID: 8727154076884094698}
+  - component: {fileID: 5318426793352137662}
   m_Layer: 8
   m_Name: Spooder
   m_TagString: Enemy
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -12114295
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 2874787458709476839, guid: 86446392350bd9848bc0e71732722299,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -227,7 +228,6 @@ MonoBehaviour:
   DeadSignal: {fileID: 0}
   DeathAnimation: {fileID: 173590, guid: 7469283484e0dcc4887fa575d1fd7ecc, type: 3}
   DirectionalArrow: {fileID: 1155273150}
-  CurrentState: 0
   RoomSignal: {fileID: 0}
   SpooderNet: {fileID: 1168303258240033692, guid: 701144212e973f045a2c6e917349fe34,
     type: 3}
@@ -358,3 +358,17 @@ MonoBehaviour:
   DamageDisplayCanvas: {fileID: 8702429126016056852, guid: 00624395a594fb64b8488b2443ae1d3e,
     type: 3}
   Health: {fileID: 11400000, guid: 2604d215e483bc94893827efa092ce47, type: 2}
+--- !u!114 &5318426793352137662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799011598253740570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 3ca169d9b21a0ff44994e45e56d7464f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementState: 0

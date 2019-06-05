@@ -36,7 +36,7 @@ public class KnockBack : MonoBehaviour
                         collidedObject.GetComponent<EnemyBase>().TakeDamage(transform, PushTime, PushForce, Damage);
                     }
                     if (collidedObject.gameObject.CompareTag("Player")
-                        && collidedObject.GetComponent<PlayerMovement>().State != PlayerState.Staggered)
+                        && collidedObject.GetComponent<PlayerMovement>().PlayerState.MovementState != CharacterMovementState.Stunned)
                     {
                         collidedObject.GetComponent<PlayerMovement>().TakeDamage(transform, PushTime, PushForce, Damage);
                     }

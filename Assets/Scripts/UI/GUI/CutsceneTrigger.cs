@@ -14,7 +14,7 @@ public class CutsceneTrigger : MonoBehaviour
     public TextMeshProUGUI BossTitle;
     public EnemyBase Boss;
     public BossHealthManager BossHealthManager;
-    public PlayerMovement Player;
+    public CharacterState PlayerState;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,7 +29,7 @@ public class CutsceneTrigger : MonoBehaviour
 
     IEnumerator PlayCutsceneCo()
     {
-        Player.SetFrozenForCutscene(true);
+        PlayerState.MovementState = CharacterMovementState.Stunned;
         if (BossTitle)
             BossTitle.text = Boss.Name;
         GUI.SetActive(false);
@@ -43,7 +43,7 @@ public class CutsceneTrigger : MonoBehaviour
             CutsceneFinishedSignal.Raise();
         if (BossHealthManager)
             BossHealthManager.Initialize(Boss.GetEnemyHealth().MaxHealth, Boss.Name);
-        Player.SetFrozenForCutscene(false);
+        PlayerState.MovementState = CharacterMovementState.Idle;
         this.gameObject.SetActive(false);
         yield return null;
     }

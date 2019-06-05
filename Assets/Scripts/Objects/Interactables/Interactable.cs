@@ -4,30 +4,40 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public VoidSignal Context;
+    public BoolSignal Context;
     public bool IsActive;
 
-    private void OnTriggerEnter2D(Collider2D collidedObject)
+    protected virtual void OnTriggerExit2D(Collider2D collidedObject)
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
             if (Context != null && gameObject.activeInHierarchy)
             {
-                Context.Raise();
+                Context.Raise(false);
+                IsActive = false;
             }
-            IsActive = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collidedObject)
+    protected virtual bool CanInteract()
     {
-        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
+        return true;
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !collision.isTrigger && CanInteract())
         {
-            if (Context != null && gameObject.activeInHierarchy)
+            if (collision.GetComponent<PlayerInput>().CanInteract() != null)
             {
-                Context.Raise();
+                IsActive = true;
+                Context.Raise(true);
             }
-            IsActive = false;
+            else
+            {
+                IsActive = false;
+                Context.Raise(false);
+            }
         }
     }
 }

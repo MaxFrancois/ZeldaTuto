@@ -6,18 +6,21 @@ public class Log : Enemy
 {
     void FixedUpdate()
     {
-        if (TargetInChasingRange && CurrentState != EnemyState.Staggered)
+        if (CanAct())
         {
-            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
-            ChangeMovementDirection(temp - transform.position);
-            body.MovePosition(temp);
-            ChangeState(EnemyState.Walking);
-            animator.SetBool("IsAwake", true);
-        }
-        else if (TargetOutOfRange)
-        {
-            ChangeState(EnemyState.Idle);
-            animator.SetBool("IsAwake", false);
+            if (TargetInChasingRange)
+            {
+                var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
+                ChangeMovementDirection(temp - transform.position);
+                body.MovePosition(temp);
+                EnemyState.MovementState = CharacterMovementState.Walking;
+                animator.SetBool("IsAwake", true);
+            }
+            else if (TargetOutOfRange)
+            {
+                EnemyState.MovementState = CharacterMovementState.Idle;
+                animator.SetBool("IsAwake", false);
+            }
         }
     }
 }

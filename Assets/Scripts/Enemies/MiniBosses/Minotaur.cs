@@ -232,7 +232,7 @@ public class Minotaur : Enemy
         {
             roomCameraNoise.m_FrequencyGain = 0f;
             roomCameraNoise.m_AmplitudeGain = 0f;
-            target.GetComponent<PlayerMovement>().SetFrozenForCutscene(false);
+            target.GetComponent<CharacterState>().MovementState = CharacterMovementState.Idle;
         }
     }
 
@@ -269,7 +269,7 @@ public class Minotaur : Enemy
     {
         if (RoomCamera != null)
         {
-            target.GetComponent<PlayerMovement>().SetFrozenForCutscene(true);
+            target.GetComponent<CharacterState>().MovementState = CharacterMovementState.Stunned;
             cameraShakeCurrentDuration = cameraShakeDuration;
             roomCameraNoise.m_AmplitudeGain = cameraShakeAmplitude;
             roomCameraNoise.m_FrequencyGain = cameraShakeFrequency;

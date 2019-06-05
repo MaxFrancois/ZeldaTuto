@@ -12,15 +12,9 @@ public class Spooder : Enemy
     protected override void Update()
     {
         base.Update();
-        if (timeSinceLastAttack > 0)
-            timeSinceLastAttack -= Time.deltaTime;
-    }
-
-    void FixedUpdate()
-    {
-        if (!IsDead)
+        if (!IsDead && CanAct())
         {
-            if (TargetInChasingRange && CurrentState != EnemyState.Staggered && CurrentState != EnemyState.Attacking)
+            if (TargetInChasingRange)
             {
                 var r = Random.Range(0, 300);
                 if (r != 0)
@@ -28,7 +22,7 @@ public class Spooder : Enemy
                     var temp  = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                     ChangeMovementDirection(temp - transform.position);
                     transform.position = temp;
-                    ChangeState(EnemyState.Walking);
+                    EnemyState.MovementState = CharacterMovementState.Walking;
                     animator.SetBool("IsWalking", true);
                 }
                 else
@@ -36,37 +30,48 @@ public class Spooder : Enemy
                     StartCoroutine(ThrowNet());
                 }
             }
-            else if (TargetInAttackRange && CurrentState != EnemyState.Attacking && CurrentState != EnemyState.Staggered)
+            else if (TargetInAttackRange)
             {
+                if (timeSinceLastAttack > 0)
+                    timeSinceLastAttack -= Time.deltaTime - (1 * SlowTimeCoefficient);
                 if (timeSinceLastAttack <= 0)
                     StartCoroutine(Attack());
             }
             else if (TargetOutOfRange)
             {
-                ChangeState(EnemyState.Idle);
+                EnemyState.MovementState = CharacterMovementState.Idle;
                 animator.SetBool("IsWalking", false);
+                timeSinceLastAttack = TimeBetweenAttacks;
             }
         }
+        //else
+        //{
+        //    if (!IsDead)
+        //    {
+        //        animator.SetBool("IsWalking", false);
+        //        timeSinceLastAttack = TimeBetweenAttacks;
+        //    }
+        //}
     }
 
     private IEnumerator ThrowNet()
     {
         animator.SetBool("IsWalking", false);
-        ChangeState(EnemyState.Attacking);
+        EnemyState.MovementState = CharacterMovementState.Attacking;
         animator.SetTrigger("ThrowNet");
         var targetPosition = new Vector2(target.position.x, target.position.y);
         yield return new WaitForSeconds(1.2f);
         var net = Instantiate(SpooderNet, transform.position, Quaternion.identity);
         net.Init(targetPosition);
         yield return new WaitForSeconds(0.4f);
-        ChangeState(EnemyState.Idle);
+        EnemyState.MovementState = CharacterMovementState.Idle;
     }
 
     private IEnumerator Attack()
     {
         animator.SetBool("IsWalking", false);
         body.velocity = Vector2.zero;
-        ChangeState(EnemyState.Attacking);
+        EnemyState.MovementState = CharacterMovementState.Attacking;
         animator.SetTrigger("Attack");
         Vector2 difference = target.transform.position - transform.position;
         yield return new WaitForSeconds(1.2f);
@@ -74,13 +79,13 @@ public class Spooder : Enemy
         body.AddForce(difference, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.4f);
         body.velocity = Vector2.zero;
-        ChangeState(EnemyState.Idle);
+        EnemyState.MovementState = CharacterMovementState.Idle;
         timeSinceLastAttack = TimeBetweenAttacks;
     }
 
     private IEnumerator Jump()
     {
-        CurrentState = EnemyState.Attacking;
+        EnemyState.MovementState = CharacterMovementState.Attacking;
         yield return null;
     }
 }

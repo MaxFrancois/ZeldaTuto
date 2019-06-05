@@ -31,17 +31,21 @@ public class Dummy : Enemy
         Destroy(portal2, .3f);
         inCombat = false;
         transform.position = HomePosition;
+        HideEnemyStateUI();
     }
 
     public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
-        CurrentState = EnemyState.Staggered;
+        EnemyState.MovementState = CharacterMovementState.Stunned;
+        EnableEnemyStateUI();
         LoseHealth(damage, display);
         GainHealth(damage, false);
-
-        Vector2 difference = transform.position - thingThatHitYou.position;
-        difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
-        body.AddForce(difference, ForceMode2D.Impulse);
+        if (thingThatHitYou)
+        {
+            Vector2 difference = transform.position - thingThatHitYou.position;
+            difference = difference.normalized * pushForce * (1 - SlowTimeCoefficient);
+            body.AddForce(difference, ForceMode2D.Impulse);
+        }
         if (transform.gameObject.activeInHierarchy)
             StartCoroutine(Knockback(body, pushTime));
         timeSinceLastHit = 0;

@@ -12,23 +12,26 @@ public class PatrolLog : Log
     void FixedUpdate()
     {
         animator.SetBool("IsAwake", true);
-
-        if (TargetInChasingRange && CurrentState != EnemyState.Staggered)
+        if (CanAct())
         {
-            var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
-            ChangeMovementDirection(temp - transform.position);
-            body.MovePosition(temp);
-        }
-        else if (TargetOutOfRange)
-        {
-            if (Vector3.Distance(transform.position, currentGoal.position) > RoundingDistance)
+            if (TargetInChasingRange)
             {
-                var temp = Vector3.MoveTowards(transform.position, currentGoal.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
+                var temp = Vector3.MoveTowards(transform.position, target.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
                 ChangeMovementDirection(temp - transform.position);
                 body.MovePosition(temp);
-            } else
+            }
+            else if (TargetOutOfRange)
             {
-                ChangeGoal();
+                if (Vector3.Distance(transform.position, currentGoal.position) > RoundingDistance)
+                {
+                    var temp = Vector3.MoveTowards(transform.position, currentGoal.position, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
+                    ChangeMovementDirection(temp - transform.position);
+                    body.MovePosition(temp);
+                }
+                else
+                {
+                    ChangeGoal();
+                }
             }
         }
     }

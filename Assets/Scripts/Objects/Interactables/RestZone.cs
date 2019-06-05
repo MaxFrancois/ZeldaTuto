@@ -28,23 +28,4 @@ public class RestZone : Interactable
         yield return new WaitForSeconds(0.5f);
         RestZoneSignal.Raise();
     }
-
-    private void OnTriggerEnter2D(Collider2D collidedObject)
-    {
-        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
-        {
-            IsActive = true;
-            Context.Raise();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collidedObject)
-    {
-        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
-        {
-            Context.Raise();
-            IsActive = false;
-            animator.SetBool("IsOpen", false);
-        }
-    }
 }

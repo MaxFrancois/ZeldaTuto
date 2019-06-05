@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8957217773972928075}
   - component: {fileID: 6151242227417490689}
   - component: {fileID: 1993879947156752623}
+  - component: {fileID: 1367620166}
   m_Layer: 0
   m_Name: Sign
   m_TagString: Untagged
@@ -135,3 +136,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.5606718}
   m_EdgeRadius: 0
+--- !u!114 &1367620166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5031748710477094125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 92cca7958313aff4583ca5ea79413d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Context: {fileID: 11400000, guid: d8ae429a6be89814096d8fb18c92a784, type: 2}
+  IsActive: 0
+  DialogBox: {fileID: 0}
+  DialogText: {fileID: 0}
+  DialogString: Dungeon stuff

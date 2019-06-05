@@ -51,4 +51,9 @@ public class Door : Interactable
         IsOpen = false;
         PhysicsCollider.enabled = true;
     }
+
+    protected override bool CanInteract()
+    {
+        return !IsOpen;
+    }
 }

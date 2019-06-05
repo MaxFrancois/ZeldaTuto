@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4268939622143116635}
   - component: {fileID: 837083458}
   - component: {fileID: 463615363}
+  - component: {fileID: 5969764324477865644}
   m_Layer: 8
   m_Name: Patrol Log
   m_TagString: Enemy
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd881faab92a4944b198c0b163bae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thrust: 4
+  PushForce: 0
   PushTime: 0.3
   Damage: 1
   IsActive: 0
@@ -221,7 +222,7 @@ MonoBehaviour:
   DeadSignal: {fileID: 0}
   DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
     type: 3}
-  CurrentState: 0
+  DirectionalArrow: {fileID: 0}
   RoomSignal: {fileID: 11400000, guid: f16b99eabb324424bacb6ab8318f59f3, type: 2}
   Path:
   - {fileID: 0}
@@ -244,4 +245,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnHealthLost: {fileID: 0}
   OnHealthGained: {fileID: 0}
+  DamageDisplayCanvas: {fileID: 0}
   Health: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}
+--- !u!114 &5969764324477865644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268939622143116580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 3ca169d9b21a0ff44994e45e56d7464f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementState: 0

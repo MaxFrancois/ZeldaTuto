@@ -7,9 +7,9 @@ public class ContextClue : MonoBehaviour
     public GameObject Clue;
     public bool IsActive = false;
 
-    public void ChangeActive()
+    public void ChangeActive(bool isActive)
     {
-        IsActive = !IsActive;
+        IsActive = isActive;
         Clue.SetActive(IsActive);
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EarthTotemConfig", menuName = "SpellConfigs/Earth/EarthTotemConfig")]
-
 public class EarthTotemConfig : SpellConfig
 {
     [Header("Totem")]

@@ -28,7 +28,7 @@ public class TurretLog : Log
                 canFire = false;
                 Vector3 tempVector = target.transform.position - transform.position;
                 var projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
-                projectile.GetComponent<Projectile>().Launch(tempVector);
+                projectile.GetComponent<Projectile>().Launch(tempVector.normalized);
                 animator.SetBool("IsAwake", true);
             }
             else if (TargetOutOfRange)

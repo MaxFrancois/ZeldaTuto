@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(CharacterHealth))]
 [RequireComponent(typeof(CharacterState))]
@@ -32,7 +33,36 @@ public abstract class EnemyBase : IHasHealth
     protected Vector3 CurrentDirection;
     //public FloatValue MaxHealth;
     //protected float currentHealth;
-    protected bool IsDead { get { return EnemyHealth.Health.CurrentHealth <= 0; } }
+
+    protected virtual void Awake()
+    {
+        Initialize();
+    }
+
+    void Initialize()
+    {
+        EnemyHealth = GetComponent<CharacterHealth>();
+        EnemyHealth.Initialize();
+        EnemyState = GetComponent<CharacterState>();
+        //EnemyHealth.Health.CurrentHealth = EnemyHealth.Health.MaxHealth;
+        body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        BlinkOnHit = GetComponent<BlinkOnHit>();
+        target = GameObject.FindWithTag("Player").transform;
+        EnemyState.MovementState = CharacterMovementState.Idle;
+    }
+
+    public bool IsDead
+    {
+        get
+        {
+            if (EnemyHealth)
+                return EnemyHealth.Health.CurrentHealth <= 0;
+            else
+                return true;
+        }
+    }
     protected float CurrentHealth { get { return EnemyHealth.Health.CurrentHealth; } }
     protected float MaxHealth { get { return EnemyHealth.Health.MaxHealth; } }
 
@@ -64,26 +94,32 @@ public abstract class EnemyBase : IHasHealth
 
     protected void EnableEnemyStateUI()
     {
-        if (!EnemyStateUI.activeInHierarchy)
+        if (EnemyStateUI && !EnemyStateUI.activeInHierarchy)
             EnemyStateUI.SetActive(true);
     }
 
     protected void HideEnemyStateUI()
     {
-        if (EnemyStateUI.activeInHierarchy)
+        if (EnemyStateUI && EnemyStateUI.activeInHierarchy)
             EnemyStateUI.SetActive(false);
     }
 
     protected virtual void Update()
     {
+        if (!CanAct()) body.velocity = Vector2.zero;
         if (DirectionalArrow && CurrentDirection != Vector3.zero)
             DirectionalArrow.transform.up = CurrentDirection;
+        if (EnemyState.MovementState == CharacterMovementState.Falling && transform.localScale.x > 0 && fallingTowards != Vector3.zero)
+        {
+            transform.localScale -= Vector3.one * Time.deltaTime * 0.4f;
+            transform.position = Vector3.MoveTowards(transform.position, fallingTowards, 1 * Time.deltaTime);
+        }
     }
 
     protected virtual void OnEnable()
     {
-        EnemyHealth.Health.CurrentHealth = MaxHealth;
-        EnemyState.MovementState = CharacterMovementState.Idle;
+        //transform.position = HomePosition;
+        Initialize();
     }
 
     protected virtual void ChangeMovementDirection(Vector2 direction)
@@ -119,7 +155,7 @@ public abstract class EnemyBase : IHasHealth
         animator.SetFloat("MoveY", setVector.y);
     }
 
-    public Health GetEnemyHealth()
+    public HealthInfo GetEnemyHealth()
     {
         return EnemyHealth.Health;
     }
@@ -131,5 +167,23 @@ public abstract class EnemyBase : IHasHealth
             MenuManager.IsPaused || MenuManager.RecentlyUnpaused)
             return false;
         return true;
+    }
+
+    Vector3 fallingTowards;
+
+    public void TriggerFall(Vector3 fallTowards)
+    {
+        fallingTowards = fallTowards;
+        StartCoroutine(FallCo());
+    }
+
+    IEnumerator FallCo()
+    {
+        EnemyState.MovementState = CharacterMovementState.Falling;
+        animator.SetBool("IsMoving", false);
+        yield return new WaitForSeconds(2);
+        fallingTowards = Vector3.zero;
+        transform.localScale = new Vector3(1, 1, 1);
+        TakeDamage(null, 0, 0, MaxHealth);
     }
 }

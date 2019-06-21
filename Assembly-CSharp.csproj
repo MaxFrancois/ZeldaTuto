@@ -75,6 +75,8 @@
     <Compile Include="Assets\Art\Epic Toon FX\Scripts\ETFXLightFade.cs" />
     <Compile Include="Assets\Art\Epic Toon FX\Scripts\ETFXPitchRandomizer.cs" />
     <Compile Include="Assets\Art\Epic Toon FX\Scripts\ETFXRotation.cs" />
+    <Compile Include="Assets\Scripts\Camera\BattleRoom.cs" />
+    <Compile Include="Assets\Scripts\Camera\BattleRoomTrigger.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Camera\DungeonEnemyRoom.cs" />
     <Compile Include="Assets\Scripts\Camera\DungeonRoom.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\SignalListenerBase.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\VoidSignal.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Signals\VoidSignalListener.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Air\BoomerangConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Air\WhirlwindConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Dark\DarkTotemConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Earth\AvalancheConfig.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="Assets\Scripts\Shared\IHasHealth.cs" />
     <Compile Include="Assets\Scripts\Shared\ITime.cs" />
     <Compile Include="Assets\Scripts\Shared\KnockBack.cs" />
+    <Compile Include="Assets\Scripts\Spells\Air\Boomerang.cs" />
     <Compile Include="Assets\Scripts\Spells\Air\Whirlwind.cs" />
     <Compile Include="Assets\Scripts\Spells\Dark\DarkTotem\DarkTotem.cs" />
     <Compile Include="Assets\Scripts\Spells\Dark\DarkTotem\DarkTotemProjectile.cs" />
@@ -183,6 +187,10 @@
     <Compile Include="Assets\Scripts\StatusEffects\Poison.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\StatusEffect.cs" />
     <Compile Include="Assets\Scripts\StatusEffects\Stun.cs" />
+    <Compile Include="Assets\Scripts\Timeline\DeactivateObjectBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Timeline\DeactivateObjectClip.cs" />
+    <Compile Include="Assets\Scripts\Timeline\DeactivateObjectMixerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Timeline\DeactivateObjectTrack.cs" />
     <Compile Include="Assets\Scripts\Traps\FloorSpike.cs" />
     <Compile Include="Assets\Scripts\Traps\FloorTrap.cs" />
     <Compile Include="Assets\Scripts\Traps\MovingRock.cs" />

@@ -38,7 +38,8 @@ public class SpooderNet : ITime
         if (collidedObject.gameObject.CompareTag("Player") && collidedObject.isTrigger)
         {
             StartCoroutine(StopMoving());
-            collidedObject.GetComponentInParent<PlayerMovement>().SetMoveSpeed(0.5f);
+            var playMovement = collidedObject.GetComponent<PlayerMovement>();
+            if (playMovement) playMovement.SetMoveSpeed(0.5f);
         }
         if (collidedObject.gameObject.CompareTag("WorldCollision"))
         {
@@ -51,7 +52,8 @@ public class SpooderNet : ITime
     {
         if (collidedObject.gameObject.CompareTag("Player") && collidedObject.isTrigger)
         {
-            collidedObject.GetComponentInParent<PlayerMovement>().SetMoveSpeed(-1);
+            var playMovement = collidedObject.GetComponent<PlayerMovement>();
+            if (playMovement) playMovement.SetMoveSpeed(-1);
         }
     }
 

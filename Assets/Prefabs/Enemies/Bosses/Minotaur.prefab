@@ -888,6 +888,7 @@ MonoBehaviour:
   TriggerCollider: {fileID: 5542084788087790288}
   HomePosition: {x: 16.5, y: 29}
   LootTable: {fileID: 0}
+  EnemyStateUI: {fileID: 0}
   DeadSignal: {fileID: 11400000, guid: 5eeb22198f88d4e4d90ffa7247208133, type: 2}
   DeathAnimation: {fileID: 0}
   DirectionalArrow: {fileID: 0}
@@ -1096,7 +1097,7 @@ MonoBehaviour:
   OnHealthLost: {fileID: 11400000, guid: 1ef836c0240a750419afbecd196cd3e6, type: 2}
   OnHealthGained: {fileID: 0}
   DamageDisplayCanvas: {fileID: 0}
-  Health: {fileID: 11400000, guid: 55517c9c7dab8214d9a9c1a1caa0ed38, type: 2}
+  HealthSO: {fileID: 11400000, guid: 55517c9c7dab8214d9a9c1a1caa0ed38, type: 2}
 --- !u!114 &6222043403901438859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1110,7 +1111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca169d9b21a0ff44994e45e56d7464f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementState: 0
+  _state: 0
+  StatusEffectDisplayArea: {fileID: 0}
+  StatusEffectIconPrefab: {fileID: 0}
+  SpaceBetweenIcons: 0
 --- !u!1 &5542084788379692026
 GameObject:
   m_ObjectHideFlags: 0

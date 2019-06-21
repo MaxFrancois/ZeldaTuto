@@ -24,7 +24,7 @@ public class DarkTotemProjectile : ITime
 
     void FixedUpdate()
     {
-        body.velocity = new Vector2(direction.x, direction.y) * config.ProjectileSpeed * Time.fixedDeltaTime * (1 - SlowTimeCoefficient);
+        body.velocity = new Vector2(direction.x, direction.y).normalized * config.ProjectileSpeed * Time.fixedDeltaTime * (1 - SlowTimeCoefficient);
         currentLifeTime -= Time.fixedDeltaTime * (1 - SlowTimeCoefficient);
         if (currentLifeTime < 0)
             DestroyThis();

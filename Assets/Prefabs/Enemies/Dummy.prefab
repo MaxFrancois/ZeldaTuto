@@ -224,7 +224,7 @@ MonoBehaviour:
   OnHealthGained: {fileID: 0}
   DamageDisplayCanvas: {fileID: 8702429126016056852, guid: 00624395a594fb64b8488b2443ae1d3e,
     type: 3}
-  Health: {fileID: 11400000, guid: cde02e79f96e5434eae4a224c16f06b4, type: 2}
+  HealthSO: {fileID: 11400000, guid: cde02e79f96e5434eae4a224c16f06b4, type: 2}
 --- !u!114 &1400589264114267886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca169d9b21a0ff44994e45e56d7464f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementState: 0
+  _state: 0
   StatusEffectDisplayArea: {fileID: 1677388901}
   StatusEffectIconPrefab: {fileID: 2645113330647844246, guid: 86d7e34d290621b4ab238dc810718270,
     type: 3}
@@ -360,6 +360,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 979254086202818542, guid: 1dc035c22ea14e147883abd74ea733aa,
+        type: 3}
+      propertyPath: HealthBarFiller
+      value: 
+      objectReference: {fileID: 945421303}
+    - target: {fileID: 979254086202818542, guid: 1dc035c22ea14e147883abd74ea733aa,
+        type: 3}
+      propertyPath: HealthBarDelayFiller
+      value: 
+      objectReference: {fileID: 769697292}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dc035c22ea14e147883abd74ea733aa, type: 3}
 --- !u!1 &83283954 stripped
@@ -374,6 +384,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 979254087169297718}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &945421303 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 979254086770276033, guid: 1dc035c22ea14e147883abd74ea733aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 979254087169297718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &769697292 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 979254086580038458, guid: 1dc035c22ea14e147883abd74ea733aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 979254087169297718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1677388901 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 979254085539176787, guid: 1dc035c22ea14e147883abd74ea733aa,

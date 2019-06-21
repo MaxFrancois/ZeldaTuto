@@ -15,20 +15,6 @@ public class Enemy : EnemyBase
 {
     public VoidSignal RoomSignal;
 
-    protected virtual void Awake()
-    {
-        //transform.position = HomePosition;
-        EnemyHealth = GetComponent<CharacterHealth>();
-        EnemyState = GetComponent<CharacterState>();
-        EnemyHealth.Health.CurrentHealth = EnemyHealth.Health.MaxHealth;
-        body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        BlinkOnHit = GetComponent<BlinkOnHit>();
-        target = GameObject.FindWithTag("Player").transform;
-        EnemyState.MovementState = CharacterMovementState.Idle;
-    }
-
     public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
         EnableEnemyStateUI();

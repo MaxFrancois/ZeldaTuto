@@ -1,15 +1,31 @@
 ﻿using UnityEngine;
 
+public class HealthInfo
+{
+    public float MaxHealth;
+    public float CurrentHealth;
+    public float PassiveHealthRegenSpeed;
+}
+
 public class CharacterHealth : ITime
 {
     public FloatSignal OnHealthLost;
     public FloatSignal OnHealthGained;
     public DamageDisplay DamageDisplayCanvas;
-    public Health Health;
+    public Health HealthSO;
+    public HealthInfo Health;
 
-    private void Start()
+    private void Awake()
     {
-        Health.CurrentHealth = Health.MaxHealth;
+        
+    }
+
+    public void Initialize()
+    {
+        Health = new HealthInfo();
+        Health.MaxHealth = HealthSO.MaxHealth;
+        Health.CurrentHealth = HealthSO.MaxHealth;
+        Health.PassiveHealthRegenSpeed = HealthSO.PassiveHealthRegenSpeed;
     }
 
     public void GainHealth(float amount, bool display = true)

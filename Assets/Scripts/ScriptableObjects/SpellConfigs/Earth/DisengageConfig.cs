@@ -17,8 +17,8 @@ public class DisengageConfig : SpellConfig
 
     public override void Cast(Transform source, Vector3 direction)
     {
-        //var illusion = Instantiate(Illusion, source.position, Quaternion.identity);
-        //illusion.Initialize(this);
+        var illusion = Instantiate(Illusion, source.position, Quaternion.identity);
+        illusion.Initialize(this);
         var backwardsDirection = new Vector3(-direction.x, -direction.y, 0);
         source.GetComponent<PlayerMovement>().Dash(DashDuration, DashSpeed, backwardsDirection);
     }

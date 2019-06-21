@@ -55,6 +55,7 @@ public class PlayerMovement : IHasHealth
         lightMask = GetComponent<SpriteMask>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         PlayerHealth = GetComponent<CharacterHealth>();
+        PlayerHealth.Initialize();
         PlayerMana = GetComponent<CharacterMana>();
         PlayerUltimate = GetComponent<CharacterUltimate>();
         animator.SetFloat("MoveX", 0);
@@ -112,7 +113,10 @@ public class PlayerMovement : IHasHealth
         fallingTowards = Vector3.zero;
         transform.localScale = new Vector3(1, 1, 1);
         animator.SetBool("IsPickingUp", false);
-        transform.position = respawnPoint.RespawnPosition;
+        if (respawnPoint)
+            transform.position = respawnPoint.RespawnPosition;
+        else
+            transform.position = StartingPosition.InitialValue;
         TakeDamage(null, 0, 0, damage);
         PlayerState.MovementState = CharacterMovementState.Idle;
     }
@@ -251,7 +255,8 @@ public class PlayerMovement : IHasHealth
     public void Dash(float duration, float dashSpeed, Vector3 direction)
     {
         DirectionalArrow.transform.up = direction;
-        var willHitWall = Physics2D.RaycastAll(transform.position, direction, 4);
+        //TODO: better wall detection when dashing, currently gets stuck
+        var willHitWall = Physics2D.RaycastAll(transform.position, direction, 5);
         var hit = willHitWall.FirstOrDefault(c => c.collider != null && c.collider.CompareTag("WorldCollision"));
         if (hit && hit.collider)
             dashHitPoint = hit.point;
@@ -291,6 +296,17 @@ public class PlayerMovement : IHasHealth
         }
     }
     #endregion
+
+    public void Freeze()
+    {
+        PlayerState.MovementState = CharacterMovementState.Stunned;
+        animator.SetBool("IsMoving", false);
+    }
+
+    public void Unfreeze()
+    {
+        PlayerState.MovementState = CharacterMovementState.Idle;
+    }
 
     public void ReceiveItem()
     {

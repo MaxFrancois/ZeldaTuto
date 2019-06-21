@@ -445,6 +445,7 @@ GameObject:
   - component: {fileID: 748696298}
   - component: {fileID: 748696299}
   - component: {fileID: 748696300}
+  - component: {fileID: 748696302}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -510,7 +511,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -12114295
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7152930139536384079, guid: 3c84827b79fd2914c974ce3071b1bacc,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -677,9 +678,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Spells:
-  - {fileID: 11400000, guid: cb3f9434268724a43b715b32c73f4154, type: 2}
+  - {fileID: 11400000, guid: 75654b6acc3b62047ab90376f3067d9b, type: 2}
   - {fileID: 11400000, guid: 43e30d4ee1ed28c44afcf8efbba6f4f9, type: 2}
-  - {fileID: 11400000, guid: ce40a06778fa9bf47bafa5b3deaeecc1, type: 2}
+  - {fileID: 11400000, guid: 18e35231daa56ed4e93fb0349a3bd0f7, type: 2}
   - {fileID: 11400000, guid: d820ba0e499764649b2afa3dca58fb50, type: 2}
   SpellChangedSignal: {fileID: 11400000, guid: f23f7826ee9c99c4da7afe130fc97b59, type: 2}
   Ultimate: {fileID: 11400000, guid: f2140e4090e16e24b916733e2a50271f, type: 2}
@@ -829,7 +830,7 @@ MonoBehaviour:
   OnHealthGained: {fileID: 11400000, guid: 5c17f1e337406224ca0cb4f49821c51c, type: 2}
   DamageDisplayCanvas: {fileID: 8702429126016056852, guid: 00624395a594fb64b8488b2443ae1d3e,
     type: 3}
-  Health: {fileID: 11400000, guid: 700be72a920452d488cba7107197f460, type: 2}
+  HealthSO: {fileID: 11400000, guid: 700be72a920452d488cba7107197f460, type: 2}
 --- !u!114 &748696296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +922,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca169d9b21a0ff44994e45e56d7464f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementState: 0
+  _state: 0
+  StatusEffectDisplayArea: {fileID: 0}
+  StatusEffectIconPrefab: {fileID: 0}
+  SpaceBetweenIcons: 0
 --- !u!114 &748696300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,6 +941,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentFacingDirection: {x: 0, y: 0, z: 0}
   CurrentInputDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &748696302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058059808089006316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: dd48a7375e3b3cd41bf9d14b9a87a35d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sendTriggerMessage: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  skinWidth: 0.1
 --- !u!1 &9058059808153127259
 GameObject:
   m_ObjectHideFlags: 0

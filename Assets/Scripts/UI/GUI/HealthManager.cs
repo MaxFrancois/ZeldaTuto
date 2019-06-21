@@ -9,19 +9,19 @@ public class HealthManager : MonoBehaviour
     public Image HealthBarDelayFiller;
     public float DelayFillerSpeed;
     //public Inventory PlayerInventory;
-    public Health PlayerHealth;
+    public CharacterHealth PlayerHealth;
 
     void Start()
     {
         //PlayerHealth.CurrentHealth = PlayerHealth.MaxHealth;
-        HealthBarFiller.fillAmount = PlayerHealth.CurrentHealth / PlayerHealth.MaxHealth;
+        HealthBarFiller.fillAmount = PlayerHealth.Health.CurrentHealth / PlayerHealth.Health.MaxHealth;
     }
 
     public void AddHealth(float amount)
     {
-        HealthBarFiller.fillAmount += amount / PlayerHealth.MaxHealth;
+        HealthBarFiller.fillAmount += amount / PlayerHealth.Health.MaxHealth;
         //PlayerHealth.CurrentHealth += amount;
-        if (PlayerHealth.CurrentHealth > PlayerHealth.MaxHealth)
+        if (PlayerHealth.Health.CurrentHealth > PlayerHealth.Health.MaxHealth)
         {
             HealthBarFiller.fillAmount = 1;
             //PlayerHealth.CurrentHealth = PlayerHealth.MaxHealth;
@@ -30,9 +30,9 @@ public class HealthManager : MonoBehaviour
 
     public void DecreaseHealth(float amount)
     {
-        HealthBarFiller.fillAmount -= amount / PlayerHealth.MaxHealth;
+        HealthBarFiller.fillAmount -= amount / PlayerHealth.Health.MaxHealth;
         //PlayerHealth.CurrentHealth -= amount;
-        if (PlayerHealth.CurrentHealth <= 0)
+        if (PlayerHealth.Health.CurrentHealth <= 0)
         {
             HealthBarFiller.fillAmount = 0;
             //PlayerHealth.CurrentHealth = 0;

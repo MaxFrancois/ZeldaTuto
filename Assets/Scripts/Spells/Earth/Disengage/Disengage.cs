@@ -8,6 +8,8 @@ public class Disengage : ITime
     float lifeTime;
     bool isDestroyed = false;
     List<EnemyBase> enemiesInRange;
+    public BoxCollider2D IllusionCollider;
+    public float EnableColliderAfter = 0.3f;
 
     public void Initialize(DisengageConfig cfg)
     {
@@ -18,6 +20,12 @@ public class Disengage : ITime
 
     void Update()
     {
+        if (EnableColliderAfter > 0)
+        {
+            EnableColliderAfter -= Time.deltaTime * (1 - SlowTimeCoefficient);
+            if (EnableColliderAfter <= 0)
+                IllusionCollider.enabled = true;
+        }
         if (lifeTime > 0)
         {
             lifeTime -= Time.deltaTime * (1 - SlowTimeCoefficient);

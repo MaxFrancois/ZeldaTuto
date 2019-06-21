@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7887866619615499780
 Transform:
   m_ObjectHideFlags: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   TriggerCollider: {fileID: 7887866619615499776}
   HomePosition: {x: -8, y: 22}
   LootTable: {fileID: 11400000, guid: 7177c74a6835c3f45b6dde15d1f1b787, type: 2}
+  EnemyStateUI: {fileID: 0}
   DeadSignal: {fileID: 0}
   DeathAnimation: {fileID: 3456100918949233971, guid: e2a8d9243cd56794eba57c1b1d1f8bda,
     type: 3}
@@ -240,7 +241,7 @@ MonoBehaviour:
   OnHealthLost: {fileID: 0}
   OnHealthGained: {fileID: 0}
   DamageDisplayCanvas: {fileID: 0}
-  Health: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}
+  HealthSO: {fileID: 11400000, guid: c012a73e43282a04a9d62e9a33256e11, type: 2}
 --- !u!114 &9190828317651785743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,4 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca169d9b21a0ff44994e45e56d7464f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementState: 0
+  _state: 0
+  StatusEffectDisplayArea: {fileID: 0}
+  StatusEffectIconPrefab: {fileID: 0}
+  SpaceBetweenIcons: 0

@@ -34,5 +34,5 @@ MonoBehaviour:
     type: 3}
   AmountOfProjectiles: 5
   AngleBetweenProjectiles: 10
-  ProjectileSpeed: 100
+  ProjectileSpeed: 500
   ProjectileLifeTime: 1

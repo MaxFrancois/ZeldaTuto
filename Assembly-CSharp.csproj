@@ -135,6 +135,8 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Air\BoomerangConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Air\WhirlwindConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Dark\DarkTotemConfig.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Dark\DashConfig.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Dark\SlowTimeConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Earth\AvalancheConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Earth\DisengageConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Earth\EarthTotemConfig.cs" />
@@ -142,8 +144,6 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Fire\FireTotemConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Fire\FirewallConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Lightning\LightningBallsConfig.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Neutral\DashConfig.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Neutral\SlowTimeConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Shared\SpellBook.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\SpellConfigs\Shared\SpellConfig.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\StatusEffectConfigs\PoisonConfig.cs" />
@@ -166,6 +166,8 @@
     <Compile Include="Assets\Scripts\Spells\Air\Whirlwind.cs" />
     <Compile Include="Assets\Scripts\Spells\Dark\DarkTotem\DarkTotem.cs" />
     <Compile Include="Assets\Scripts\Spells\Dark\DarkTotem\DarkTotemProjectile.cs" />
+    <Compile Include="Assets\Scripts\Spells\Dark\Dash.cs" />
+    <Compile Include="Assets\Scripts\Spells\Dark\SlowTime.cs" />
     <Compile Include="Assets\Scripts\Spells\Earth\Avalanche.cs" />
     <Compile Include="Assets\Scripts\Spells\Earth\Disengage\Disengage.cs" />
     <Compile Include="Assets\Scripts\Spells\Earth\Disengage\DisengageGas.cs" />
@@ -177,8 +179,6 @@
     <Compile Include="Assets\Scripts\Spells\Fire\Firewall\StaticFire.cs" />
     <Compile Include="Assets\Scripts\Spells\Lightning\LightningBalls\LightningBallInstance.cs" />
     <Compile Include="Assets\Scripts\Spells\Lightning\LightningBalls\LightningBalls.cs" />
-    <Compile Include="Assets\Scripts\Spells\Neutral\Dash.cs" />
-    <Compile Include="Assets\Scripts\Spells\Neutral\SlowTime.cs" />
     <Compile Include="Assets\Scripts\Spells\Shared\AOEEffect.cs" />
     <Compile Include="Assets\Scripts\Spells\Shared\SpellBar.cs" />
     <Compile Include="Assets\Scripts\Spells\Shared\SpellContainer.cs" />

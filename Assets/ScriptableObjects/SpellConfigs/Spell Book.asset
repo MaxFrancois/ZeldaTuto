@@ -13,14 +13,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082f678a663b51046a3b718ad32c4cff, type: 3}
   m_Name: Spell Book
   m_EditorClassIdentifier: 
-  Spells:
-  - {fileID: 11400000, guid: 2968764c0a4f39846969cd08122c6270, type: 2}
-  - {fileID: 11400000, guid: cb3f9434268724a43b715b32c73f4154, type: 2}
-  - {fileID: 11400000, guid: f2140e4090e16e24b916733e2a50271f, type: 2}
-  - {fileID: 11400000, guid: 513744178a12da4438d9f17bf3db7e8c, type: 2}
-  - {fileID: 11400000, guid: 447896eb93cf6d5489aa525cae93116e, type: 2}
-  - {fileID: 11400000, guid: 43e30d4ee1ed28c44afcf8efbba6f4f9, type: 2}
-  - {fileID: 11400000, guid: fe9d59ee23be8914e9ae3ec89ddf02a6, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  SpellCategories:
+  - Element: 1
+    Spells:
+    - {fileID: 11400000, guid: 2968764c0a4f39846969cd08122c6270, type: 2}
+    - {fileID: 11400000, guid: ce40a06778fa9bf47bafa5b3deaeecc1, type: 2}
+    - {fileID: 11400000, guid: f2140e4090e16e24b916733e2a50271f, type: 2}
+  - Element: 2
+    Spells: []
+  - Element: 3
+    Spells:
+    - {fileID: 11400000, guid: 447896eb93cf6d5489aa525cae93116e, type: 2}
+    - {fileID: 11400000, guid: 18e35231daa56ed4e93fb0349a3bd0f7, type: 2}
+  - Element: 4
+    Spells:
+    - {fileID: 11400000, guid: 43e30d4ee1ed28c44afcf8efbba6f4f9, type: 2}
+  - Element: 5
+    Spells:
+    - {fileID: 11400000, guid: 513744178a12da4438d9f17bf3db7e8c, type: 2}
+    - {fileID: 11400000, guid: 75654b6acc3b62047ab90376f3067d9b, type: 2}
+    - {fileID: 11400000, guid: 08bc225ce226968488c20bc40fbd1cc9, type: 2}
+  - Element: 6
+    Spells:
+    - {fileID: 11400000, guid: cb3f9434268724a43b715b32c73f4154, type: 2}
+    - {fileID: 11400000, guid: fe9d59ee23be8914e9ae3ec89ddf02a6, type: 2}
+    - {fileID: 11400000, guid: d820ba0e499764649b2afa3dca58fb50, type: 2}
+  - Element: 7
+    Spells: []

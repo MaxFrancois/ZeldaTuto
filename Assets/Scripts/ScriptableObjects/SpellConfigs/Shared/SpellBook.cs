@@ -51,6 +51,6 @@ public class SpellBook : ScriptableObject
 
     public List<SpellConfig> GetByElement(SpellElement element)
     {
-        return SpellCategories.First(c => c.Element == element).Spells;
+        return SpellCategories.FirstOrDefault(c => c.Element == element)?.Spells;
     }
 }

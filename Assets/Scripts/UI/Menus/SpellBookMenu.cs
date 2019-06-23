@@ -18,11 +18,15 @@ public class SpellBookMenuTab
 public class SpellBookMenu : MonoBehaviour
 {
     public List<SpellBookMenuTab> Tabs;
+    List<SpellBookMenuTab> activeTabs;
     int selectedTabIndex;
+    public float TabXIndex;
     public List<Button> BoundButtons;
     Button[][] ButtonLinksArray;
     List<Button> SpellButtons;
     public Button SpellButtonPrefab;
+    public float SpellIconsOffset;
+    public float SpellIconsXIndex;
     public Sprite EmptySelectionSquare;
     public GameObject RestMenu;
     public GameObject SpellListContainer;
@@ -44,6 +48,7 @@ public class SpellBookMenu : MonoBehaviour
         selectedButtonIndex = 0;
         boundSpellSelected = false;
         selectedTabIndex = 0;
+        InitializeTabs();
         SetTabSelected(selectedTabIndex, true);
         //setup controller buttons at the top
         for (int i = 0; i < PlayerSpellBar.Spells.Count; i++)
@@ -55,7 +60,27 @@ public class SpellBookMenu : MonoBehaviour
         }
 
         SetupButtons();
+
+        //TODO: figure out how to pre select the first button
+        BoundButtons[0].Select();
         eventSystem.SetSelectedGameObject(DefaultSelectedObject);
+    }
+
+    void InitializeTabs()
+    {
+        activeTabs = new List<SpellBookMenuTab>();
+        foreach (var tab in Tabs)
+        {
+            if (tab.Element == SpellElement.None || SpellBook.GetByElement(tab.Element).Count > 0)
+            {
+                var rect = tab.TabImage.gameObject.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(TabXIndex * activeTabs.Count, rect.anchoredPosition.y);
+                activeTabs.Add(tab);
+                tab.TabImage.gameObject.SetActive(true);
+            }
+            else
+                tab.TabImage.gameObject.SetActive(false);
+        }
     }
 
     // Go through the available spells in the spellbook
@@ -63,11 +88,9 @@ public class SpellBookMenu : MonoBehaviour
     // And bind the proper spellconfig to it
     private void SetupButtons()
     {
-        
         int spellIndex = 0;
-        //TODO: replace with category tabs
         var unlockedSpells = new List<SpellConfig>();
-        var selectedTabElement = Tabs.First(c => c.Selected).Element;
+        var selectedTabElement = activeTabs.First(c => c.Selected).Element;
         if (selectedTabElement == SpellElement.None)
             unlockedSpells = SpellBook.GetAllSpells();
         else
@@ -85,11 +108,11 @@ public class SpellBookMenu : MonoBehaviour
             ButtonLinksArray[i] = new Button[SpellsPerLine];
         while (spellIndex < unlockedSpells.Count)
         {
-            //if (spellIndex >= NumberOfLines * SpellsPerLine) break;
-            var xIndex = 10 + currentColumn * 70;
-            var yIndex = -10 + currentLine * -70;
-            var buttonPosition = new Vector3(SpellListContainer.transform.position.x + xIndex, SpellListContainer.transform.position.y + yIndex, 0);
+            var xIndex = SpellIconsOffset + currentColumn * SpellIconsXIndex;
+            var yIndex = -SpellIconsOffset + currentLine * -SpellIconsXIndex;
+            var buttonPosition = new Vector2(xIndex, yIndex);
             var b = Instantiate(SpellButtonPrefab, buttonPosition, Quaternion.identity, SpellListContainer.transform);
+            b.gameObject.GetComponent<RectTransform>().anchoredPosition = buttonPosition;
             ButtonLinksArray[currentLine][currentColumn] = b;
             currentColumn++;
             if (currentColumn >= SpellsPerLine)
@@ -237,7 +260,9 @@ public class SpellBookMenu : MonoBehaviour
             ss.pressedSprite = newSpell.SelectedIcon;
             btn.spriteState = ss;
             if (index != -1)
+            {
                 btn.onClick.AddListener(delegate { SetSelectedSpell(index); });
+            }
             btn.gameObject.GetComponent<SpellContainer>().Spell = newSpell;
         }
         else
@@ -301,8 +326,8 @@ public class SpellBookMenu : MonoBehaviour
         SetTabSelected(selectedTabIndex, false);
         selectedTabIndex += index;
         if (selectedTabIndex < 0)
-            selectedTabIndex = Tabs.Count - 1;
-        else if (selectedTabIndex > Tabs.Count - 1)
+            selectedTabIndex = activeTabs.Count - 1;
+        else if (selectedTabIndex > activeTabs.Count - 1)
             selectedTabIndex = 0;
         SetTabSelected(selectedTabIndex, true);
 
@@ -313,9 +338,9 @@ public class SpellBookMenu : MonoBehaviour
 
     private void SetTabSelected(int index, bool selected)
     {
-        var color = Tabs[index].TabImage.color;
-        Tabs[index].TabImage.color = new Color(color.r, color.g, color.b, selected ? 1 : 0.5f);
-        Tabs[index].Selected = selected;
+        var color = activeTabs[index].TabImage.color;
+        activeTabs[index].TabImage.color = new Color(color.r, color.g, color.b, selected ? 1 : 0.5f);
+        activeTabs[index].Selected = selected;
     }
 
     private void BackToRestMenu()

@@ -17,7 +17,8 @@ public class CharacterHealth : ITime
 
     private void Awake()
     {
-        
+        if (Health == null)
+            Initialize();
     }
 
     public void Initialize()

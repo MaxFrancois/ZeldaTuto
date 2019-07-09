@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RestMenu : MonoBehaviour
@@ -10,6 +11,8 @@ public class RestMenu : MonoBehaviour
     public GameObject SpellBookMenu;
     private float recentlyMoved;
     private float recentlyPressed;
+    [SerializeField] GameObject FadePanel;
+    [SerializeField] float FadeDuration;
 
     private void OnEnable()
     {
@@ -74,7 +77,15 @@ public class RestMenu : MonoBehaviour
 
     public void SaveExit()
     {
-        Debug.Log("Save & Exit");
+        StartCoroutine(SaveExitCo());
+    }
+
+    IEnumerator SaveExitCo()
+    {
+        SaveManager.instance.SaveGame();
+        Instantiate(FadePanel, Vector3.zero, Quaternion.identity);
+        yield return new WaitForSeconds(FadeDuration);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Resume()

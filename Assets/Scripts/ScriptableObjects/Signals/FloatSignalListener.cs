@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [Serializable]
 public class FloatEvent : UnityEvent<float> { }
 
-public class FloatSignalListener : SignalListenerBase
+public class FloatSignalListener : SingleSignalListenerBase
 {
     public FloatEvent Event;
 

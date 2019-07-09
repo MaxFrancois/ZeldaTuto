@@ -233,11 +233,11 @@ public class PlayerMovement : IHasHealth
         //if (dashDuration > 0 && dashHitPoint != (Vector2)transform.position)
         //{
         //    dashDuration -= Time.deltaTime * (1 - SlowTimeCoefficient);
-            //if (dashHitPoint == Vector2.zero)
-            //    rigidBody.MovePosition(transform.position + dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
-            //else
-                //rigidBody.MovePosition(Vector3.Lerp(transform.position, dashHitPoint, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient)));
-            //rigidBody.velocity = dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient);
+        //if (dashHitPoint == Vector2.zero)
+        //    rigidBody.MovePosition(transform.position + dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
+        //else
+        //rigidBody.MovePosition(Vector3.Lerp(transform.position, dashHitPoint, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient)));
+        //rigidBody.velocity = dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient);
         //}
         if (Vector2.Distance(dashHitPoint, transform.position) > 0.2)
         {
@@ -308,25 +308,51 @@ public class PlayerMovement : IHasHealth
         PlayerState.MovementState = CharacterMovementState.Idle;
     }
 
-    public void ReceiveItem()
+    public void ReceiveItem(MonoBehaviour spriteRenderer)
     {
-        if (PlayerInventory.currentItem != null)
+        //if (PlayerInventory.currentItem != null)
+        //{
+        if (spriteRenderer)//PlayerState.MovementState != CharacterMovementState.Interacting)
         {
-            if (PlayerState.MovementState != CharacterMovementState.Interacting)
-            {
-                animator.SetBool("IsPickingUp", true);
-                PlayerState.MovementState = CharacterMovementState.Interacting;
-                ReceivedItemSprite.sprite = PlayerInventory.currentItem.ItemSprite;
-            }
-            else
-            {
-                animator.SetBool("IsPickingUp", false);
-                PlayerState.MovementState = CharacterMovementState.Idle;
-                ReceivedItemSprite.sprite = null;
-                PlayerInventory.currentItem = null;
-            }
+            animator.SetBool("IsPickingUp", true);
+            Freeze();
+            //ReceivedItemSprite.sprite = (spriteRenderer as SpriteRenderer).sprite;
+            
+            //PlayerState.MovementState = CharacterMovementState.Interacting;
+            //if (sprite)
+            //else
+            //    ReceivedItemSprite.sprite = PlayerInventory.currentItem.ItemSprite;
+        }
+        else
+        {
+            animator.SetBool("IsPickingUp", false);
+            //PlayerState.MovementState = CharacterMovementState.Idle;
+            ReceivedItemSprite.sprite = null;
+            //PlayerInventory.currentItem = null;
+            Unfreeze();
+        }
+        //}
+    }
+
+    public void ReceiveItem(object item)
+    {
+        if (item != null && item is Sprite)
+        {
+            animator.SetBool("IsPickingUp", true);
+            ReceivedItemSprite.sprite = (item as Sprite);
+            ReceivedItemSprite.gameObject.SetActive(true);
+            Freeze();
+        }
+        else
+        {
+            animator.SetBool("IsPickingUp", false);
+            ReceivedItemSprite.sprite = null;
+            ReceivedItemSprite.gameObject.SetActive(false);
+            Unfreeze();
         }
     }
+
+
     public override void TakeDamage(Transform thingThatHitYou, float pushTime, float pushForce, float damage, bool display = true)
     {
         if (PlayerState.MovementState == CharacterMovementState.Dashing)
@@ -410,5 +436,5 @@ public class PlayerMovement : IHasHealth
         respawnPoint = rp;
     }
 
-    
+
 }

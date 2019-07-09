@@ -82,4 +82,9 @@ public class SpellBar : MonoBehaviour
             }
         }
     }
+
+    public List<SpellConfig> GetCurrentSpells()
+    {
+        return Spells;
+    }
 }

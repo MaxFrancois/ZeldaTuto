@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ContextClue : MonoBehaviour
 {
@@ -9,7 +7,10 @@ public class ContextClue : MonoBehaviour
 
     public void ChangeActive(bool isActive)
     {
-        IsActive = isActive;
-        Clue.SetActive(IsActive);
+        if (IsActive != isActive)
+        {
+            IsActive = isActive;
+            Clue.SetActive(IsActive);
+        }
     }
 }

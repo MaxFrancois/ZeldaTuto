@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [Serializable]
 public class BoolEvent : UnityEvent<bool> { }
 
-public class BoolSignalListener : SignalListenerBase
+public class BoolSignalListener : SingleSignalListenerBase
 {
     public BoolEvent Event;
 

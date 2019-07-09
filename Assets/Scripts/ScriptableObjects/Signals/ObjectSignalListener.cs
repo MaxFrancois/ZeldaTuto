@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class ObjectEvent : UnityEvent<Object> { }
+public class ObjectEvent : UnityEvent<object> { }
 
-public class ObjectSignalListener : SignalListenerBase
+public class ObjectSignalListener : SingleSignalListenerBase
 {
     public ObjectEvent Event;
 
-    public void OnSignalRaised(Object parameter)
+    public void OnSignalRaised(object parameter)
     {
         Event.Invoke(parameter);
     }

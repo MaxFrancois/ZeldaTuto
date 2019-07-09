@@ -31,12 +31,20 @@ public class SpellBook : ScriptableObject
 
     public void UnlockSpell(SpellConfig spell)
     {
-        SpellCategories.Select(c => c.Spells.First(d => d == spell)).First().IsUnlocked = true;
+        foreach (var category in SpellCategories)
+        {
+            var cfg = category.Spells.FirstOrDefault(d => d == spell);
+            if (cfg) { cfg.IsUnlocked = true; break; }
+        }
     }
 
     public void LockSpell(SpellConfig spell)
     {
-        SpellCategories.Select(c => c.Spells.First(d => d == spell)).First().IsUnlocked = false;
+        foreach (var category in SpellCategories)
+        {
+            var cfg = category.Spells.FirstOrDefault(d => d == spell);
+            if (cfg) { cfg.IsUnlocked = false; break; }
+        }
     }
 
     public List<SpellConfig> GetAllSpells()

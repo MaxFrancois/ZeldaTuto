@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class VoidSignalListener : SignalListenerBase
+public class VoidSignalListener : SingleSignalListenerBase
 {
     public UnityEvent Event;
 

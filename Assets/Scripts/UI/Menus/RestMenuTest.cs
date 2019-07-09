@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class RestMenuTest : MonoBehaviour
 {
     public EventSystem eventSystem;
     public GameObject selectedObject;
     public GameObject SpellBookMenu;
+    [SerializeField] GameObject FadePanel;
+    [SerializeField] float FadeDuration;
+
     private bool buttonSelected;
 
     private void OnEnable()
@@ -42,7 +46,15 @@ public class RestMenuTest : MonoBehaviour
 
     public void SaveExit()
     {
-        Debug.Log("Save & Exit");
+        StartCoroutine(SaveExitCo());
+    }
+
+    IEnumerator SaveExitCo()
+    {
+        SaveManager.instance.SaveGame();
+        Instantiate(FadePanel, Vector3.zero, Quaternion.identity);
+        yield return new WaitForSeconds(FadeDuration);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Resume()

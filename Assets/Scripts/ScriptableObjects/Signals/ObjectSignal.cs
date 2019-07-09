@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "ObjectSignal", menuName = "Signals/ObjectSignal")]
 public class ObjectSignal : SignalBase
 {
-    public void Raise(Object parameter)
+    public void Raise(object parameter)
     {
         for (int i = Listeners.Count - 1; i >= 0; i--)
         {

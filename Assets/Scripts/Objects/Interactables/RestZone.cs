@@ -1,25 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RestZone : Interactable
 {
     public VoidSignal RestZoneSignal;
-    private Animator animator;
 
-    private void Awake()
+    protected override void StartInteraction()
     {
-        animator = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        if (Input.GetButtonDown("Interact") && IsActive && !MenuManager.IsPaused)
-        {
-            //RestMenu.SetActive(true);
-            //Context.Raise();
+        if (!MenuManager.IsPaused)
             StartCoroutine(OpenBook());
-        }
     }
 
     IEnumerator OpenBook()

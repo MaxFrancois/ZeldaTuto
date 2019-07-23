@@ -15,22 +15,14 @@ public class Door : Interactable
     [Tooltip("Test Tooltip")]
     public DoorType DoorType;
     public bool IsOpen = false;
-    public SpriteRenderer SpriteRenderer;
     public Inventory PlayerInventory;
     public BoxCollider2D PhysicsCollider;
 
-    void Start()
+    protected override void StartInteraction()
     {
-    }
-
-    void Update()
-    {
-        if (Input.GetButtonDown("Interact") && IsActive && !IsOpen)
+        if (DoorType == DoorType.Key && PlayerInventory.NumberOfKeys > 0 && !IsOpen)
         {
-            if (DoorType == DoorType.Key && PlayerInventory.NumberOfKeys > 0)
-            {
-                Open();
-            }
+            Open();
         }
     }
 
@@ -38,22 +30,17 @@ public class Door : Interactable
     {
         // inherit and only use key or other required item on child
         PlayerInventory.NumberOfKeys--;
-        SpriteRenderer.enabled = false;
-        IsActive = false;
+        spriteRenderer.enabled = false;
+        IsPlayerInRange = false;
         IsOpen = true;
         PhysicsCollider.enabled = false;
     }
 
     public void Close()
     {
-        SpriteRenderer.enabled = true;
-        IsActive = true;
+        spriteRenderer.enabled = true;
+        IsPlayerInRange = true;
         IsOpen = false;
         PhysicsCollider.enabled = true;
-    }
-
-    protected override bool CanInteract()
-    {
-        return !IsOpen;
     }
 }

@@ -21,6 +21,12 @@ public class SpellBar : MonoBehaviour
     public VoidSignal SpellChangedSignal;
     public SpellConfig Ultimate;
 
+    public void Initialize(List<SpellConfig> spells)
+    {
+        Spells = spells;
+        SpellChangedSignal.Raise();
+    }
+
     public void AddSpell(SpellConfig spell)
     {
         if (!Spells.Contains(spell) && Spells.Count < MaxQuantity)

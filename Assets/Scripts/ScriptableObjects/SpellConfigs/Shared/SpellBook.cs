@@ -38,6 +38,13 @@ public class SpellBook : ScriptableObject
         }
     }
 
+    public void LockAll()
+    {
+        foreach (var spellCategory in SpellCategories)
+            foreach (var spell in spellCategory.Spells)
+                LockSpell(spell);
+    }
+
     public void LockSpell(SpellConfig spell)
     {
         foreach (var category in SpellCategories)
@@ -47,7 +54,7 @@ public class SpellBook : ScriptableObject
         }
     }
 
-    public List<SpellConfig> GetAllSpells()
+    public List<SpellConfig> GetAllUnlockedSpells()
     {
         var spells = new List<SpellConfig>();
         foreach (var category in SpellCategories)
@@ -60,5 +67,16 @@ public class SpellBook : ScriptableObject
     public List<SpellConfig> GetByElement(SpellElement element)
     {
         return SpellCategories.FirstOrDefault(c => c.Element == element)?.Spells;
+    }
+
+    public SpellConfig GetSpellById(string id)
+    {
+        foreach (var category in SpellCategories)
+        {
+            var spell = category.Spells.FirstOrDefault(d => d.Id == id);
+            if (spell) return spell;
+        }
+        Debug.LogError("Couldnt get spell with ID " + id);
+        return null;
     }
 }

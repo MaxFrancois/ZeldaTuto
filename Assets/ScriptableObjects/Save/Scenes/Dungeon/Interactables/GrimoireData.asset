@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 0e8362b60c272684ca798baa9cfbca3e, type: 3}
+  m_Name: GrimoireData
+  m_EditorClassIdentifier: 
+  InteractableId: e61f68aa-9abb-4e88-93a5-196f8639430b
+  CanBeInteractedWithDefaultValue: 1
+  HideWhenCannotInteract: 1
+  SpriteAfterInteraction: {fileID: 0}
+  CanBeInteractedWith: 0

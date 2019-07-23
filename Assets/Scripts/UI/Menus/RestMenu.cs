@@ -82,7 +82,7 @@ public class RestMenu : MonoBehaviour
 
     IEnumerator SaveExitCo()
     {
-        SaveManager.instance.SaveGame();
+        PermanentObjects.Instance.SaveManager.SaveGame();
         Instantiate(FadePanel, Vector3.zero, Quaternion.identity);
         yield return new WaitForSeconds(FadeDuration);
         SceneManager.LoadScene("MainMenu");

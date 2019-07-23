@@ -34,13 +34,25 @@ public class SpellBookMenu : MonoBehaviour
     public float NumberOfLines;
     private int selectedButtonIndex;
     private bool boundSpellSelected = false;
-    public EventSystem eventSystem;
+    //public EventSystem eventSystem;
     public GameObject DefaultSelectedObject;
     public GameObject DefaultSelectedSpell;
     private bool buttonSelected;
     public SpellBar PlayerSpellBar;
     public SpellBook SpellBook;
     public SpellDetailsMenu SpellDetailsMenu;
+
+
+    EventSystem _eventSystem;
+    EventSystem eventSystem
+    {
+        get
+        {
+            if (_eventSystem == null)
+                _eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+            return _eventSystem;
+        }
+    }
 
     private void OnEnable()
     {
@@ -92,7 +104,7 @@ public class SpellBookMenu : MonoBehaviour
         var unlockedSpells = new List<SpellConfig>();
         var selectedTabElement = activeTabs.First(c => c.Selected).Element;
         if (selectedTabElement == SpellElement.None)
-            unlockedSpells = SpellBook.GetAllSpells();
+            unlockedSpells = SpellBook.GetAllUnlockedSpells();
         else
             unlockedSpells = SpellBook.GetByElement(selectedTabElement);
         NumberOfLines = Mathf.Ceil((float)unlockedSpells.Count / (float)SpellsPerLine);

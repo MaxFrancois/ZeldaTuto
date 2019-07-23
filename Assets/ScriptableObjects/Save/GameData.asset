@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7bd8231b8984e144b6521768d4516df, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  SceneData: []
-  PlayerData: {fileID: 0}
+  ScenesData:
+  - {fileID: 11400000, guid: 21ede40db0e2b7e4793f3d0ed12b18f2, type: 2}
+  PlayerData: {fileID: 11400000, guid: 9dd19d9d2410b79479431fd1e7e6864c, type: 2}

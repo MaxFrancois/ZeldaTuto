@@ -4640,7 +4640,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2664363764277657120}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 31d4354cef3a92a4481b8c1464e22afd, type: 3}
@@ -23263,7 +23263,7 @@ GameObject:
   - component: {fileID: 8347690773220751111}
   - component: {fileID: 8347690773220751108}
   m_Layer: 0
-  m_Name: FireballNewInstance
+  m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

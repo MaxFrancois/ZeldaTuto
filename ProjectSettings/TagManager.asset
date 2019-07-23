@@ -10,6 +10,7 @@ TagManager:
   - Room
   - MiniBoss
   - Boss
+  - Cursor
   layers:
   - Default
   - TransparentFX

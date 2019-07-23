@@ -1,65 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Chest : Interactable
 {
-    public Item Contents;
-    public Inventory PlayerInventory;
-    public bool IsOpened;
-    public VoidSignal ReceivedItemSignal;
-    public GameObject DialogWindow;
-    public Text DialogText;
-    private Animator anim;
-    public BoolValue StoredOpen;
+    [SerializeField] Item Contents;
+    [SerializeField] Inventory PlayerInventory;
+    [SerializeField] ObjectSignal OnPickupObjectSignal;
+    [SerializeField] GameObject DialogWindow;
+    [SerializeField] Text DialogText;
 
-    void Start()
+    protected override void StartInteraction()
     {
-        anim = GetComponent<Animator>();
-        IsOpened = StoredOpen.RuntimeValue;
-        if (IsOpened)
-        {
-            anim.SetBool("IsOpened", true);
-        }
+        OpenChest();
     }
 
-    void Update()
-    {
-        if (Input.GetButtonDown("Interact") && IsActive)
-        {
-            if (!IsOpened)
-            {
-                OpenChest();
-            }
-            else
-            {
-                ChestAlreadyOpened();
-            }
-        }
-    }
-
-    public void OpenChest()
+    void OpenChest()
     {
         DialogWindow.SetActive(true);
         DialogText.text = Contents.ItemDescription;
-        PlayerInventory.currentItem = Contents;
         PlayerInventory.AddItem(Contents);
-        IsOpened = true;
-        ReceivedItemSignal.Raise();
+        OnPickupObjectSignal.Raise(Contents.ItemSprite);
         Context.Raise(false);
-        anim.SetBool("IsOpened", true);
-        StoredOpen.RuntimeValue = IsOpened;
-    }
-
-    public void ChestAlreadyOpened()
-    {
-        DialogWindow.SetActive(false);
-        ReceivedItemSignal.Raise();
-    }
-
-    protected override bool CanInteract()
-    {
-        return !IsOpened;
+        animator.SetBool("IsOpened", true);
+        Data.CanBeInteractedWith = false;
+        canInteract = false;
     }
 }

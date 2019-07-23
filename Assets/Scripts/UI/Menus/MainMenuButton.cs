@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,9 +20,13 @@ public class MenuButtonEditor : Editor
 public class MainMenuButton : Button
 {
     [SerializeField] public GameObject Cursor;
+    [SerializeField] public float OffsetX;
+    [SerializeField] public float OffsetY;
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-        Cursor.transform.position = new Vector3(transform.position.x, transform.position.y + 10, 0);
+        if (Cursor == null)
+            Cursor = GameObject.FindWithTag("Cursor");
+        Cursor.transform.position = new Vector3(transform.position.x + OffsetX, transform.position.y + OffsetY, 0);
     }
 }

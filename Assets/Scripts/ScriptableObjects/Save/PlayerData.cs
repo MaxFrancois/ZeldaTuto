@@ -1,35 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "SaveData/PlayerData")]
-[Serializable]
 public class PlayerData : ScriptableObject
 {
-    public float PositionX;
-    public float PositionY;
+    [Header("Runtime Values")]
     public SpellBook SpellBook;
+    public Vector2 PlayerPosition;
     public List<SpellConfig> Spells;
 
-    private GameObject player;
-    private SpellBar spellBar;
+    [Header("New Game Start values")]
+    public Vector2 StartPosition;
+    public List<SpellConfig> StartSpells;
 
-    void Awake()
+    PlayerMovement _player;
+    PlayerMovement Player
     {
-        player = GameObject.FindWithTag("Player");
-        spellBar = player.GetComponent<SpellBar>();
+        get
+        {
+            if (_player == null)
+            {
+                var p = GameObject.FindWithTag("Player");
+                if (p != null) _player = p.GetComponent<PlayerMovement>();
+                else Debug.LogError("COULDNT FIND PLAYER IN PLAYERDATA");
+            }
+            return _player;
+        }
     }
 
-    public void SavePlayerData()
+    public void Reset()
     {
-        Spells = spellBar.Spells;
-        PositionX = player.transform.position.x;
-        PositionX = player.transform.position.y;
+        SpellBook.LockAll();
+        foreach (var spell in StartSpells)
+            SpellBook.UnlockSpell(spell);
+        PlayerPosition = StartPosition;
+        Spells = StartSpells;
     }
 
-    public void LoadPlayerData()
+    public SaveablePlayerData GetSavePlayerData()
     {
-        spellBar.Spells = Spells;
-        player.transform.position = new Vector3(PositionX, PositionY, 0);
+        var saveablePlayerData = new SaveablePlayerData();
+        saveablePlayerData.PositionX = Player.transform.position.x;
+        saveablePlayerData.PositionY = Player.transform.position.y;
+        Spells = Player.GetComponent<SpellBar>().Spells;
+        foreach (var spell in Spells)
+            if (spell)
+                saveablePlayerData.BoundSpellIds.Add(spell.Id);
+        foreach (var spellCategory in SpellBook.SpellCategories)
+            foreach (var spell in spellCategory.Spells)
+                if (spell.IsUnlocked)
+                    saveablePlayerData.UnlockedSpellIds.Add(spell.Id);
+
+        return saveablePlayerData;
+    }
+
+    public void LoadPlayerData(SaveablePlayerData data)
+    {
+        PlayerPosition = new Vector2(data.PositionX, data.PositionY);
+        foreach (var spellCategory in SpellBook.SpellCategories)
+            foreach (var spell in spellCategory.Spells)
+                spell.IsUnlocked = data.UnlockedSpellIds.Contains(spell.Id);
+        Spells = new List<SpellConfig>();
+        foreach (var boundSpell in data.BoundSpellIds)
+            Spells.Add(SpellBook.GetSpellById(boundSpell));
     }
 }

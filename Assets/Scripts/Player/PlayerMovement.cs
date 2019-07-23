@@ -9,6 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterMana))]
 public class PlayerMovement : IHasHealth
 {
+    [SerializeField] PlayerData PlayerData;
     [Header("Basics")]
     public float MoveSpeed;
     private float defaultSpeed;
@@ -62,6 +63,18 @@ public class PlayerMovement : IHasHealth
         animator.SetFloat("MoveY", -1);
         transform.position = StartingPosition.InitialValue;
         blinkOnHit = GetComponent<BlinkOnHit>();
+        LoadData();
+    }
+
+    public void Reset()
+    {
+        LoadData();
+    }
+
+    void LoadData()
+    {
+        transform.position = PlayerData.PlayerPosition;
+        Spells.Initialize(PlayerData.Spells);
     }
 
     private bool CanAct()
@@ -213,7 +226,7 @@ public class PlayerMovement : IHasHealth
         }
         else
         {
-            if (Spells.Spells[spellIndex] != null && PlayerMana.Mana.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
+            if (spellIndex < Spells.Spells.Count && Spells.Spells[spellIndex] != null && PlayerMana.Mana.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
             {
                 PlayerMana.LoseMana(Spells.Spells[spellIndex].ManaCost);
                 Spells.CastSpell(spellIndex, transform, PlayerInput.CurrentFacingDirection);

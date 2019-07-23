@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class RestMenuTest : MonoBehaviour
 {
-    public EventSystem eventSystem;
+    //public EventSystem eventSystem;
     public GameObject selectedObject;
     public GameObject SpellBookMenu;
     [SerializeField] GameObject FadePanel;
@@ -14,9 +14,20 @@ public class RestMenuTest : MonoBehaviour
 
     private bool buttonSelected;
 
+    EventSystem _eventSystem;
+    EventSystem EventSystem
+    {
+        get
+        {
+            if (_eventSystem == null)
+                _eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+            return _eventSystem;
+        }
+    }
+
     private void OnEnable()
     {
-        eventSystem.SetSelectedGameObject(selectedObject);
+        EventSystem.SetSelectedGameObject(selectedObject);
     }
 
     // Update is called once per frame
@@ -24,7 +35,7 @@ public class RestMenuTest : MonoBehaviour
     {
         if (Input.GetAxisRaw("Vertical") != 0 && !buttonSelected)
         {
-            eventSystem.SetSelectedGameObject(selectedObject);
+            EventSystem.SetSelectedGameObject(selectedObject);
             buttonSelected = true;
         }
         if (Input.GetButtonDown("Spell 3"))
@@ -51,7 +62,7 @@ public class RestMenuTest : MonoBehaviour
 
     IEnumerator SaveExitCo()
     {
-        SaveManager.instance.SaveGame();
+        PermanentObjects.Instance.SaveManager.SaveGame();
         Instantiate(FadePanel, Vector3.zero, Quaternion.identity);
         yield return new WaitForSeconds(FadeDuration);
         SceneManager.LoadScene("MainMenu");
@@ -65,7 +76,7 @@ public class RestMenuTest : MonoBehaviour
 
     private void OnDisable()
     {
-        eventSystem.SetSelectedGameObject(null);
+        EventSystem.SetSelectedGameObject(null);
         buttonSelected = false;
     }
 }

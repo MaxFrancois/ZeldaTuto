@@ -29,6 +29,11 @@ public class CharacterHealth : ITime
         Health.PassiveHealthRegenSpeed = HealthSO.PassiveHealthRegenSpeed;
     }
 
+    public void HealToMax()
+    {
+        Health.CurrentHealth = HealthSO.MaxHealth;
+    }
+
     public void GainHealth(float amount, bool display = true)
     {
         float actualHealing = Health.CurrentHealth + amount > Health.MaxHealth ? Health.MaxHealth - Health.CurrentHealth : amount;

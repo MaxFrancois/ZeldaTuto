@@ -1,40 +1,94 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
+public enum StartMenuAction
+{
+    NewGame = 0,
+    Continue = 1,
+    Load = 2
+}
+
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] EventSystem eventSystem;
+
     [Header("Fade")]
     [SerializeField] GameObject fadeToPanel;
     [SerializeField] float fadeDuration;
-
-    [Header("Buttons")]
-    [SerializeField] Button continueButton;
-    [SerializeField] TextMeshProUGUI continueButtonText;
+    [SerializeField] GameObject canvas;
 
     [Header("Orbs")]
     [SerializeField] GameObject orbsRotationCenter;
-    [SerializeField] float rotationSpeed;
     [SerializeField] List<GameObject> orbs;
+    [SerializeField] float rotationSpeed;
+    [SerializeField] float orbsOffsetY;
 
+    [Header("MainMenu")]
+    [SerializeField] GameObject mainMenuParent;
+    [SerializeField] GameObject SmallMenu;
+    [SerializeField] Button SmallMenuStartbutton;
+    [SerializeField] GameObject LongMenu;
+    [SerializeField] Button LongMenuStartbutton;
+
+    [Header("SaveFilesMenu")]
+    [SerializeField] GameObject saveFilesMenuParent;
+    [SerializeField] GameObject saveFilePrefab;
+    [SerializeField] float saveFilesOffsetY;
+    List<SaveFileData> saveFiles;
+    List<GameObject> saveFileObjects;
+
+    [Header("SettingsMenu")]
+    [SerializeField] GameObject settingsMenuParent;
+
+    bool canGoBack;
 
     void Start()
     {
-        if (true) //has saved game
+        saveFiles = PermanentObjects.Instance.SaveManager.GetSaveFiles();
+        PermanentObjects.Instance.DisableVisible();
+        LoadMainMenu();
+
+        saveFileObjects = new List<GameObject>();
+        for (int i = 0; i < saveFiles.Count; i++)
         {
-            continueButton.interactable = false;
-            continueButtonText.color = new Color(0.4f,0.4f,0.4f);
+            var saveFileCpn = Instantiate(saveFilePrefab, saveFilesMenuParent.transform.position, Quaternion.identity, saveFilesMenuParent.transform);
+            saveFileCpn.transform.position = new Vector3(saveFileCpn.transform.position.x, saveFileCpn.transform.position.y + (saveFilesOffsetY * i), 0);
+            saveFileCpn.GetComponent<MainMenuSaveFileButton>().Initialize(saveFiles[i]);
+            var fileName = saveFiles[i].FileName;
+            saveFileCpn.GetComponent<MainMenuButton>().onClick.AddListener(delegate { LoadFile(fileName); });
+            saveFileObjects.Add(saveFileCpn);
         }
-        for(int i = 0; i < orbs.Count; i++)
+
+        for (int i = 0; i < orbs.Count; i++)
         {
-            Vector3 spawnPosition = new Vector3(orbsRotationCenter.transform.position.x, orbsRotationCenter.transform.position.y + -100, 0);
+            Vector3 spawnPosition = new Vector3(orbsRotationCenter.transform.position.x, orbsRotationCenter.transform.position.y + orbsOffsetY, 0);
             var instance = Instantiate(orbs[i], spawnPosition, Quaternion.identity, orbsRotationCenter.transform);
             instance.transform.rotation = new Quaternion(0, 0, 0, 0);
             orbsRotationCenter.transform.Rotate(Vector3.back, 360 / orbs.Count);
+        }
+    }
+
+    void LoadMainMenu()
+    {
+        canGoBack = false;
+        mainMenuParent.SetActive(true);
+        saveFilesMenuParent.SetActive(false);
+        settingsMenuParent.SetActive(false);
+        if (saveFiles.Count == 0)
+        {
+            SmallMenu.SetActive(true);
+            LongMenu.SetActive(false);
+            eventSystem.SetSelectedGameObject(SmallMenuStartbutton.gameObject);
+        }
+        else
+        {
+            SmallMenu.SetActive(false);
+            LongMenu.SetActive(true);
+            eventSystem.SetSelectedGameObject(LongMenuStartbutton.gameObject);
         }
     }
 
@@ -43,43 +97,69 @@ public class MainMenu : MonoBehaviour
         orbsRotationCenter.transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
         if (orbsRotationCenter.transform.rotation.z <= -360)
             orbsRotationCenter.transform.rotation = new Quaternion(50, 0, 0, 0);
+        if (canGoBack && Input.GetButtonDown("Spell 3"))
+            LoadMainMenu();
     }
 
     public void NewGame()
     {
-        StartCoroutine(FadeToBlack());
+        StartCoroutine(StartGame(StartMenuAction.NewGame));
     }
 
     public void Continue()
     {
-        Debug.Log("Continue game");
+        StartCoroutine(StartGame(StartMenuAction.Continue));
     }
 
-    public void SettingsMenu()
+    public void LoadSaveFilesMenu()
     {
+        mainMenuParent.SetActive(false);
+        saveFilesMenuParent.SetActive(true);
+        canGoBack = true;
+        eventSystem.SetSelectedGameObject(saveFileObjects[0]);
+    }
 
+    //public void LoadFile(Button btn)
+    //{
+    //    var saveFile = btn.GetComponent<MainMenuSaveFileButton>();
+    //    StartCoroutine(StartGame(StartMenuAction.Load, saveFile.GetSaveFileName()));
+    //}
+
+    public void LoadFile(string fileName)
+    {
+        StartCoroutine(StartGame(StartMenuAction.Load, fileName));
+    }
+
+    public void LoadSettingsMenu()
+    {
+        mainMenuParent.SetActive(false);
+        settingsMenuParent.SetActive(true);
     }
 
     public void ExitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#else
         Application.Quit();
-        #endif
+#endif
     }
 
-    public IEnumerator FadeToBlack()
+    IEnumerator StartGame(StartMenuAction action, string fileName = "")
     {
         if (fadeToPanel != null)
         {
-            Instantiate(fadeToPanel, Vector3.zero, Quaternion.identity);
+            Instantiate(fadeToPanel, Vector3.zero, Quaternion.identity, canvas.transform);
         }
         yield return new WaitForSeconds(fadeDuration);
-        var asyncOperation = SceneManager.LoadSceneAsync("Dungeon");
-        while (!asyncOperation.isDone)
-        {
-            yield return null;
-        }
+
+        PermanentObjects.Instance.SaveManager.StartGame(action, fileName);
+        //PermanentObjects.Instance.EnableVisible();
+        //PermanentObjects.Instance.SaveManager.ResetAll(true);
+        //var asyncOperation = SceneManager.LoadSceneAsync("Dungeon");
+        //while (!asyncOperation.isDone)
+        //{
+        //    yield return null;
+        //}
     }
 }

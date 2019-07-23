@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterHealth))]
@@ -9,9 +10,12 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public abstract class EnemyBase : IHasHealth
 {
+    [Header("Enemy Data")]
+    [SerializeField] protected EnemyData Data;
     [Header("Basic")]
     protected Rigidbody2D body;
-    protected Transform target;
+    //private Transform _target;
+    protected Transform target;// { get { if (!_target) _target = PermanentObjects.Instance.Player.transform; return _target; } } 
     protected Animator animator;
     protected CharacterHealth EnemyHealth;
     protected CharacterState EnemyState;
@@ -36,11 +40,23 @@ public abstract class EnemyBase : IHasHealth
 
     protected virtual void Awake()
     {
+        if (Data == null)
+        {
+            Debug.LogError("Enemy " + name + " doesn't have its EnemyData scriptableObject");
+            UnityEditor.EditorApplication.isPlaying = false;
+            return;
+        }
         Initialize();
     }
-
+    
     void Initialize()
     {
+        if (string.IsNullOrWhiteSpace(Data.EnemyId))
+        {
+            Data.EnemyId = Guid.NewGuid().ToString();
+            gameObject.SetActive(Data.IsAliveDefaultValue);
+        }
+        target = PermanentObjects.Instance.Player.transform;
         EnemyHealth = GetComponent<CharacterHealth>();
         EnemyHealth.Initialize();
         EnemyState = GetComponent<CharacterState>();
@@ -49,8 +65,15 @@ public abstract class EnemyBase : IHasHealth
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         BlinkOnHit = GetComponent<BlinkOnHit>();
-        target = GameObject.FindWithTag("Player").transform;
         EnemyState.MovementState = CharacterMovementState.Idle;
+        if (!Data.IsAlive)
+            if (Data.LeaveBody)
+            {
+                transform.position = Data.BodyPosition;
+                EnemyHealth.LoseHealth(EnemyHealth.Health.CurrentHealth, false);
+            }
+            else
+                gameObject.SetActive(Data.IsAlive);
     }
 
     public bool IsDead
@@ -185,5 +208,14 @@ public abstract class EnemyBase : IHasHealth
         fallingTowards = Vector3.zero;
         transform.localScale = new Vector3(1, 1, 1);
         TakeDamage(null, 0, 0, MaxHealth);
+    }
+
+    public string ID { get { return Data.EnemyId; } }
+
+    public void Reset()
+    {
+        transform.position = HomePosition;
+        EnemyHealth.HealToMax();
+        Data.BodyPosition = Vector2.zero;
     }
 }

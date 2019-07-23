@@ -14,7 +14,22 @@ MonoBehaviour:
   m_Name: DungeonSceneData
   m_EditorClassIdentifier: 
   SceneName: Dungeon
-  IsCurrentScene: 0
-  Enemies: []
+  IsCurrentScene: 1
+  Enemies:
+  - {fileID: 11400000, guid: 78a2ab11a833c2340ad46a928be3f0da, type: 2}
+  - {fileID: 11400000, guid: 628c8901d5ef52542872f4798e6b6d5b, type: 2}
+  - {fileID: 11400000, guid: f464f3813fa76d74db962f352b2f0de4, type: 2}
+  - {fileID: 11400000, guid: 7a533961f787fb5469d82b562e995ad3, type: 2}
+  - {fileID: 11400000, guid: be155bdd5aa01954db9058ab3f1fad4a, type: 2}
+  - {fileID: 11400000, guid: f65382b5070f1964a845632d165c52bd, type: 2}
+  - {fileID: 11400000, guid: d3801f679cdbcf341a0fabd60debe4fe, type: 2}
+  - {fileID: 11400000, guid: 2214239f4782d7344873c6a513da8630, type: 2}
   Interactables:
-  - {fileID: 11400000, guid: 172b8182a3863804b8d1deef6786103d, type: 2}
+  - {fileID: 11400000, guid: 805b5b66ea2b1514685ef95b8f112e1b, type: 2}
+  - {fileID: 11400000, guid: 37568159822499c42ba9b6609d14d042, type: 2}
+  - {fileID: 11400000, guid: d1a520aa0193b1c43b34f5a682fbea1e, type: 2}
+  - {fileID: 11400000, guid: 974f5c26b3acff148b4a28bb59df8465, type: 2}
+  - {fileID: 11400000, guid: f4d1377db344c0149a04769f2a8763de, type: 2}
+  Triggers:
+  - {fileID: 11400000, guid: 9411f769f142758449b77f1b0de92a1d, type: 2}
+  - {fileID: 11400000, guid: f8cfdc6edf4214848be40bbee7c1d371, type: 2}

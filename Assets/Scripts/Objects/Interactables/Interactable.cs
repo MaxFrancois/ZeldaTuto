@@ -1,41 +1,112 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
-    public BoolSignal Context;
-    public bool IsActive;
+    [SerializeField] protected InteractableData Data;
+    [SerializeField] protected BoolSignal Context;
+    [NonSerialized ] protected Animator animator;
 
-    protected virtual void OnTriggerExit2D(Collider2D collidedObject)
+    //[SerializeField] protected Sprite SpriteAfterInteraction;
+
+    protected PlayerInput playerInput;
+    protected SpriteRenderer spriteRenderer;
+    protected bool canInteract;
+    protected bool IsPlayerInRange;
+
+    [HideInInspector]
+    public string ID { get { return Data.InteractableId; } }
+
+    protected virtual void Awake()
     {
-        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
+        if (Data == null)
         {
-            if (Context != null && gameObject.activeInHierarchy)
-            {
-                Context.Raise(false);
-                IsActive = false;
-            }
+            Debug.LogError("Interactable " + name + " doesn't have its InteractableData scriptableObject");
+            UnityEditor.EditorApplication.isPlaying = false;
+            return;
+        }
+    
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        InitializeData();
+    }
+
+    void InitializeData()
+    {
+        canInteract = Data.CanBeInteractedWith;
+        if (string.IsNullOrWhiteSpace(Data.InteractableId))
+        {
+            Data.InteractableId = Guid.NewGuid().ToString();
+            gameObject.SetActive(Data.CanBeInteractedWithDefaultValue);
+        }
+        else if (!Data.CanBeInteractedWith) SetCannotInteract();
+        //if (Data.CanBeInteractedWith == Data.CanBeInteractedWithDefaultValue)
+        //{
+        //    if (Data.CanBeInteractedWithDefaultValue)
+        //        return;
+        //    else
+        //        SetCannotInteract();
+        //}
+        //else
+        //    SetCannotInteract();
+    }
+
+    void SetCannotInteract()
+    {
+        if (Data.HideWhenCannotInteract) gameObject.SetActive(false);
+        else
+        {
+            if (animator) animator.enabled = false;
+            if (spriteRenderer) spriteRenderer.sprite = Data.SpriteAfterInteraction;
         }
     }
 
-    protected virtual bool CanInteract()
+    //protected virtual void OnTriggerExit2D(Collider2D collidedObject)
+    //{
+    //    if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
+    //    {
+    //        if (Context != null && gameObject.activeInHierarchy)
+    //        {
+    //            Context.Raise(false);
+    //            IsActive = false;
+    //        }
+    //    }
+    //}
+
+    protected virtual void Update()
     {
-        return true;
+        if (Input.GetButtonDown("Interact") && IsPlayerInRange && canInteract)
+        {
+            StartInteraction();
+        }
+    }
+
+    protected virtual void StartInteraction()
+    {
+        Debug.LogError("StartInteraction not configured for "+ name);
     }
 
     protected virtual void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger && CanInteract())
+        if (collision.CompareTag("Player") && !collision.isTrigger && canInteract)
         {
-            if (collision.GetComponent<PlayerInput>().CanInteract() != null)
+            if (playerInput == null)
+                playerInput = collision.GetComponent<PlayerInput>();
+            if (playerInput.CanInteract() != null)
             {
-                IsActive = true;
+                IsPlayerInRange = true;
                 Context.Raise(true);
             }
             else
             {
-                IsActive = false;
+                IsPlayerInRange = false;
                 Context.Raise(false);
             }
         }
+    }
+
+    public virtual void Reset()
+    {
+        InitializeData();
     }
 }

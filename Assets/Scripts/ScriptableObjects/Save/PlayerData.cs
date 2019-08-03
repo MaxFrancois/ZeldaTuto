@@ -31,10 +31,13 @@ public class PlayerData : ScriptableObject
     public void Reset()
     {
         SpellBook.LockAll();
+        Spells = new List<SpellConfig>(StartSpells.Count);
         foreach (var spell in StartSpells)
+        {
             SpellBook.UnlockSpell(spell);
+            Spells.Add(spell);
+        }
         PlayerPosition = StartPosition;
-        Spells = StartSpells;
     }
 
     public SaveablePlayerData GetSavePlayerData()
@@ -42,10 +45,13 @@ public class PlayerData : ScriptableObject
         var saveablePlayerData = new SaveablePlayerData();
         saveablePlayerData.PositionX = Player.transform.position.x;
         saveablePlayerData.PositionY = Player.transform.position.y;
-        Spells = Player.GetComponent<SpellBar>().Spells;
+        Spells = Player.GetComponent<SpellBar>().GetCurrentSpells();
+        PlayerPosition = Player.transform.position;
         foreach (var spell in Spells)
-            if (spell)
+            if (spell != null)
                 saveablePlayerData.BoundSpellIds.Add(spell.Id);
+            else
+                saveablePlayerData.BoundSpellIds.Add("");
         foreach (var spellCategory in SpellBook.SpellCategories)
             foreach (var spell in spellCategory.Spells)
                 if (spell.IsUnlocked)

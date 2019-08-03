@@ -19,7 +19,8 @@ public class MainMenuSaveFileButton : MonoBehaviour
         lastPlayedText.text = data.LastPlayed;
         currentSceneText.text = data.CurrentSceneName;
         for (int i = 0; i < data.Spells.Count; i++)
-            spellImages[i].sprite = data.Spells[i].Icon;
+            if (data.Spells[i] != null)
+                spellImages[i].sprite = data.Spells[i].Icon;
     }
 
     public string GetSaveFileName()

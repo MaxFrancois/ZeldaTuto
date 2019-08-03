@@ -14,5 +14,5 @@ MonoBehaviour:
   m_Name: MinotaurCutsceneTriggerData
   m_EditorClassIdentifier: 
   TriggerId: ac0515e1-4307-485a-81a7-5aa41551f528
-  IsActiveDefaultValue: 0
-  IsActive: 0
+  IsActiveDefaultValue: 1
+  IsActive: 1

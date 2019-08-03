@@ -7,11 +7,11 @@ public class Sign : Interactable
     public Text DialogText;
     public string DialogString;
 
-    private CharacterState playerState;
+    CharacterState playerState;
 
     void Start()
     {
-        playerState = GameObject.FindWithTag("Player").GetComponent<CharacterState>();
+        playerState = PermanentObjects.Instance.Player.GetComponent<CharacterState>();
     }
 
     protected override void StartInteraction()

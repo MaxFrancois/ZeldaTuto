@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064ee7a908685b84c96ba1e50f9f24f9, type: 3}
   m_Name: Log8Data
   m_EditorClassIdentifier: 
-  EnemyId: 
-  IsAliveDefaultValue: 0
+  EnemyId: 3048b198-1728-45d6-a1f1-22f76cb62e70
+  IsAliveDefaultValue: 1
   LeaveBody: 0
-  IsAlive: 0
-  BodyPosition: {x: 0, y: 0}
+  IsAlive: 1
+  BodyPosition: {x: 47.44655, y: -6.5309997}

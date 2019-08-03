@@ -18,7 +18,6 @@ public class DayTimeManager : MonoBehaviour
     private SpriteRenderer darknessImage;
     public BoolSignal PlayerLightSignal;
     private bool isLightOn = false;
-    public GameObject Player;
 
     void Awake()
     {
@@ -42,7 +41,7 @@ public class DayTimeManager : MonoBehaviour
     void Update()
     {
         DayNightCycle();
-        transform.position = Player.transform.position;
+        transform.position = PermanentObjects.Instance.Player.transform.position;
     }
 
     void InitializeDayAndNightCycle()

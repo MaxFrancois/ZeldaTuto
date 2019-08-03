@@ -108,7 +108,7 @@ public class Minotaur : Enemy
         isSpawningRocks = false;
         hasSpawnedFirstRock = false;
         isEnraged = false;
-        target = GameObject.FindWithTag("Player").transform;
+        //target = GameObject.FindWithTag("Player").transform;
         if (RoomCamera != null)
             roomCameraNoise = RoomCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }

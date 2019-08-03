@@ -75,7 +75,12 @@ public class GameData : ScriptableObject
         ret.LastPlayed = data.LastPlayed;
         ret.SpellsIds = new List<string>();
         foreach (var spell in data.Spells)
-            ret.SpellsIds.Add(spell.Id);
+        {
+            if (spell != null)
+                ret.SpellsIds.Add(spell.Id);
+            else
+                ret.SpellsIds.Add("");
+        }
         return ret;
     }
 }

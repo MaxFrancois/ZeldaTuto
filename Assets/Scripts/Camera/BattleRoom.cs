@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using UnityEngine.Playables;
 
 [System.Serializable]
@@ -21,7 +20,7 @@ public class BattleRoom : MonoBehaviour
 
     public PlayableDirector RoomStartDirector;
     public PlayableDirector RoomEndDirector;
-    public PlayerMovement Player;
+    PlayerMovement Player;
 
     public List<EnemyWave> EnemyWaves;
     int currentWave;
@@ -31,6 +30,7 @@ public class BattleRoom : MonoBehaviour
     {
         currentWave = 0;
         isActive = false;
+        Player = PermanentObjects.Instance.Player;
     }
 
     public void EnableBattleRoom()

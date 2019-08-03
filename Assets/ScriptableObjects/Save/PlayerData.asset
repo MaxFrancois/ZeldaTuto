@@ -15,8 +15,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellBook: {fileID: 11400000, guid: 8f2cae907ce4bbd449f6e23774a4cc09, type: 2}
   PlayerPosition: {x: 0, y: 0}
-  Spells: []
-  StartPosition: {x: 2, y: 2}
+  Spells:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  StartPosition: {x: 0, y: 0}
   StartSpells:
   - {fileID: 11400000, guid: cb3f9434268724a43b715b32c73f4154, type: 2}
   - {fileID: 11400000, guid: 2968764c0a4f39846969cd08122c6270, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}

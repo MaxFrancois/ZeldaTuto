@@ -12,14 +12,14 @@ public class SceneTransition : MonoBehaviour
     public GameObject FadeToPanel;
     public float FadeWait;
 
-    private void Awake()
-    {
-        if (FadeInPanel != null)
-        {
-            var panel = Instantiate(FadeInPanel, Vector3.zero, Quaternion.identity);
-            Destroy(panel, 1);
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (FadeInPanel != null)
+    //    {
+    //        var panel = Instantiate(FadeInPanel, Vector3.zero, Quaternion.identity);
+    //        Destroy(panel, 1);
+    //    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {

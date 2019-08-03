@@ -11,6 +11,23 @@ public class Cooldown
     public float CooldownTime;
 }
 
+[System.Serializable]
+public class BoundSpells {
+
+    public BoundSpells()
+    {
+        ResetSpells();
+    }
+    public List<SpellConfig> Spells;
+    const int numberOfSpells = 4;
+    public void ResetSpells()
+    {
+        Spells = new List<SpellConfig>();
+        for (int i = 0; i < numberOfSpells; i++)
+            Spells.Add(null);
+    }
+}
+
 public class SpellBar : MonoBehaviour
 {
     public int MaxQuantity;
@@ -23,8 +40,13 @@ public class SpellBar : MonoBehaviour
 
     public void Initialize(List<SpellConfig> spells)
     {
-        Spells = spells;
-        SpellChangedSignal.Raise();
+        if (spells.Count == 4)
+        {
+            Spells = spells;
+            SpellChangedSignal.Raise();
+        }
+        else
+            Spells = new List<SpellConfig>(4);
     }
 
     public void AddSpell(SpellConfig spell)

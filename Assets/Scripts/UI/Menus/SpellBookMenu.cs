@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
-using static UnityEngine.UI.Button;
 
 [System.Serializable]
 public class SpellBookMenuTab
@@ -17,31 +16,37 @@ public class SpellBookMenuTab
 
 public class SpellBookMenu : MonoBehaviour
 {
-    public List<SpellBookMenuTab> Tabs;
+    [Header("Tabs")]
+    [SerializeField] List<SpellBookMenuTab> Tabs;
+    [SerializeField] float TabXIndex;
+    [SerializeField] float TabXOffset;
+    [SerializeField] GameObject tabNavigationRightIcon;
     List<SpellBookMenuTab> activeTabs;
     int selectedTabIndex;
-    public float TabXIndex;
-    public List<Button> BoundButtons;
+
+    [Header("Bound Buttons")]
+    [SerializeField] GameObject DefaultSelectedButton;
+    [SerializeField] List<Button> BoundButtons;
     Button[][] ButtonLinksArray;
     List<Button> SpellButtons;
-    public Button SpellButtonPrefab;
-    public float SpellIconsOffset;
-    public float SpellIconsXIndex;
-    public Sprite EmptySelectionSquare;
-    public GameObject RestMenu;
-    public GameObject SpellListContainer;
-    public int SpellsPerLine;
-    public float NumberOfLines;
-    private int selectedButtonIndex;
-    private bool boundSpellSelected = false;
-    //public EventSystem eventSystem;
-    public GameObject DefaultSelectedObject;
-    public GameObject DefaultSelectedSpell;
-    private bool buttonSelected;
-    public SpellBar PlayerSpellBar;
-    public SpellBook SpellBook;
-    public SpellDetailsMenu SpellDetailsMenu;
 
+    [Header("Spell Grid")]
+    [SerializeField] GameObject SpellListContainer;
+    [SerializeField] Button SpellButtonPrefab;
+    [SerializeField] float SpellIconsOffset;
+    [SerializeField] float SpellIconsXIndex;
+    [SerializeField] Sprite EmptySelectionSquare;
+    [SerializeField] int SpellsPerLine;
+    [SerializeField] float NumberOfLines;
+
+    [Header("Navigation")]
+    [SerializeField] GameObject RestMenu;
+
+    int selectedButtonIndex;
+    bool boundSpellSelected = false;
+    [SerializeField] SpellBar PlayerSpellBar;
+    [SerializeField] SpellBook SpellBook;
+    [SerializeField] SpellDetailsMenu SpellDetailsMenu;
 
     EventSystem _eventSystem;
     EventSystem eventSystem
@@ -54,9 +59,8 @@ public class SpellBookMenu : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
-        buttonSelected = false;
         selectedButtonIndex = 0;
         boundSpellSelected = false;
         selectedTabIndex = 0;
@@ -75,7 +79,13 @@ public class SpellBookMenu : MonoBehaviour
 
         //TODO: figure out how to pre select the first button
         BoundButtons[0].Select();
-        eventSystem.SetSelectedGameObject(DefaultSelectedObject);
+        StartCoroutine(SetDefaultSelectedSpell());
+    }
+
+    IEnumerator SetDefaultSelectedSpell()
+    {
+        yield return new WaitForSeconds(0.2f);
+        eventSystem.SetSelectedGameObject(DefaultSelectedButton);
     }
 
     void InitializeTabs()
@@ -83,16 +93,19 @@ public class SpellBookMenu : MonoBehaviour
         activeTabs = new List<SpellBookMenuTab>();
         foreach (var tab in Tabs)
         {
-            if (tab.Element == SpellElement.None || SpellBook.GetByElement(tab.Element).Count > 0)
+            if (tab.Element == SpellElement.None || SpellBook.GetUnlockedSpellsByElement(tab.Element).Count > 0)
             {
                 var rect = tab.TabImage.gameObject.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(TabXIndex * activeTabs.Count, rect.anchoredPosition.y);
+                rect.anchoredPosition = new Vector2(TabXOffset + TabXIndex * activeTabs.Count, rect.anchoredPosition.y);
                 activeTabs.Add(tab);
                 tab.TabImage.gameObject.SetActive(true);
             }
             else
                 tab.TabImage.gameObject.SetActive(false);
         }
+        var rb = tabNavigationRightIcon.GetComponent<RectTransform>();
+        rb.anchoredPosition = new Vector2(TabXOffset + TabXIndex * activeTabs.Count, rb.anchoredPosition.y);
+
     }
 
     // Go through the available spells in the spellbook
@@ -106,7 +119,7 @@ public class SpellBookMenu : MonoBehaviour
         if (selectedTabElement == SpellElement.None)
             unlockedSpells = SpellBook.GetAllUnlockedSpells();
         else
-            unlockedSpells = SpellBook.GetByElement(selectedTabElement);
+            unlockedSpells = SpellBook.GetUnlockedSpellsByElement(selectedTabElement);
         NumberOfLines = Mathf.Ceil((float)unlockedSpells.Count / (float)SpellsPerLine);
         if (SpellButtons != null)
             for (int i = SpellButtons.Count - 1; i >= 0; i--)
@@ -303,11 +316,6 @@ public class SpellBookMenu : MonoBehaviour
         }
         if (!boundSpellSelected)
         {
-            if (Input.GetAxisRaw("Horizontal") != 0 && !buttonSelected)
-            {
-                eventSystem.SetSelectedGameObject(DefaultSelectedObject);
-                buttonSelected = true;
-            }
             if (Input.GetButtonDown("Spell 3"))
             {
                 Debug.Log("Returning to rest menu");

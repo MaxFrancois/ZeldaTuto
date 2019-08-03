@@ -14,21 +14,22 @@ public class PermanentObjects : MonoBehaviour
 
     public void DisableVisible()
     {
+        UI.GetComponent<MenuManager>().HideMenus();
         Player.gameObject.SetActive(false);
         MainCamera.gameObject.SetActive(false);
-        UI.SetActive(false);
+        UI.gameObject.SetActive(false);
     }
 
     public void EnableVisible()
     {
         Player.gameObject.SetActive(true);
         MainCamera.gameObject.SetActive(true);
-        UI.SetActive(true);
+        UI.gameObject.SetActive(true);
     }
 
     public PlayerMovement Player;
     public SaveManager SaveManager;
     public Camera MainCamera;
     public SpellBar SpellBar;
-    public GameObject UI;
+    public UIManager UI;
 }

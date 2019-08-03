@@ -14,7 +14,12 @@ public class CutsceneTrigger : Trigger
     public TextMeshProUGUI BossTitle;
     public EnemyBase Boss;
     public BossHealthManager BossHealthManager;
-    public PlayerMovement Player;
+    PlayerMovement Player;
+
+    private void Awake()
+    {
+        Player = PermanentObjects.Instance.Player;
+    }
 
     protected override void OnPlayerEnter()
     {
@@ -43,6 +48,7 @@ public class CutsceneTrigger : Trigger
         if (BossHealthManager)
             BossHealthManager.Initialize(Boss.GetEnemyHealth().MaxHealth, Boss.Name);
         Player.Unfreeze();
+        //TODO: disable data
         this.gameObject.SetActive(false);
         yield return null;
     }

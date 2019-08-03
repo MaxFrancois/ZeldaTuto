@@ -42,7 +42,7 @@ public class PlayerMovement : IHasHealth
     private BlinkOnHit blinkOnHit;
 
 
-    void Start()
+    void Awake()
     {
         defaultSpeed = MoveSpeed;
         PlayerState = GetComponent<CharacterState>();
@@ -61,7 +61,7 @@ public class PlayerMovement : IHasHealth
         PlayerUltimate = GetComponent<CharacterUltimate>();
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
-        transform.position = StartingPosition.InitialValue;
+        //transform.position = StartingPosition.InitialValue;
         blinkOnHit = GetComponent<BlinkOnHit>();
         LoadData();
     }
@@ -73,7 +73,7 @@ public class PlayerMovement : IHasHealth
 
     void LoadData()
     {
-        transform.position = PlayerData.PlayerPosition;
+        transform.position = new Vector3(PlayerData.PlayerPosition.x, PlayerData.PlayerPosition.y, 0);
         Spells.Initialize(PlayerData.Spells);
     }
 
@@ -312,12 +312,14 @@ public class PlayerMovement : IHasHealth
 
     public void Freeze()
     {
+        PlayerInput.CurrentInputDirection = Vector3.zero;
         PlayerState.MovementState = CharacterMovementState.Stunned;
         animator.SetBool("IsMoving", false);
     }
 
     public void Unfreeze()
     {
+        PlayerInput.CurrentInputDirection = Vector3.zero;
         PlayerState.MovementState = CharacterMovementState.Idle;
     }
 

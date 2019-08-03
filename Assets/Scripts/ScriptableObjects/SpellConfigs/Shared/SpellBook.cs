@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -31,10 +30,13 @@ public class SpellBook : ScriptableObject
 
     public void UnlockSpell(SpellConfig spell)
     {
-        foreach (var category in SpellCategories)
+        if (spell != null)
         {
-            var cfg = category.Spells.FirstOrDefault(d => d == spell);
-            if (cfg) { cfg.IsUnlocked = true; break; }
+            foreach (var category in SpellCategories)
+            {
+                var cfg = category.Spells.FirstOrDefault(d => d == spell);
+                if (cfg) { cfg.IsUnlocked = true; break; }
+            }
         }
     }
 
@@ -69,8 +71,14 @@ public class SpellBook : ScriptableObject
         return SpellCategories.FirstOrDefault(c => c.Element == element)?.Spells;
     }
 
+    public List<SpellConfig> GetUnlockedSpellsByElement(SpellElement element)
+    {
+        return SpellCategories.FirstOrDefault(c => c.Element == element)?.Spells.Where(d => d.IsUnlocked).ToList();
+    }
+
     public SpellConfig GetSpellById(string id)
     {
+        if (string.IsNullOrEmpty(id)) return null;
         foreach (var category in SpellCategories)
         {
             var spell = category.Spells.FirstOrDefault(d => d.Id == id);

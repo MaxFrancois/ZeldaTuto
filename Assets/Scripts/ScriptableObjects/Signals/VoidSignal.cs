@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "VoidSignal", menuName = "Signals/VoidSignal")]
 public class VoidSignal : SignalBase

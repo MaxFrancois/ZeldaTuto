@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c629278f2ce91514683b5dbd4b41e67d, type: 3}
-    totalSpriteSurfaceArea: 232552253
+    totalSpriteSurfaceArea: 232749347
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -2183,6 +2183,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 501b13f557e1aea4a89df2d874ce9ed1, type: 3}
   - {fileID: 21300000, guid: b0d916f5a0c4753429d7ec1d94f97e1c, type: 3}
   - {fileID: 21300000, guid: 473667f54fcf3bb498d7cbe3d962881d, type: 3}
+  - {fileID: -5690122954830693929, guid: 5d0f38f50c7accb44bfd3ec47e771c53, type: 3}
+  - {fileID: 1084870471915973256, guid: 5d0f38f50c7accb44bfd3ec47e771c53, type: 3}
+  - {fileID: -5221031191145572345, guid: 5d0f38f50c7accb44bfd3ec47e771c53, type: 3}
+  - {fileID: -8200298928030360504, guid: 5d0f38f50c7accb44bfd3ec47e771c53, type: 3}
+  - {fileID: 1836571632104722114, guid: 5d0f38f50c7accb44bfd3ec47e771c53, type: 3}
   - {fileID: 21300000, guid: 04ee58f5b785d0d458f451e06074e7f6, type: 3}
   - {fileID: 21300000, guid: ca325af5ead09c24c9b478548f4640f7, type: 3}
   - {fileID: 21300000, guid: ed4c5bf54d677dc45890ddaa4feb8d41, type: 3}
@@ -2979,6 +2984,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 31ab0f485e8b73045b2e11f92fd10c74, type: 3}
   - {fileID: 21300000, guid: d3282158489a87444b22bc96066fa099, type: 3}
   - {fileID: 21300000, guid: 83af925852a326741a4ff1e1ab93093e, type: 3}
+  - {fileID: 21300000, guid: ed487358198a54746ae85acdc9c65330, type: 3}
   - {fileID: 21300000, guid: 154a94583c6112e4193efc5cd419a3a1, type: 3}
   - {fileID: 21300000, guid: 6aaec958422785a41b021efb04a5a99e, type: 3}
   - {fileID: 21300000, guid: 9035ca580ca274c4bab9a962966e97b8, type: 3}
@@ -3805,6 +3811,22 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6341005da49c17b4ebc0bd19107f0945, type: 3}
   - {fileID: 21300000, guid: 37f1825db4fe4f748b37ea1d08a162c5, type: 3}
   - {fileID: 21300000, guid: 28ef935d2acf80243b6275f6ac39af67, type: 3}
+  - {fileID: 5824774730204116306, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 1624311112463323591, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 6271797702505365095, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 6589083654508725051, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: -7836140348090335718, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: -4209278686786558190, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: -8797768098035115843, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: -6764112658653799559, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: -4296926201773883827, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 2746036302657889690, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 3125369857017562151, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 167839416641914758, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: -9035656703227714150, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: -4443154405108010462, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 6128356239977396717, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
+  - {fileID: 8981504250438449257, guid: 9762755dd359a75479f47dcf150fc68c, type: 3}
   - {fileID: 21300000, guid: f47c065d283b0da469c0347a2cfd863f, type: 3}
   - {fileID: 21300000, guid: ca67975d108a3f942bc4d6e92150badf, type: 3}
   - {fileID: 21300000, guid: 1be6785dbfeb92f4abde9edf3a23b1db, type: 3}
@@ -6396,6 +6418,11 @@ SpriteAtlas:
   - frame0001
   - frame0005
   - frame0003
+  - keyboard_1
+  - keyboard_0
+  - keyboard_3
+  - keyboard_2
+  - keyboard_4
   - 84
   - frame0000
   - 27
@@ -7192,6 +7219,7 @@ SpriteAtlas:
   - 107
   - 16
   - frame0002
+  - hangman
   - frame0028
   - J_04
   - DeathPose02_13
@@ -8018,6 +8046,22 @@ SpriteAtlas:
   - SpellBookPreface_14
   - IdleSwordOutline_01
   - frame0031
+  - xbox_LEFT
+  - xbox_RIGHT
+  - xbox_DOWN
+  - xbox_A
+  - xbox_B
+  - xbox_Y
+  - xbox_X
+  - xbox_RAnalog
+  - xbox_UP
+  - xbox_LB
+  - xbox_RT
+  - xbox_LT
+  - xbox_RB
+  - xbox_Neutral
+  - xbox_START
+  - xbox_LAnalog
   - 28
   - Death_03
   - A200-1

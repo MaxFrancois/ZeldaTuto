@@ -1,72 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class RestMenu : MonoBehaviour
 {
-    public List<Button> Buttons;
-    private int selectedButtonIndex = 0;
-    public GameObject SpellBookMenu;
-    private float recentlyMoved;
-    private float recentlyPressed;
-    [SerializeField] GameObject FadePanel;
-    [SerializeField] float FadeDuration;
+    [SerializeField] GameObject firstButton;
+    [SerializeField] GameObject spellBookMenu;
+    [SerializeField] FadePanelSignal fadeToSignal;
+    bool isFading;
 
-    private void OnEnable()
+    EventSystem _eventSystem;
+    EventSystem EventSystem
     {
-        recentlyMoved = 0f;
-        recentlyPressed = 0f;
-        Buttons[selectedButtonIndex].Select();
+        get
+        {
+            if (_eventSystem == null)
+                _eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+            return _eventSystem;
+        }
     }
 
-    private void Update()
+    void OnEnable()
     {
-        if (recentlyMoved > 0)
-            recentlyMoved -= Time.deltaTime;
-        if (recentlyPressed > 0)
-            recentlyPressed -= Time.deltaTime;
+        isFading = false;
+        EventSystem.SetSelectedGameObject(firstButton);
+    }
 
-        if (recentlyMoved <= 0)
-        {
-            var input = Input.GetAxisRaw("Vertical");
-            if (input != 0)
-            {
-                recentlyMoved = 1f;
-                if (input < 0)
-                {
-                    selectedButtonIndex++;
-                    if (selectedButtonIndex > Buttons.Count - 1)
-                        selectedButtonIndex = 0;
-                }
-                else
-                {
-                    selectedButtonIndex--;
-                    if (selectedButtonIndex < 0)
-                        selectedButtonIndex = Buttons.Count - 1;
-                }
-                Buttons[selectedButtonIndex].Select();
-            }
-        }
-        if (recentlyPressed <= 0)
-        {
-            if (Input.GetButtonDown("Spell 0"))
-            {
-                recentlyPressed = 1f;
-                Buttons[selectedButtonIndex].onClick.Invoke();
-            }
-            if (Input.GetButtonDown("Spell 1"))
-            {
-                recentlyPressed = 1f;
-                Resume();
-            }
-        }
+    void OnDisable()
+    {
+        EventSystem.SetSelectedGameObject(null);
+    }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Spell 3") && !isFading)
+            Resume();
+    }
+
+    public void Resume()
+    {
+        MenuManager.StartTime();
+        gameObject.SetActive(false);
     }
 
     public void SpellBook()
     {
-        SpellBookMenu.SetActive(true);
+        spellBookMenu.SetActive(true);
         gameObject.SetActive(false);
     }
 
@@ -82,16 +63,12 @@ public class RestMenu : MonoBehaviour
 
     IEnumerator SaveExitCo()
     {
+        isFading = true;
         PermanentObjects.Instance.SaveManager.SaveGame();
-        Instantiate(FadePanel, Vector3.zero, Quaternion.identity);
-        yield return new WaitForSeconds(FadeDuration);
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void Resume()
-    {
-        selectedButtonIndex = 0;
-        MenuManager.StartTime();
-        this.gameObject.SetActive(false);
+        var loading = SceneManager.LoadSceneAsync("MainMenu");
+        loading.allowSceneActivation = false;
+        fadeToSignal.Raise();
+        yield return new WaitForSeconds(fadeToSignal.Duration);
+        loading.allowSceneActivation = true;
     }
 }

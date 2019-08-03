@@ -54,6 +54,13 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void HideMenus()
+    {
+        StartTime();
+        RestMenu.SetActive(false);
+        PauseMenu.SetActive(false);
+    }
+
     //public void OpenSpellBookMenu()
     //{
     //    StopTime();

@@ -6,8 +6,8 @@ public class PlayerData : ScriptableObject
 {
     [Header("Runtime Values")]
     public SpellBook SpellBook;
+    public SpellBar SpellBar;
     public Vector2 PlayerPosition;
-    public List<SpellConfig> Spells;
 
     [Header("New Game Start values")]
     public Vector2 StartPosition;
@@ -31,12 +31,9 @@ public class PlayerData : ScriptableObject
     public void Reset()
     {
         SpellBook.LockAll();
-        Spells = new List<SpellConfig>(StartSpells.Count);
+        SpellBar.Initialize(StartSpells);
         foreach (var spell in StartSpells)
-        {
             SpellBook.UnlockSpell(spell);
-            Spells.Add(spell);
-        }
         PlayerPosition = StartPosition;
     }
 
@@ -45,9 +42,8 @@ public class PlayerData : ScriptableObject
         var saveablePlayerData = new SaveablePlayerData();
         saveablePlayerData.PositionX = Player.transform.position.x;
         saveablePlayerData.PositionY = Player.transform.position.y;
-        Spells = Player.GetComponent<SpellBar>().GetCurrentSpells();
         PlayerPosition = Player.transform.position;
-        foreach (var spell in Spells)
+        foreach (var spell in SpellBar.Spells)
             if (spell != null)
                 saveablePlayerData.BoundSpellIds.Add(spell.Id);
             else
@@ -66,8 +62,9 @@ public class PlayerData : ScriptableObject
         foreach (var spellCategory in SpellBook.SpellCategories)
             foreach (var spell in spellCategory.Spells)
                 spell.IsUnlocked = data.UnlockedSpellIds.Contains(spell.Id);
-        Spells = new List<SpellConfig>();
+        var spells = new List<SpellConfig>();
         foreach (var boundSpell in data.BoundSpellIds)
-            Spells.Add(SpellBook.GetSpellById(boundSpell));
+            spells.Add(SpellBook.GetSpellById(boundSpell));
+        SpellBar.Initialize(spells);
     }
 }

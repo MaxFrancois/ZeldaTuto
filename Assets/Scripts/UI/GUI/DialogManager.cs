@@ -15,8 +15,10 @@ public class DialogManager : MonoBehaviour
     Conversation currentConversation;
     Color[] colors = { new Color(0, 0, 1, 1), new Color(1, 1, 0, 1), new Color(1, 0, 0, 1) };
     Coroutine currentDialogCoRoutine;
+    string currentTimelineId;
 
     [SerializeField] GameObject continueButton;
+    [SerializeField] StringSignal conversationOver;
     [Header("Left Alignment")]
     [SerializeField] GameObject leftContainer;
     [SerializeField] Image leftIconImage;
@@ -37,6 +39,7 @@ public class DialogManager : MonoBehaviour
         animator = GetComponent<Animator>();
         awaitingInput = false;
         currentDialogIndex = 0;
+        currentTimelineId = string.Empty;
     }
 
     void Update()
@@ -77,10 +80,13 @@ public class DialogManager : MonoBehaviour
             leftContainer.SetActive(false);
             rightContainer.SetActive(false);
             animator.SetBool("Visible", false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.6f);
             dialogBubble.enabled = false;
         }
-        PermanentObjects.Instance.Player.Unfreeze();
+        if (!string.IsNullOrEmpty(currentTimelineId))
+            conversationOver.Raise(currentTimelineId);
+        else
+            PermanentObjects.Instance.Player.Unfreeze();
     }
 
     public void StartConversation(Conversation conversation)
@@ -88,6 +94,15 @@ public class DialogManager : MonoBehaviour
         currentConversation = conversation;
         currentDialogIndex = 0;
         PermanentObjects.Instance.Player.Freeze();
+
+        currentDialogCoRoutine = StartCoroutine(NextDialogCo());
+    }
+
+    public void StartTimelineConversation(Conversation conversation, string timelineId)
+    {
+        currentTimelineId = timelineId;
+        currentConversation = conversation;
+        currentDialogIndex = 0;
 
         currentDialogCoRoutine = StartCoroutine(NextDialogCo());
     }
@@ -115,7 +130,7 @@ public class DialogManager : MonoBehaviour
             foreach (char c in nextDialog.Text)
             {
                 leftText.text += c;
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.03f);
             }
         }
         else if (nextDialog.Alignment == DialogAlignment.Right)
@@ -130,10 +145,11 @@ public class DialogManager : MonoBehaviour
             foreach (char c in nextDialog.Text)
             {
                 rightText.text += c;
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.03f);
             }
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        writingText = false;
         awaitingInput = true;
         continueButton.SetActive(true);
     }

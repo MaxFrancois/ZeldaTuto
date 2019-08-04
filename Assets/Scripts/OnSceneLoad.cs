@@ -4,15 +4,11 @@ using UnityEngine;
 public class OnSceneLoad : MonoBehaviour
 {
     [SerializeField] FadePanelSignal fadeFromSignal;
-
-    //void Awake()
-    //{
-    //    PermanentObjects.Instance.Player.Freeze();
-    //    StartCoroutine(ScreenFade());
-    //}
+    [SerializeField] VoidSignal updateUISignal;
 
     void Start()
     {
+        updateUISignal.Raise();
         PermanentObjects.Instance.Player.Freeze();
         StartCoroutine(ScreenFade());
     }

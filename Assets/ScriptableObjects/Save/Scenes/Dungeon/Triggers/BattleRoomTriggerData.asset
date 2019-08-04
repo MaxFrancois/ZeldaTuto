@@ -15,4 +15,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TriggerId: 0d35b812-fc4a-44df-a501-11195b4c0977
   IsActiveDefaultValue: 1
-  IsActive: 0
+  IsActive: 1

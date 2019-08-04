@@ -1,29 +1,33 @@
 ﻿using Cinemachine;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-public class DialogTimeline : MonoBehaviour
+public class DialogTimeline : Trigger
 {
     [SerializeField] PlayableDirector TimelineDirector;
     bool awaitInput = false;
-    
-    void OnTriggerEnter2D(Collider2D collision)
+
+    [Header("Conversations")]
+    [SerializeField] List<Conversation> conversations;
+    [SerializeField] TimelineConversationSignal conversationSignal;
+    int currentConversationIndex;
+
+    protected override void OnPlayerEnter()
     {
-        if (collision.CompareTag("Player") && collision.isTrigger)
+        try
         {
-            try
-            {
-                var cameraTrack = (TimelineDirector.playableAsset as TimelineAsset).outputs.FirstOrDefault(c => c.streamName == "Camera");
-                TimelineDirector.SetGenericBinding(cameraTrack.sourceObject, PermanentObjects.Instance.MainCamera.GetComponent<CinemachineBrain>());
-                PermanentObjects.Instance.Player.Freeze();
-                TimelineDirector.Play();
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError("Error in DialogTimeline when setting the camera. Make sure the track is named Camera" + ex.Message);
-            }
+            currentConversationIndex = 0;
+            var cameraTrack = (TimelineDirector.playableAsset as TimelineAsset).outputs.FirstOrDefault(c => c.streamName == "Camera");
+            TimelineDirector.SetGenericBinding(cameraTrack.sourceObject, PermanentObjects.Instance.MainCamera.GetComponent<CinemachineBrain>());
+            PermanentObjects.Instance.Player.Freeze();
+            TimelineDirector.Play();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error in DialogTimeline when setting the camera. Make sure the track is named Camera" + ex.Message);
         }
     }
 
@@ -36,6 +40,21 @@ public class DialogTimeline : MonoBehaviour
                 PermanentObjects.Instance.UI.ContinueButton.SetActive(false);
                 TimelineDirector.Play();
             }
+    }
+
+    public void StartConversation()
+    {
+        conversationSignal.Raise(conversations[currentConversationIndex], Data.TriggerId);
+        TimelineDirector.Pause();
+    }
+
+    public void ConversationFinished(string timelineId)
+    {
+        if (Data.TriggerId == timelineId)
+        {
+            TimelineDirector.Play();
+            currentConversationIndex++;
+        }
     }
 
     public void WaitForInput()

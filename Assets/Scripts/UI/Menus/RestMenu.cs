@@ -25,6 +25,12 @@ public class RestMenu : MonoBehaviour
     void OnEnable()
     {
         isFading = false;
+        StartCoroutine(SelectDefaultButton());
+    }
+
+    IEnumerator SelectDefaultButton()
+    {
+        yield return new WaitForSeconds(0.1f);
         EventSystem.SetSelectedGameObject(firstButton);
     }
 

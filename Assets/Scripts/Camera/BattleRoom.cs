@@ -12,14 +12,11 @@ public class EnemyWave
 
 public class BattleRoom : MonoBehaviour
 {
-    //public CinemachineConfiner CameraConfiner;
-    public CinemachineVirtualCamera BattleRoomCamera;
-    //public Collider2D BattleRoomCollider;
-    public CinemachineVirtualCamera ParentRoomCamera;
-    //public Collider2D ParentRoomCollider;
-
-    public PlayableDirector RoomStartDirector;
-    public PlayableDirector RoomEndDirector;
+    [SerializeField] TriggerData Data;
+    [SerializeField] CinemachineVirtualCamera BattleRoomCamera;
+    [SerializeField] CinemachineVirtualCamera ParentRoomCamera;
+    [SerializeField] PlayableDirector RoomStartDirector;
+    [SerializeField] PlayableDirector RoomEndDirector;
     PlayerMovement Player;
 
     public List<EnemyWave> EnemyWaves;
@@ -67,6 +64,7 @@ public class BattleRoom : MonoBehaviour
         BattleRoomCamera.gameObject.SetActive(false);
         ParentRoomCamera.gameObject.SetActive(true);
         Player.Unfreeze();
+        Data.IsActive = false;
         gameObject.SetActive(false);
     }
 

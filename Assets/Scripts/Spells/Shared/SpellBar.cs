@@ -7,7 +7,9 @@ public class Cooldown
 {
     public SpellConfig Spell;
     public float TimeTracker;
-    public Image CooldownImage;
+    //public Image CooldownImage;
+    public int Index;
+    public bool HasStarted;
     public float CooldownTime;
 }
 
@@ -28,37 +30,25 @@ public class BoundSpells {
     }
 }
 
-public class SpellBar : MonoBehaviour
+[CreateAssetMenu]
+public class SpellBar : ScriptableObject
 {
-    public int MaxQuantity;
+    [HideInInspector]
     public List<Cooldown> Cooldowns = new List<Cooldown>();
-    [Header("Spells")]
-    public List<Image> CooldownImages;
     public List<SpellConfig> Spells;
-    public VoidSignal SpellChangedSignal;
     public SpellConfig Ultimate;
+    [SerializeField] int MaxSpells;
+    [SerializeField] VoidSignal SpellChangedSignal;
 
     public void Initialize(List<SpellConfig> spells)
     {
-        if (spells.Count == 4)
+        Spells = new List<SpellConfig>(MaxSpells);
+        if (spells.Count == MaxSpells)
         {
-            Spells = spells;
+            foreach (var s in spells)
+                Spells.Add(s);
             SpellChangedSignal.Raise();
         }
-        else
-            Spells = new List<SpellConfig>(4);
-    }
-
-    public void AddSpell(SpellConfig spell)
-    {
-        if (!Spells.Contains(spell) && Spells.Count < MaxQuantity)
-            Spells.Add(spell);
-    }
-
-    public void RemoveSpell(SpellConfig spell)
-    {
-        if (Spells.Contains(spell))
-            Spells.Remove(spell);
     }
 
     public void CastUltimate(Transform source, Vector3 direction)
@@ -76,43 +66,23 @@ public class SpellBar : MonoBehaviour
     {
         if (Spells[spellIndex] != null && Spells[spellIndex].CanCast(source, direction))
         {
-            if (spellIndex < MaxQuantity && spellIndex >= 0)
+            if (spellIndex < MaxSpells && spellIndex >= 0)
                 if (!Cooldowns.Any(c => c.Spell.Name == Spells[spellIndex].Name))
                 {
                     var spell = Spells[spellIndex];//, source.position, Quaternion.identity);
                     if (Spells[spellIndex].Cooldown > 0)
                     {
-                        CooldownImages[spellIndex].fillAmount = 1;
                         Cooldowns.Add(new Cooldown()
                         {
                             TimeTracker = Spells[spellIndex].Cooldown,
                             CooldownTime = Spells[spellIndex].Cooldown,
                             Spell = Spells[spellIndex],
-                            CooldownImage = CooldownImages[spellIndex]
+                           HasStarted = false,
+                           Index = spellIndex
                         });
                     }
                     spell.Cast(source, direction);
                 }
         }
-    }
-
-    private void Update()
-    {
-        var deltaTime = Time.deltaTime;
-
-        for (int i = Cooldowns.Count - 1; i >= 0; i--)
-        {
-            Cooldowns[i].TimeTracker -= deltaTime;
-            Cooldowns[i].CooldownImage.fillAmount -= deltaTime / Cooldowns[i].CooldownTime;
-            if (Cooldowns[i].TimeTracker <= 0)
-            {
-                Cooldowns.Remove(Cooldowns[i]);
-            }
-        }
-    }
-
-    public List<SpellConfig> GetCurrentSpells()
-    {
-        return Spells;
     }
 }

@@ -433,7 +433,6 @@ GameObject:
   - component: {fileID: 9058059808089006290}
   - component: {fileID: 9058059808089006291}
   - component: {fileID: 244566703}
-  - component: {fileID: 548933280}
   - component: {fileID: 548933281}
   - component: {fileID: 748696293}
   - component: {fileID: 748696284}
@@ -584,11 +583,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94afb75839ef13b428cb57113c1960e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerData: {fileID: 0}
   MoveSpeed: 5
   PlayerState: {fileID: 0}
   StartingPosition: {fileID: 11400000, guid: ea4305ef45b45914f9eafa635cb55b20, type: 2}
   InvulnerabilityTime: 2
   PlayerInventory: {fileID: 11400000, guid: 22c93857dcb5f0b4da541a91aec16de6, type: 2}
+  Spells: {fileID: 0}
   PlayerHit: {fileID: 11400000, guid: 2dc9c7ce85ee4a4418e6ca98f1525c49, type: 2}
   RoomSignal: {fileID: 11400000, guid: 4b12a9e343ae12b44b28500820ab385d, type: 2}
   ReceivedItemSprite: {fileID: 487798826}
@@ -658,32 +659,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Clue: {fileID: 26292940}
   IsActive: 0
---- !u!114 &548933280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9058059808089006316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: c3682a5c422296741a777105eb59d56f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxQuantity: 4
-  CooldownImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Spells:
-  - {fileID: 11400000, guid: 75654b6acc3b62047ab90376f3067d9b, type: 2}
-  - {fileID: 11400000, guid: 43e30d4ee1ed28c44afcf8efbba6f4f9, type: 2}
-  - {fileID: 11400000, guid: 18e35231daa56ed4e93fb0349a3bd0f7, type: 2}
-  - {fileID: 11400000, guid: d820ba0e499764649b2afa3dca58fb50, type: 2}
-  SpellChangedSignal: {fileID: 11400000, guid: f23f7826ee9c99c4da7afe130fc97b59, type: 2}
-  Ultimate: {fileID: 11400000, guid: f2140e4090e16e24b916733e2a50271f, type: 2}
 --- !u!114 &548933281
 MonoBehaviour:
   m_ObjectHideFlags: 0

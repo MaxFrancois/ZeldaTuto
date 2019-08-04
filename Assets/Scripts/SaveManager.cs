@@ -73,7 +73,7 @@ public class SaveManager : MonoBehaviour
             }
             saveFileData.LastPlayed = DateTime.Now.ToShortDateString();
             saveFileData.CurrentSceneName = SceneManager.GetActiveScene().name;
-            saveFileData.Spells = GameData.PlayerData.Spells;
+            saveFileData.Spells = GameData.PlayerData.SpellBar.Spells;
             var saveableSaveFileData = GameData.ToSaveableSaveFileData(saveFiles);
             using (Stream s = File.Open(Path.Combine(gamePath, summaryFilePath), FileMode.OpenOrCreate))
             {

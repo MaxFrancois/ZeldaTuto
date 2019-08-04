@@ -23,7 +23,7 @@ public class PlayerMovement : IHasHealth
     protected CharacterMana PlayerMana;
     protected CharacterUltimate PlayerUltimate;
     public Inventory PlayerInventory;
-    protected SpellBar Spells;
+    [SerializeField] SpellBar Spells;
     [Header("Signals")]
     public VoidSignal PlayerHit;
     public ObjectSignal RoomSignal;
@@ -52,7 +52,6 @@ public class PlayerMovement : IHasHealth
         PlayerInput.OnJump += Jump;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
-        Spells = GetComponent<SpellBar>();
         lightMask = GetComponent<SpriteMask>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         PlayerHealth = GetComponent<CharacterHealth>();
@@ -74,7 +73,7 @@ public class PlayerMovement : IHasHealth
     void LoadData()
     {
         transform.position = new Vector3(PlayerData.PlayerPosition.x, PlayerData.PlayerPosition.y, 0);
-        Spells.Initialize(PlayerData.Spells);
+        //Spells.Initialize(PlayerData.SpellBar);
     }
 
     private bool CanAct()

@@ -44,7 +44,7 @@ public class SpellBookMenu : MonoBehaviour
 
     int selectedButtonIndex;
     bool boundSpellSelected = false;
-    [SerializeField] SpellBar PlayerSpellBar;
+    [SerializeField] SpellBar SpellBar;
     [SerializeField] SpellBook SpellBook;
     [SerializeField] SpellDetailsMenu SpellDetailsMenu;
 
@@ -67,12 +67,12 @@ public class SpellBookMenu : MonoBehaviour
         InitializeTabs();
         SetTabSelected(selectedTabIndex, true);
         //setup controller buttons at the top
-        for (int i = 0; i < PlayerSpellBar.Spells.Count; i++)
+        for (int i = 0; i < SpellBar.Spells.Count; i++)
         {
-            if (PlayerSpellBar.Spells[i] != null)
-            {
-                UpdateButton(BoundButtons[i], PlayerSpellBar.Spells[i]);
-            }
+            //if (SpellBar.Spells[i] != null)
+            //{
+                UpdateButton(BoundButtons[i], SpellBar.Spells[i]);
+            //}
         }
 
         SetupButtons();
@@ -84,7 +84,7 @@ public class SpellBookMenu : MonoBehaviour
 
     IEnumerator SetDefaultSelectedSpell()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         eventSystem.SetSelectedGameObject(DefaultSelectedButton);
     }
 
@@ -248,7 +248,7 @@ public class SpellBookMenu : MonoBehaviour
             }
             if (alreadyBoundIdx == -1)
             {
-                PlayerSpellBar.ChangeSpell(selectedButtonIndex, newSpell);
+                SpellBar.ChangeSpell(selectedButtonIndex, newSpell);
                 UpdateButton(BoundButtons[selectedButtonIndex], newSpell);
             }
             else
@@ -267,10 +267,10 @@ public class SpellBookMenu : MonoBehaviour
 
     private void SwapButtons(int idx1, int idx2, SpellConfig newSpell, SpellConfig spellToMove)
     {
-        PlayerSpellBar.ChangeSpell(idx1, newSpell);
+        SpellBar.ChangeSpell(idx1, newSpell);
         UpdateButton(BoundButtons[idx1], newSpell);
 
-        PlayerSpellBar.ChangeSpell(idx2, spellToMove);
+        SpellBar.ChangeSpell(idx2, spellToMove);
         UpdateButton(BoundButtons[idx2], spellToMove);
     }
 

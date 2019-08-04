@@ -14,12 +14,8 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   SpellBook: {fileID: 11400000, guid: 8f2cae907ce4bbd449f6e23774a4cc09, type: 2}
+  SpellBar: {fileID: 11400000, guid: 8c37c77b9e6cd8e41a31e343d506bfa0, type: 2}
   PlayerPosition: {x: 0, y: 0}
-  Spells:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   StartPosition: {x: 0, y: 0}
   StartSpells:
   - {fileID: 11400000, guid: cb3f9434268724a43b715b32c73f4154, type: 2}

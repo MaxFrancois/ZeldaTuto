@@ -11,12 +11,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject continueButton;
     [SerializeField] VoidSignal keyboardSignal;
     [SerializeField] VoidSignal controllerSignal;
-    InputType currentInputType;
+    //InputType currentInputType;
     public GameObject ContinueButton { get { return continueButton; } }
 
     void Awake()
     {
-        currentInputType = InputType.Keyboard;  
+        //currentInputType = InputType.Keyboard;  
     }
 
     void Update()

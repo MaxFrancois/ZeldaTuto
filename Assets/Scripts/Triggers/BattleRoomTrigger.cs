@@ -7,7 +7,7 @@ public class BattleRoomTrigger : Trigger
     protected override void OnPlayerEnter()
     {
         StartBattleSignal.Raise();
-        Data.IsActive = false;
+        //Data.IsActive = false;
         gameObject.SetActive(false);
     }
 }

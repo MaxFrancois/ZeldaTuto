@@ -10,7 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: d9c871aaa2707ac4f83f9918863360ba, type: 3}
-  m_Name: ConversationSignal
+  m_Script: {fileID: 11500000, guid: 24d514a393f95844eb18d4f20a90d8e2, type: 3}
+  m_Name: Dialog2
   m_EditorClassIdentifier: 
-  Listeners: []
+  Text: Crushing blocks...
+  CharacterIcon: {fileID: -5607390224565108056, guid: c97b3304372e01d478c0f866d4d54385,
+    type: 3}
+  CharacterName: Enemy NPC
+  SpeakerRelation: 2
+  Alignment: 1

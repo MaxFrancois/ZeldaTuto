@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SpellBarManager : MonoBehaviour
@@ -7,9 +8,29 @@ public class SpellBarManager : MonoBehaviour
     public Image[] SpellIcons;
     public Image[] SpellCooldownIcons;
 
-    private void Awake()
+    void Start()
     {
         UpdateUI();
+    }
+
+    private void Update()
+    {
+        var deltaTime = Time.deltaTime;
+
+        for (int i = SpellBar.Cooldowns.Count - 1; i >= 0; i--)
+        {
+            if (!SpellBar.Cooldowns[i].HasStarted)
+            {
+                SpellBar.Cooldowns[i].HasStarted = true;
+                SpellCooldownIcons[SpellBar.Cooldowns[i].Index].fillAmount = 1;
+            }
+            SpellBar.Cooldowns[i].TimeTracker -= deltaTime;
+            SpellCooldownIcons[SpellBar.Cooldowns[i].Index].fillAmount -= deltaTime / SpellBar.Cooldowns[i].CooldownTime;
+            if (SpellBar.Cooldowns[i].TimeTracker <= 0)
+            {
+                SpellBar.Cooldowns.Remove(SpellBar.Cooldowns[i]);
+            }
+        }
     }
 
     public void UpdateUI()

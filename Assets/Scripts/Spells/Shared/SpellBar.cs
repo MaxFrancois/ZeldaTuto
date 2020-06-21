@@ -58,6 +58,8 @@ public class SpellBar : ScriptableObject
 
     public void ChangeSpell(int idx, SpellConfig newSpell)
     {
+        if (Spells.Count == 0)
+            Spells = new List<SpellConfig>(MaxSpells);
         Spells[idx] = newSpell;
         SpellChangedSignal.Raise();
     }

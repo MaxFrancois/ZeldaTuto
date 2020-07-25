@@ -37,10 +37,11 @@ public abstract class EnemyBase : IHasHealth
     protected Vector3 CurrentDirection;
     //public FloatValue MaxHealth;
     //protected float currentHealth;
+    [SerializeField] public bool IsRoomEnemy;
 
     protected virtual void Awake()
     {
-        if (Data == null)
+        if (!IsRoomEnemy && Data == null)
         {
             Debug.LogError("Enemy " + name + " doesn't have its EnemyData scriptableObject");
             UnityEditor.EditorApplication.isPlaying = false;
@@ -48,13 +49,24 @@ public abstract class EnemyBase : IHasHealth
         }
         Initialize();
     }
-    
+
     void Initialize()
     {
-        if (string.IsNullOrWhiteSpace(Data.EnemyId))
+        if (!IsRoomEnemy)
         {
-            Data.EnemyId = Guid.NewGuid().ToString();
-            gameObject.SetActive(Data.IsAliveDefaultValue);
+            if (string.IsNullOrWhiteSpace(Data.EnemyId))
+            {
+                Data.EnemyId = Guid.NewGuid().ToString();
+                gameObject.SetActive(Data.IsAliveDefaultValue);
+            }
+            if (!Data.IsAlive)
+                if (Data.LeaveBody)
+                {
+                    transform.position = Data.BodyPosition;
+                    EnemyHealth.LoseHealth(EnemyHealth.Health.CurrentHealth, false);
+                }
+                else
+                    gameObject.SetActive(Data.IsAlive);
         }
         target = PermanentObjects.Instance.Player.transform;
         EnemyHealth = GetComponent<CharacterHealth>();
@@ -66,14 +78,6 @@ public abstract class EnemyBase : IHasHealth
         spriteRenderer = GetComponent<SpriteRenderer>();
         BlinkOnHit = GetComponent<BlinkOnHit>();
         EnemyState.MovementState = CharacterMovementState.Idle;
-        if (!Data.IsAlive)
-            if (Data.LeaveBody)
-            {
-                transform.position = Data.BodyPosition;
-                EnemyHealth.LoseHealth(EnemyHealth.Health.CurrentHealth, false);
-            }
-            else
-                gameObject.SetActive(Data.IsAlive);
     }
 
     public bool IsDead
@@ -210,12 +214,13 @@ public abstract class EnemyBase : IHasHealth
         TakeDamage(null, 0, 0, MaxHealth);
     }
 
-    public string ID { get { return Data.EnemyId; } }
+    public string ID { get { return IsRoomEnemy ? null : Data.EnemyId; } }
 
     public void Reset()
     {
         transform.position = HomePosition;
         EnemyHealth.HealToMax();
-        Data.BodyPosition = Vector2.zero;
+        if (!IsRoomEnemy)
+            Data.BodyPosition = Vector2.zero;
     }
 }

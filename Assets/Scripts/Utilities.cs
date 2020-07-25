@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class Utilities
+public static class MyUtilities
 {
     public static GameObject FindClosestEnemyInRadius(Transform transform, float radius)
     {
@@ -26,5 +26,11 @@ public static class Utilities
         if (sprite.color.a == 0f)
             return true;
         return false;
+    }
+
+    public enum Layers
+    {
+        PLAYER = 10,
+        DASHWALL = 12
     }
 }

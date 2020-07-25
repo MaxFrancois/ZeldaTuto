@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +42,7 @@ public class SpellBarManager : MonoBehaviour
             SpellCooldownIcons[i].sprite = null;
         }
 
-        for (int i = 0; i < SpellBar.Spells.Count; i++)
+        for (int i = 0; i < SpellBar.Spells.Count(); i++)
         {
             if (SpellBar.Spells[i] != null)
             {

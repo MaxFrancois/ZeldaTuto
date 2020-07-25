@@ -20,7 +20,7 @@ public class DungeonEnemyRoom : DungeonRoom
                 ChangeActivation(pot, true);
             }
             CloseDoors();
-            VirtualCamera.SetActive(true);
+            VirtualCamera.gameObject.SetActive(true);
         }
     }
     

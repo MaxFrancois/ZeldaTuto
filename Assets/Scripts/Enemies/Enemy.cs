@@ -53,8 +53,11 @@ public class Enemy : EnemyBase
         EnemyHealth.LoseHealth(damage, display);
         if (IsDead && EnemyState.MovementState != CharacterMovementState.Dead)
         {
-            Data.IsAlive = false;
-            Data.BodyPosition = transform.position;
+            if (!IsRoomEnemy)
+            {
+                Data.IsAlive = false;
+                Data.BodyPosition = transform.position;
+            }
             if (DeadSignal) DeadSignal.Raise();
             if (RoomSignal != null) RoomSignal.Raise();
             GetLoot();

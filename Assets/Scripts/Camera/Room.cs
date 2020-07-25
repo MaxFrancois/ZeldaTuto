@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public Enemy[] Enemies;
-    public Pot[] Pots;
-    public GameObject VirtualCamera;
-    public bool ContainsPlayer = false;
+    [SerializeField] protected Enemy[] Enemies = default;
+    [SerializeField] protected Pot[] Pots = default;
+    [SerializeField] protected CinemachineVirtualCamera VirtualCamera = default;
+    [SerializeField] protected bool ContainsPlayer = default;
+    
 
     public virtual void OnTriggerEnter2D(Collider2D collidedObject)
     {
@@ -23,7 +25,8 @@ public class Room : MonoBehaviour
             {
                 ChangeActivation(pot, true);
             }
-            VirtualCamera.SetActive(true);
+            VirtualCamera.gameObject.SetActive(true);
+            VirtualCamera.Follow = PermanentObjects.Instance.Player.transform;
         }
     }
 
@@ -41,12 +44,17 @@ public class Room : MonoBehaviour
             {
                 ChangeActivation(pot, false);
             }
-            VirtualCamera.SetActive(false);
+            VirtualCamera.gameObject.SetActive(false);
         }
     }
 
     public void ChangeActivation(Component component, bool setActive)
     {
         component.gameObject.SetActive(setActive);
+    }
+
+    public bool IsPlayerIn()
+    {
+        return ContainsPlayer;
     }
 }

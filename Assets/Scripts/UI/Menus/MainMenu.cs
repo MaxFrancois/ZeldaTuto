@@ -14,35 +14,35 @@ public enum StartMenuAction
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] EventSystem eventSystem;
+    [SerializeField] EventSystem eventSystem = default;
 
     [Header("Fade")]
-    [SerializeField] GameObject fadeToPanel;
-    [SerializeField] float fadeDuration;
-    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject fadeToPanel = default;
+    [SerializeField] float fadeDuration = default;
+    [SerializeField] GameObject canvas = default;
 
     [Header("Orbs")]
-    [SerializeField] GameObject orbsRotationCenter;
-    [SerializeField] List<GameObject> orbs;
-    [SerializeField] float rotationSpeed;
-    [SerializeField] float orbsOffsetY;
+    [SerializeField] GameObject orbsRotationCenter = default;
+    [SerializeField] List<GameObject> orbs = default;
+    [SerializeField] float rotationSpeed = default;
+    [SerializeField] float orbsOffsetY = default;
 
     [Header("MainMenu")]
-    [SerializeField] GameObject mainMenuParent;
-    [SerializeField] GameObject SmallMenu;
-    [SerializeField] Button SmallMenuStartbutton;
-    [SerializeField] GameObject LongMenu;
-    [SerializeField] Button LongMenuStartbutton;
+    [SerializeField] GameObject mainMenuParent = default;
+    [SerializeField] GameObject SmallMenu = default;
+    [SerializeField] Button SmallMenuStartbutton = default;
+    [SerializeField] GameObject LongMenu = default;
+    [SerializeField] Button LongMenuStartbutton = default;
 
     [Header("SaveFilesMenu")]
-    [SerializeField] GameObject saveFilesMenuParent;
-    [SerializeField] GameObject saveFilePrefab;
-    [SerializeField] float saveFilesOffsetY;
-    List<SaveFileData> saveFiles;
-    List<GameObject> saveFileObjects;
+    [SerializeField] GameObject saveFilesMenuParent = default;
+    [SerializeField] GameObject saveFilePrefab = default;
+    [SerializeField] float saveFilesOffsetY = default;
+    List<SaveFileData> saveFiles = default;
+    List<GameObject> saveFileObjects = default;
 
     [Header("SettingsMenu")]
-    [SerializeField] GameObject settingsMenuParent;
+    [SerializeField] GameObject settingsMenuParent = default;
 
     bool canGoBack;
 

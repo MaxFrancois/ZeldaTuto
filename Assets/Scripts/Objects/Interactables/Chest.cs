@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class Chest : Interactable
 {
-    [SerializeField] Item Contents;
-    [SerializeField] Inventory PlayerInventory;
-    [SerializeField] ObjectSignal OnPickupObjectSignal;
-    [SerializeField] GameObject DialogWindow;
-    [SerializeField] Text DialogText;
+    [SerializeField] Item Contents = default;
+    [SerializeField] Inventory PlayerInventory = default;
+    [SerializeField] ObjectSignal OnPickupObjectSignal = default;
+    [SerializeField] GameObject DialogWindow = default;
+    [SerializeField] Text DialogText = default;
 
     protected override void StartInteraction()
     {

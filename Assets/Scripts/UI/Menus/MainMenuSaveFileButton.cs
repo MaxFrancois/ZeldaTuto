@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class MainMenuSaveFileButton : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI lastPlayedText;
-    [SerializeField] TextMeshProUGUI currentSceneText;
-    [SerializeField] List<Image> spellImages;
+    [SerializeField] TextMeshProUGUI lastPlayedText = default;
+    [SerializeField] TextMeshProUGUI currentSceneText = default;
+    [SerializeField] List<Image> spellImages = default;
 
     string saveFileName;
 

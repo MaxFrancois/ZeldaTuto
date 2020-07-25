@@ -52,7 +52,7 @@ public class EarthTotem : ITime
         }
         else
         {
-            if (Utilities.FadeOutSprite(spriteRenderer, config.DeathFadeSpeed, startFadeTime))
+            if (MyUtilities.FadeOutSprite(spriteRenderer, config.DeathFadeSpeed, startFadeTime))
             {
                 Destroy(healingCircle);
                 Destroy(gameObject);

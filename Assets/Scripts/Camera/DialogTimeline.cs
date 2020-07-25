@@ -7,12 +7,12 @@ using UnityEngine.Timeline;
 
 public class DialogTimeline : Trigger
 {
-    [SerializeField] PlayableDirector TimelineDirector;
+    [SerializeField] PlayableDirector TimelineDirector = default;
     bool awaitInput = false;
 
     [Header("Conversations")]
-    [SerializeField] List<Conversation> conversations;
-    [SerializeField] TimelineConversationSignal conversationSignal;
+    [SerializeField] List<Conversation> conversations = default;
+    [SerializeField] TimelineConversationSignal conversationSignal = default;
     int currentConversationIndex;
 
     protected override void OnPlayerEnter()

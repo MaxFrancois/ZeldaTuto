@@ -12,13 +12,13 @@ public enum Direction
 
 public class MovingRock : MonoBehaviour
 {
-    public float MoveSpeed;
-    public float PauseTime;
-    public Direction StartDirection;
-    Direction currentDirection;
-    Rigidbody2D body;
-    Animator animator;
-    bool isMoving;
+    [SerializeField] float MoveSpeed = default;
+    [SerializeField] float PauseTime = default;
+    [SerializeField] Direction StartDirection = default;
+    [SerializeField] Direction currentDirection = default;
+    [SerializeField] Rigidbody2D body = default;
+    [SerializeField] Animator animator = default;
+    [SerializeField] bool isMoving = default;
     
     void Start()
     {

@@ -69,6 +69,8 @@ public class CharacterHealth : ITime
 
     void Update()
     {
+        if (Health == null)
+            Initialize();
         if (Health.PassiveHealthRegenSpeed != 0)
         {
             var healthDifference = Health.PassiveHealthRegenSpeed * Time.deltaTime * (1 - SlowTimeCoefficient);

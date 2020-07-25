@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 81461b34c9438824d8fb32aa0f3de90f, type: 3}
   m_Name: DashConfig
   m_EditorClassIdentifier: 
@@ -23,10 +22,10 @@ MonoBehaviour:
   PushTime: 0
   PushForce: 0
   Damage: 0
-  Cooldown: 1
+  Cooldown: 0
   LifeTime: 0
   IsUnlocked: 1
   DashInstance: {fileID: 2979725522307296010, guid: bb1410becb59f93459191a3146a95236,
     type: 3}
-  Duration: 0.15
-  Speed: 20
+  Duration: 0.4
+  Speed: 5

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FloorTrap : MonoBehaviour
 {
-    public float StartDelay;
+    [SerializeField] float StartDelay = default;
 
     void Awake()
     {

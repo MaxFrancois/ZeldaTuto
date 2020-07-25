@@ -35,18 +35,18 @@ public class SpellBar : ScriptableObject
 {
     [HideInInspector]
     public List<Cooldown> Cooldowns = new List<Cooldown>();
-    public List<SpellConfig> Spells;
+    public SpellConfig[] Spells;
     public SpellConfig Ultimate;
-    [SerializeField] int MaxSpells;
-    [SerializeField] VoidSignal SpellChangedSignal;
+    [SerializeField] int MaxSpells = default;
+    [SerializeField] VoidSignal SpellChangedSignal = default;
 
     public void Initialize(List<SpellConfig> spells)
     {
-        Spells = new List<SpellConfig>(MaxSpells);
+        Spells = new SpellConfig[MaxSpells];
         if (spells.Count == MaxSpells)
         {
             foreach (var s in spells)
-                Spells.Add(s);
+                Spells.Append(s);
             SpellChangedSignal.Raise();
         }
     }
@@ -58,8 +58,8 @@ public class SpellBar : ScriptableObject
 
     public void ChangeSpell(int idx, SpellConfig newSpell)
     {
-        if (Spells.Count == 0)
-            Spells = new List<SpellConfig>(MaxSpells);
+        if (Spells.Count() == 0)
+            Spells = new SpellConfig[MaxSpells];
         Spells[idx] = newSpell;
         SpellChangedSignal.Raise();
     }

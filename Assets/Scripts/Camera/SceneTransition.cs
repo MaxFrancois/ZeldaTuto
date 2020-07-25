@@ -1,46 +1,38 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    public string SceneToLoad;
-    public Vector2 PlayerPosition;
-    public VectorValue PlayerStorage;
-    public GameObject FadeInPanel;
-    public GameObject FadeToPanel;
-    public float FadeWait;
-
-    //private void Awake()
-    //{
-    //    if (FadeInPanel != null)
-    //    {
-    //        var panel = Instantiate(FadeInPanel, Vector3.zero, Quaternion.identity);
-    //        Destroy(panel, 1);
-    //    }
-    //}
+    public string SceneToLoad = default;
+    public Vector2 PlayerNewCoordinates = default;
+    [SerializeField] FadePanelSignal FadeToSignal = default;
+    [SerializeField] FadePanelSignal FadeFromSignal = default;
+    [SerializeField] PlayerLocation PlayerLocation = default;
+    GameObject player;
 
     private void OnTriggerEnter2D(Collider2D collidedObject)
     {
         if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
         {
-            PlayerStorage.InitialValue = PlayerPosition;
-            //SceneManager.LoadScene(SceneToLoad);/
+            if (player == null)
+                player = collidedObject.gameObject;
             StartCoroutine(FadeCo());
         }
     }
     public IEnumerator FadeCo()
     {
-        if (FadeToPanel != null)
+        if (FadeToSignal)
         {
-            var panel = Instantiate(FadeToPanel, Vector3.zero, Quaternion.identity);
+            player.GetComponent<PlayerMovement>().Freeze();
+            FadeToSignal.Raise();
+            yield return new WaitForSeconds(FadeToSignal.Duration);
         }
-        yield return new WaitForSeconds(FadeWait);
-        var asyncOperation = SceneManager.LoadSceneAsync(SceneToLoad);
-        while (!asyncOperation.isDone)
-        {
-            yield return null;
-        }
+        PlayerLocation.FacingDirection = player.GetComponent<PlayerInput>().CurrentFacingDirection;
+        PlayerLocation.FadeFromSignal = FadeFromSignal;
+        PlayerLocation.Location = PlayerNewCoordinates;
+        PlayerLocation.UseThis = true;
+        SceneManager.LoadScene(SceneToLoad);
+        yield return null;
     }
 }

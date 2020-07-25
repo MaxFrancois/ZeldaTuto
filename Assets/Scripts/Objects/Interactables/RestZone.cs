@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RestZone : Interactable
 {
-    [SerializeField] VoidSignal restZoneSignal;
+    [SerializeField] VoidSignal restZoneSignal = default;
     bool isOpen = false;
 
     protected override void StartInteraction()

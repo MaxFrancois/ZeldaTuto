@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DialogTrigger : Trigger
 {
-    [SerializeField] ConversationSignal signal;
-    [SerializeField] Conversation conversation;
+    [SerializeField] ConversationSignal signal = default;
+    [SerializeField] Conversation conversation = default;
 
     protected override void OnPlayerEnter()
     {

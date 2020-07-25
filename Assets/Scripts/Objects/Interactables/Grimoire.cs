@@ -14,14 +14,14 @@ public class NewSpellUnlocked
 
 public class Grimoire : Interactable
 {
-    [SerializeField] List<SpellConfig> SpellsToUnlock;
-    [SerializeField] SpellBook SpellBook;
+    [SerializeField] List<SpellConfig> SpellsToUnlock = default;
+    [SerializeField] SpellBook SpellBook = default;
 
-    [SerializeField] PlayableDirector TimelineDirector;
-    [SerializeField] List<NewSpellUnlocked> NewSpellUnlockedUIs;
-    [SerializeField] ObjectSignal OnPickupObjectSignal;
+    [SerializeField] PlayableDirector TimelineDirector = default;
+    [SerializeField] List<NewSpellUnlocked> NewSpellUnlockedUIs = default;
+    [SerializeField] ObjectSignal OnPickupObjectSignal = default;
 
-    [SerializeField] TimelineSignal timelineSignal;
+    [SerializeField] TimelineSignal timelineSignal = default;
 
     protected override void StartInteraction()
     {

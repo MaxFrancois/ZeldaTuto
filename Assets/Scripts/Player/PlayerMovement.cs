@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG;
+using DG.Tweening;
 
 [RequireComponent(typeof(CharacterUltimate))]
 [RequireComponent(typeof(CharacterHealth))]
@@ -18,12 +20,13 @@ public class PlayerMovement : IHasHealth
     public VectorValue StartingPosition;
     public float InvulnerabilityTime;
     protected PlayerInput PlayerInput;
+    [SerializeField] PlayerLocation PlayerLocation = default;
     [Header("Inventories")]
     protected CharacterHealth PlayerHealth;
     protected CharacterMana PlayerMana;
     protected CharacterUltimate PlayerUltimate;
     public Inventory PlayerInventory;
-    [SerializeField] SpellBar Spells;
+    [SerializeField] SpellBar Spells = default;
     [Header("Signals")]
     public VoidSignal PlayerHit;
     public ObjectSignal RoomSignal;
@@ -62,7 +65,6 @@ public class PlayerMovement : IHasHealth
         animator.SetFloat("MoveY", -1);
         //transform.position = StartingPosition.InitialValue;
         blinkOnHit = GetComponent<BlinkOnHit>();
-        LoadData();
     }
 
     public void Reset()
@@ -72,8 +74,23 @@ public class PlayerMovement : IHasHealth
 
     void LoadData()
     {
-        transform.position = new Vector3(PlayerData.PlayerPosition.x, PlayerData.PlayerPosition.y, 0);
+        // TODO: FOR RESUME, NEED TO SET POSITION, NOT FOR TESTING
+        //transform.position = new Vector3(PlayerData.PlayerPosition.x, PlayerData.PlayerPosition.y, 0);
         //Spells.Initialize(PlayerData.SpellBar);
+        LoadLocation();
+    }
+
+    void LoadLocation()
+    {
+        if (PlayerLocation && PlayerLocation.UseThis)
+        {
+            if (PlayerLocation.FadeFromSignal)
+                PlayerLocation.FadeFromSignal.Raise();
+            Unfreeze();
+            transform.position = PlayerLocation.Location;
+            PlayerInput.CurrentFacingDirection = PlayerLocation.FacingDirection;
+            PlayerLocation.UseThis = false;
+        }
     }
 
     private bool CanAct()
@@ -87,11 +104,13 @@ public class PlayerMovement : IHasHealth
 
     void FixedUpdate()
     {
+        LoadData();
         if (!CanAct()) return;
-        if (PlayerState.MovementState == CharacterMovementState.Falling && transform.localScale.x > 0 && fallingTowards != Vector3.zero)
+        if (PlayerState.MovementState == CharacterMovementState.Falling && transform.localScale.x > 0)
         {
-            transform.localScale -= Vector3.one * Time.deltaTime * 0.4f;
-            transform.position = Vector3.MoveTowards(transform.position, fallingTowards, 1 * Time.deltaTime);
+            transform.localScale -= Vector3.one * Time.deltaTime * 0.8f;
+            if (fallingTowards != Vector3.zero)
+                transform.position = Vector3.MoveTowards(transform.position, fallingTowards, 1 * Time.deltaTime);
         }
         else if (PlayerState.MovementState == CharacterMovementState.Jumping)
         {
@@ -121,15 +140,18 @@ public class PlayerMovement : IHasHealth
         PlayerState.MovementState = CharacterMovementState.Falling;
         animator.SetBool("IsMoving", false);
         animator.SetBool("IsPickingUp", true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         fallingTowards = Vector3.zero;
         transform.localScale = new Vector3(1, 1, 1);
         animator.SetBool("IsPickingUp", false);
-        if (respawnPoint)
+        if (beforeDashPosition != Vector2.zero)
+            transform.position = beforeDashPosition;
+        else if (respawnPoint)
             transform.position = respawnPoint.RespawnPosition;
         else
             transform.position = StartingPosition.InitialValue;
         TakeDamage(null, 0, 0, damage);
+        beforeDashPosition = Vector2.zero;
         PlayerState.MovementState = CharacterMovementState.Idle;
     }
     #endregion
@@ -225,7 +247,7 @@ public class PlayerMovement : IHasHealth
         }
         else
         {
-            if (spellIndex < Spells.Spells.Count && Spells.Spells[spellIndex] != null && PlayerMana.Mana.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
+            if (spellIndex < Spells.Spells.Count() && Spells.Spells[spellIndex] != null && PlayerMana.Mana.CurrentMana >= Spells.Spells[spellIndex].ManaCost)
             {
                 PlayerMana.LoseMana(Spells.Spells[spellIndex].ManaCost);
                 Spells.CastSpell(spellIndex, transform, PlayerInput.CurrentFacingDirection);
@@ -236,48 +258,66 @@ public class PlayerMovement : IHasHealth
 
     #region Movement
 
-    float dashDuration = 0;
-    Vector3 dashDirection;
-    Vector2 dashHitPoint;
+    //float dashDuration = 0;
+    //Vector3 dashDirection;
+    Vector2 beforeDashPosition = Vector2.zero;
 
     private void UpdateDash()
     {
-        //if (dashDuration > 0 && dashHitPoint != (Vector2)transform.position)
+        ////if (dashDuration > 0 && dashHitPoint != (Vector2)transform.position)
+        ////{
+        ////    dashDuration -= Time.deltaTime * (1 - SlowTimeCoefficient);
+        ////if (dashHitPoint == Vector2.zero)
+        ////    rigidBody.MovePosition(transform.position + dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
+        ////else
+        ////rigidBody.MovePosition(Vector3.Lerp(transform.position, dashHitPoint, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient)));
+        ////rigidBody.velocity = dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient);
+        ////}
+        //if (Vector2.Distance(dashHitPoint, transform.position) > 0.2)
         //{
-        //    dashDuration -= Time.deltaTime * (1 - SlowTimeCoefficient);
-        //if (dashHitPoint == Vector2.zero)
-        //    rigidBody.MovePosition(transform.position + dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient));
-        //else
-        //rigidBody.MovePosition(Vector3.Lerp(transform.position, dashHitPoint, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient)));
-        //rigidBody.velocity = dashDirection.normalized * MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient);
+        //    //TODO: CHANGE HOW DASH WORKS (DOTween)
+        //    Physics2D.IgnoreLayerCollision((int)MyUtilities.Layers.PLAYER, (int)MyUtilities.Layers.DASHWALL, true);
+        //    //rigidBody.MovePosition(Vector3.Lerp(transform.position, dashHitPoint, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient)));
+
         //}
-        if (Vector2.Distance(dashHitPoint, transform.position) > 0.2)
-        {
-            rigidBody.MovePosition(Vector3.Lerp(transform.position, dashHitPoint, MoveSpeed * Time.deltaTime * (1 - SlowTimeCoefficient)));
-        }
-        else
-        {
-            PlayerState.MovementState = CharacterMovementState.Idle;
-            MoveSpeed = defaultSpeed;
-            rigidBody.velocity = Vector2.zero;
-            dashHitPoint = Vector2.zero;
-        }
+        //else
+        //{
+        //    PlayerState.MovementState = CharacterMovementState.Idle;
+        //    MoveSpeed = defaultSpeed;
+        //    rigidBody.velocity = Vector2.zero;
+        //    dashHitPoint = Vector2.zero;
+        //    Physics2D.IgnoreLayerCollision((int)MyUtilities.Layers.PLAYER, (int)MyUtilities.Layers.DASHWALL, false);
+        //}
     }
 
     public void Dash(float duration, float dashSpeed, Vector3 direction)
     {
-        DirectionalArrow.transform.up = direction;
-        //TODO: better wall detection when dashing, currently gets stuck
-        var willHitWall = Physics2D.RaycastAll(transform.position, direction, 5);
-        var hit = willHitWall.FirstOrDefault(c => c.collider != null && c.collider.CompareTag("WorldCollision"));
-        if (hit && hit.collider)
-            dashHitPoint = hit.point;
-        else
-            dashHitPoint = new Vector2(transform.position.x + (direction.normalized.x * 4), transform.position.y + (direction.normalized.y * 4));
-        MoveSpeed = dashSpeed;
-        dashDirection = direction;
-        dashDuration = duration;
+        //DirectionalArrow.transform.up = direction;
+        ////TODO: better wall detection when dashing, currently gets stuck
+        //var willHitWall = Physics2D.RaycastAll(transform.position, direction, 5);
+        //var hit = willHitWall.FirstOrDefault(c => c.collider != null && c.collider.CompareTag("WorldCollision"));
+        //if (hit && hit.collider)
+        //    dashHitPoint = hit.point;
+        //else
+        //    dashHitPoint = new Vector2(transform.position.x + (direction.normalized.x * 4), transform.position.y + (direction.normalized.y * 4));
+        //MoveSpeed = dashSpeed;
+        //dashDirection = direction;
+        //dashDuration = duration;
+        //PlayerState.MovementState = CharacterMovementState.Dashing;
+        StartCoroutine(DoDash(duration, dashSpeed, direction));
+    }
+
+    IEnumerator DoDash(float duration, float dashSpeed, Vector3 direction)
+    {
+        beforeDashPosition = transform.position;
         PlayerState.MovementState = CharacterMovementState.Dashing;
+        Physics2D.IgnoreLayerCollision((int)MyUtilities.Layers.PLAYER, (int)MyUtilities.Layers.DASHWALL, true);
+        rigidBody.velocity = Vector2.zero;
+        var target = rigidBody.transform.position + direction.normalized * dashSpeed;
+        rigidBody.DOMove(target, duration);
+        yield return new WaitForSeconds(duration);
+        PlayerState.MovementState = CharacterMovementState.Idle;
+        Physics2D.IgnoreLayerCollision((int)MyUtilities.Layers.PLAYER, (int)MyUtilities.Layers.DASHWALL, false);
     }
 
     public void SetMoveSpeed(float moveSpeedMultiplier)
@@ -431,18 +471,18 @@ public class PlayerMovement : IHasHealth
             RoomSignal.Raise(collision);
             //WeatherManager.SetRoom(collision);
         }
-        if (collision.CompareTag("WorldCollision"))
-        {
-            if (PlayerState.MovementState == CharacterMovementState.Dashing)
-            {
-                dashDuration = 0;
-                MoveSpeed = defaultSpeed;
-                PlayerState.MovementState = CharacterMovementState.Idle;
-                transform.position = dashHitPoint;
-                dashHitPoint = Vector2.zero;
-                rigidBody.velocity = Vector2.zero;
-            }
-        }
+        //if (collision.CompareTag("WorldCollision"))
+        //{
+        //    if (PlayerState.MovementState == CharacterMovementState.Dashing)
+        //    {
+        //        dashDuration = 0;
+        //        MoveSpeed = defaultSpeed;
+        //        PlayerState.MovementState = CharacterMovementState.Idle;
+        //        transform.position = dashHitPoint;
+        //        dashHitPoint = Vector2.zero;
+        //        rigidBody.velocity = Vector2.zero;
+        //    }
+        //}
     }
 
     public void SetRespawnPoint(RespawnPoint rp)

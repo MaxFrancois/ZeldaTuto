@@ -37,7 +37,7 @@ public class DarkTotem : ITime
                 anim.SetBool("IsDead", true);
             }
             timeSinceLastAttack += Time.deltaTime * (1 - SlowTimeCoefficient);
-            if (timeSinceLastAttack >= config.TimeBetweenAttacks && Utilities.FindClosestEnemyInRadius(transform, config.AttackRadius) != null && !isDead)
+            if (timeSinceLastAttack >= config.TimeBetweenAttacks && MyUtilities.FindClosestEnemyInRadius(transform, config.AttackRadius) != null && !isDead)
             {
                 timeSinceLastAttack = 0;
                 StartCoroutine(Attack());
@@ -45,7 +45,7 @@ public class DarkTotem : ITime
         }
         else
         {
-            if (Utilities.FadeOutSprite(spriteRenderer, config.DeathFadeSpeed, startFadeTime))
+            if (MyUtilities.FadeOutSprite(spriteRenderer, config.DeathFadeSpeed, startFadeTime))
                 Destroy(gameObject);
         }
     }
@@ -54,7 +54,7 @@ public class DarkTotem : ITime
     {
         anim.SetTrigger("Cast");
         yield return new WaitForSeconds(0.3f);
-        var closestEnemy = Utilities.FindClosestEnemyInRadius(transform, config.AttackRadius);
+        var closestEnemy = MyUtilities.FindClosestEnemyInRadius(transform, config.AttackRadius);
         var enemyDirection = closestEnemy.transform.position - transform.position;
         for (int i = 0; i < config.AmountOfProjectiles; i++)
         {

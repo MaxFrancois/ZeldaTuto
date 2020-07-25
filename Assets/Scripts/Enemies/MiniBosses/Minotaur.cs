@@ -140,7 +140,7 @@ public class Minotaur : Enemy
 
     void FixedUpdate()
     {
-        if (AggroRoom.ContainsPlayer && inCombat)
+        if (AggroRoom.IsPlayerIn() && inCombat)
         {
             UpdateCameraShake();
 

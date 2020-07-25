@@ -4,9 +4,9 @@ using UnityEngine;
 public class ArcaneBeam : MonoBehaviour
 {
 
-    [SerializeField] float startDelay;
-    [SerializeField] float laserDuration;
-    [SerializeField] float pauseDuration;
+    [SerializeField] float startDelay = default;
+    [SerializeField] float laserDuration = default;
+    [SerializeField] float pauseDuration = default;
 
     Animator animator;
     bool started;

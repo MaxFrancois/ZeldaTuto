@@ -8,9 +8,9 @@ public enum InputType
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject continueButton;
-    [SerializeField] VoidSignal keyboardSignal;
-    [SerializeField] VoidSignal controllerSignal;
+    [SerializeField] GameObject continueButton = default;
+    [SerializeField] VoidSignal keyboardSignal = default;
+    [SerializeField] VoidSignal controllerSignal = default;
     //InputType currentInputType;
     public GameObject ContinueButton { get { return continueButton; } }
 

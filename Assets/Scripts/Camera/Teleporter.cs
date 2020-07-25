@@ -5,21 +5,21 @@ using UnityEngine.UI;
 public class Teleporter : MonoBehaviour
 {
     [Header("Teleporter")]
-    [SerializeField] GameObject Destination;
-    [SerializeField] bool RequiresInput;
-    [SerializeField] GameObject Animation;
-    [SerializeField] float AnimationDuration;
+    [SerializeField] GameObject Destination = default;
+    [SerializeField] bool RequiresInput = default;
+    [SerializeField] GameObject Animation = default;
+    [SerializeField] float AnimationDuration = default;
 
     [Header("Signals")]
-    [SerializeField] BoolSignal InRangeSignal;
-    [SerializeField] FadePanelSignal FadeToSignal;
-    [SerializeField] FadePanelSignal FadeFromSignal;
+    [SerializeField] BoolSignal InRangeSignal = default;
+    [SerializeField] FadePanelSignal FadeToSignal = default;
+    [SerializeField] FadePanelSignal FadeFromSignal = default;
 
     [Header("Location")]
-    [SerializeField] bool ShowLocationName;
-    [SerializeField] string LocationName;
-    [SerializeField] GameObject LocationTextObject;
-    [SerializeField] Text LocationTextField;
+    [SerializeField] bool ShowLocationName = default;
+    [SerializeField] string LocationName = default;
+    [SerializeField] GameObject LocationTextObject = default;
+    [SerializeField] Text LocationTextField = default;
 
 
     public Image Image;

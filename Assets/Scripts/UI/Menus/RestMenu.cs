@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class RestMenu : MonoBehaviour
 {
-    [SerializeField] GameObject firstButton;
-    [SerializeField] GameObject spellBookMenu;
-    [SerializeField] FadePanelSignal fadeToSignal;
+    [SerializeField] GameObject firstButton = default;
+    [SerializeField] GameObject spellBookMenu = default;
+    [SerializeField] FadePanelSignal fadeToSignal = default;
     bool isFading;
 
     EventSystem _eventSystem;

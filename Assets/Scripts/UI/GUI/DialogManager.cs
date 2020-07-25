@@ -17,21 +17,21 @@ public class DialogManager : MonoBehaviour
     Coroutine currentDialogCoRoutine;
     string currentTimelineId;
 
-    [SerializeField] GameObject continueButton;
-    [SerializeField] StringSignal conversationOver;
+    [SerializeField] GameObject continueButton = default;
+    [SerializeField] StringSignal conversationOver = default;
     [Header("Left Alignment")]
-    [SerializeField] GameObject leftContainer;
-    [SerializeField] Image leftIconImage;
-    [SerializeField] Image leftCharacterNameBackground;
-    [SerializeField] TextMeshProUGUI leftText;
-    [SerializeField] TextMeshProUGUI leftCharacterName;
+    [SerializeField] GameObject leftContainer = default;
+    [SerializeField] Image leftIconImage = default;
+    [SerializeField] Image leftCharacterNameBackground = default;
+    [SerializeField] TextMeshProUGUI leftText = default;
+    [SerializeField] TextMeshProUGUI leftCharacterName = default;
 
     [Header("Right Alignment")]
-    [SerializeField] GameObject rightContainer;
-    [SerializeField] Image rightIconImage;
-    [SerializeField] Image rightCharacterNameBackground;
-    [SerializeField] TextMeshProUGUI rightText;
-    [SerializeField] TextMeshProUGUI rightCharacterName;
+    [SerializeField] GameObject rightContainer = default;
+    [SerializeField] Image rightIconImage = default;
+    [SerializeField] Image rightCharacterNameBackground = default;
+    [SerializeField] TextMeshProUGUI rightText = default;
+    [SerializeField] TextMeshProUGUI rightCharacterName = default;
 
     void Awake()
     {

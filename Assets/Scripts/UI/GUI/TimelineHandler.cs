@@ -5,12 +5,12 @@ using UnityEngine.Playables;
 
 public class TimelineHandler : MonoBehaviour
 {
-    [SerializeField] SpellBook spellBook;
-    [SerializeField] GameObject cutSceneRoot;
+    [SerializeField] SpellBook spellBook = default;
+    [SerializeField] GameObject cutSceneRoot = default;
 
-    [SerializeField] PlayableDirector grimoireDirector;
-    [SerializeField] List<NewSpellUnlocked> NewSpellUnlockedUIs;
-    [SerializeField] ObjectSignal OnPickupObjectSignal;
+    [SerializeField] PlayableDirector grimoireDirector = default;
+    [SerializeField] List<NewSpellUnlocked> NewSpellUnlockedUIs = default;
+    [SerializeField] ObjectSignal OnPickupObjectSignal = default;
 
 
     public void StartGrimoireTimeline(List<SpellConfig> spells, Sprite grimoireSprite)

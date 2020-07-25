@@ -17,36 +17,36 @@ public class SpellBookMenuTab
 public class SpellBookMenu : MonoBehaviour
 {
     [Header("Tabs")]
-    [SerializeField] List<SpellBookMenuTab> Tabs;
-    [SerializeField] float TabXIndex;
-    [SerializeField] float TabXOffset;
-    [SerializeField] GameObject tabNavigationRightIcon;
-    List<SpellBookMenuTab> activeTabs;
+    [SerializeField] List<SpellBookMenuTab> Tabs = default;
+    [SerializeField] float TabXIndex = default;
+    [SerializeField] float TabXOffset = default;
+    [SerializeField] GameObject tabNavigationRightIcon = default;
+    List<SpellBookMenuTab> activeTabs = default;
     int selectedTabIndex;
 
     [Header("Bound Buttons")]
-    [SerializeField] GameObject DefaultSelectedButton;
-    [SerializeField] List<Button> BoundButtons;
+    [SerializeField] GameObject DefaultSelectedButton = default;
+    [SerializeField] List<Button> BoundButtons = default;
     Button[][] ButtonLinksArray;
     List<Button> SpellButtons;
 
     [Header("Spell Grid")]
-    [SerializeField] GameObject SpellListContainer;
-    [SerializeField] Button SpellButtonPrefab;
-    [SerializeField] float SpellIconsOffset;
-    [SerializeField] float SpellIconsXIndex;
-    [SerializeField] Sprite EmptySelectionSquare;
-    [SerializeField] int SpellsPerLine;
-    [SerializeField] float NumberOfLines;
+    [SerializeField] GameObject SpellListContainer = default;
+    [SerializeField] Button SpellButtonPrefab = default;
+    [SerializeField] float SpellIconsOffset = default;
+    [SerializeField] float SpellIconsXIndex = default;
+    [SerializeField] Sprite EmptySelectionSquare = default;
+    [SerializeField] int SpellsPerLine = default;
+    [SerializeField] float NumberOfLines = default;
 
     [Header("Navigation")]
-    [SerializeField] GameObject RestMenu;
+    [SerializeField] GameObject RestMenu = default;
 
     int selectedButtonIndex;
     bool boundSpellSelected = false;
-    [SerializeField] SpellBar SpellBar;
-    [SerializeField] SpellBook SpellBook;
-    [SerializeField] SpellDetailsMenu SpellDetailsMenu;
+    [SerializeField] SpellBar SpellBar = default;
+    [SerializeField] SpellBook SpellBook = default;
+    [SerializeField] SpellDetailsMenu SpellDetailsMenu = default;
 
     EventSystem _eventSystem;
     EventSystem eventSystem
@@ -67,7 +67,7 @@ public class SpellBookMenu : MonoBehaviour
         InitializeTabs();
         SetTabSelected(selectedTabIndex, true);
         //setup controller buttons at the top
-        for (int i = 0; i < SpellBar.Spells.Count; i++)
+        for (int i = 0; i < SpellBar.Spells.Count(); i++)
         {
             //if (SpellBar.Spells[i] != null)
             //{

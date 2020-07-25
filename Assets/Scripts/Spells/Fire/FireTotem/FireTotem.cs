@@ -45,7 +45,7 @@ public class FireTotem : ITime
         }
         else
         {
-            if (Utilities.FadeOutSprite(spriteRenderer, config.DeathFadeSpeed, startFadeTime))
+            if (MyUtilities.FadeOutSprite(spriteRenderer, config.DeathFadeSpeed, startFadeTime))
                 Destroy(gameObject);
         }
     }

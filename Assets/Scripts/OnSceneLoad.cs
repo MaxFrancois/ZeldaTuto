@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class OnSceneLoad : MonoBehaviour
 {
-    [SerializeField] FadePanelSignal fadeFromSignal;
-    [SerializeField] VoidSignal updateUISignal;
+    [SerializeField] FadePanelSignal fadeFromSignal = default;
+    [SerializeField] VoidSignal updateUISignal = default;
 
     void Start()
     {

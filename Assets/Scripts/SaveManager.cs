@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    [SerializeField] GameData GameData;
+    [SerializeField] GameData GameData = default;
     string gamePath;
     const string saveFilesFile = "gameSummaryFile.menu";
     List<EnemyBase> currentSceneEnemies;
@@ -73,7 +73,7 @@ public class SaveManager : MonoBehaviour
             }
             saveFileData.LastPlayed = DateTime.Now.ToShortDateString();
             saveFileData.CurrentSceneName = SceneManager.GetActiveScene().name;
-            saveFileData.Spells = GameData.PlayerData.SpellBar.Spells;
+            saveFileData.Spells = GameData.PlayerData.SpellBar.Spells.ToList();
             var saveableSaveFileData = GameData.ToSaveableSaveFileData(saveFiles);
             using (Stream s = File.Open(Path.Combine(gamePath, summaryFilePath), FileMode.OpenOrCreate))
             {

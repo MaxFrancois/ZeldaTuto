@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityScript.Macros;
 
 [System.Serializable]
 public class EnemyWave
@@ -12,22 +13,23 @@ public class EnemyWave
 
 public class BattleRoom : MonoBehaviour
 {
-    [SerializeField] TriggerData Data;
-    [SerializeField] CinemachineVirtualCamera BattleRoomCamera;
-    [SerializeField] CinemachineVirtualCamera ParentRoomCamera;
-    [SerializeField] PlayableDirector RoomStartDirector;
-    [SerializeField] PlayableDirector RoomEndDirector;
+    [SerializeField] TriggerData Data = default;
+    [SerializeField] CinemachineVirtualCamera BattleRoomCamera = default;
+    [SerializeField] CinemachineVirtualCamera ParentRoomCamera = default;
+    [SerializeField] PlayableDirector RoomStartDirector = default;
+    [SerializeField] PlayableDirector RoomEndDirector = default;
+    [SerializeField] GameObject ClosedDoorsParent = default;
+    [SerializeField] GameObject OpenDoorsParent = default;
     PlayerMovement Player;
 
     public List<EnemyWave> EnemyWaves;
     int currentWave;
-    bool isActive;
+    bool isInProgress;
 
     void Awake()
     {
         currentWave = 0;
-        isActive = false;
-        Player = PermanentObjects.Instance.Player;
+        isInProgress = false;
     }
 
     public void EnableBattleRoom()
@@ -35,19 +37,41 @@ public class BattleRoom : MonoBehaviour
         StartCoroutine(StartRoomCo());
     }
 
+    public void OnTriggerEnter2D(Collider2D collidedObject)
+    {
+        if (collidedObject.CompareTag("Player") && !collidedObject.isTrigger)
+        {
+            if (Data.IsActive && !isInProgress)
+            {
+                Player = PermanentObjects.Instance.Player;
+                EnableBattleRoom();
+            }
+        }
+    }
+
     IEnumerator StartRoomCo()
     {
-        Player.Freeze();
         if (RoomStartDirector)
+        {
+            Player.Freeze();
             RoomStartDirector.Play();
-        yield return new WaitForSeconds((float)RoomStartDirector.duration);
-        Player.Unfreeze();
+            yield return new WaitForSeconds((float)RoomStartDirector.duration);
+            Player.Unfreeze();
+        }
         //CameraConfiner.m_BoundingShape2D = BattleRoomCollider;
-        BattleRoomCamera.gameObject.SetActive(true);
-        ParentRoomCamera.gameObject.SetActive(false);
+        if (BattleRoomCamera)
+        {
+            BattleRoomCamera.gameObject.SetActive(true);
+            ParentRoomCamera.gameObject.SetActive(false);
+        }
+        if (ClosedDoorsParent && OpenDoorsParent)
+        {
+            ClosedDoorsParent.SetActive(true);
+            OpenDoorsParent.SetActive(false);
+        }
         //CameraConfiner.InvalidatePathCache();
         StartNextWave();
-        isActive = true;
+        isInProgress = true;
     }
 
     void DisableBattleRoom()
@@ -57,20 +81,32 @@ public class BattleRoom : MonoBehaviour
 
     IEnumerator EndRoomCo()
     {
-        Player.Freeze();
+
         if (RoomEndDirector)
+        {
+            Player.Freeze();
             RoomEndDirector.Play();
-        yield return new WaitForSeconds((float)RoomEndDirector.duration);
-        BattleRoomCamera.gameObject.SetActive(false);
-        ParentRoomCamera.gameObject.SetActive(true);
-        Player.Unfreeze();
+            yield return new WaitForSeconds((float)RoomEndDirector.duration);
+            Player.Unfreeze();
+        }
+        if (BattleRoomCamera)
+        {
+            BattleRoomCamera.gameObject.SetActive(false);
+            ParentRoomCamera.gameObject.SetActive(true);
+        }
+        if (ClosedDoorsParent && OpenDoorsParent)
+        {
+            ClosedDoorsParent.SetActive(false);
+            OpenDoorsParent.SetActive(true);
+        }
         Data.IsActive = false;
-        gameObject.SetActive(false);
+        isInProgress = false;
+        //gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (isActive)
+        if (isInProgress)
         {
             if (IsWaveOver())
             {

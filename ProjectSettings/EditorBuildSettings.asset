@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon.unity
     guid: 24f9f7c0ca548754faf52ff9dd363f29
+  - enabled: 1
+    path: Assets/Scenes/Town.unity
+    guid: 38ae219d32d7ebb4f88160f9283d66bd
+  - enabled: 1
+    path: Assets/Scenes/CompanyLogo.unity
+    guid: c7b5cc4ee22bc2b439e23b8b09ea1be3
+  - enabled: 1
+    path: Assets/Scenes/TestDungeon.unity
+    guid: e6219ec3f91b6e342bb4cb6dc9a934ce
   m_configObjects: {}

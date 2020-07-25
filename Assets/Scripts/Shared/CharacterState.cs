@@ -96,7 +96,7 @@ public class CharacterState : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<FloorSpike>())
+        if (collision.GetComponent<FloorHole>())
             CurrentlyOverThisHole = collision;
     }
 
@@ -109,6 +109,7 @@ public class CharacterState : MonoBehaviour
     void CheckForHoles()
     {
         if (CurrentlyOverThisHole)
-            GetComponent<PlayerMovement>().TriggerFall(CurrentlyOverThisHole.GetComponent<FloorSpike>().Damage, CurrentlyOverThisHole.bounds.center);
+            CurrentlyOverThisHole.GetComponent<FloorHole>().TriggerFall(gameObject);
+            //GetComponent<PlayerMovement>().TriggerFall(CurrentlyOverThisHole.GetComponent<FloorSpike>().Damage, CurrentlyOverThisHole.bounds.center);
     }
 }
